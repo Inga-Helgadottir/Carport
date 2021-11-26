@@ -12,24 +12,61 @@
         <div style="margin-top: 5em;">
             <form name="login" action="${pageContext.request.contextPath}/fc/registercommand" method="POST">
                 <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label" for="name">Name</label>
+                    <div class="col-sm-4">
+                        <input id="name" class="form-control" type="text" name="name" value="${param.name}"
+                               placeholder="Enter full name">
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="email">Email</label>
                     <div class="col-sm-4">
-                        <input id="email" class="form-control" type="text" name="email" value="${param.email}" placeholder="Enter a valid email">
+                        <input id="email" class="form-control" type="text" name="email" value="${param.email}"
+                               placeholder="Enter a valid email">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="password1">Password</label>
                     <div class="col-sm-4">
-                        <input id="password1" class="form-control" type="password" name="password1"  value="${param.password1}"  placeholder="Enter your password">
+                        <input id="password1" class="form-control" type="password" name="password1"
+                               value="${param.password1}" placeholder="Enter your password">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label" for="password2">Password</label>
                     <div class="col-sm-4">
-                        <input id="password2" class="form-control" type="password" name="password2" value="${param.password2}"  placeholder="Repeat the password">
+                        <input id="password2" class="form-control" type="password" name="password2"
+                               value="${param.password2}" placeholder="Repeat the password">
                     </div>
                 </div>
-
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label" for="telephone">Telephone</label>
+                    <div class="col-sm-4">
+                        <input id="telephone" class="form-control" type="number" name="telephone"
+                               value="${param.telephone}" placeholder="Enter phone number">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label" for="zipcode">Postnummer</label>
+                    <div class="col-sm-4">
+                        <input id="zipcode" class="form-control" type="number" name="zipcode"
+                               value="${param.zipcode}" placeholder="Enter zipcode">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label" for="city">City</label>
+                    <div class="col-sm-4">
+                        <input id="city" class="form-control" type="text" name="city"
+                               value="${param.city}" placeholder="Enter city">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label" for="address">Address</label>
+                    <div class="col-sm-4">
+                        <input id="address" class="form-control" type="text" name="address"
+                               value="${param.address}" placeholder="Enter address">
+                    </div>
+                </div>
                 <input class="btn btn-primary" type="submit" type="submit" value="Submit">
             </form>
 
