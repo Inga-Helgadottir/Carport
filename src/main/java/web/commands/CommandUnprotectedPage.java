@@ -15,9 +15,7 @@ public class CommandUnprotectedPage extends Command
         this.pageToShow = pageToShow;
     }
 
-    public String execute(
-            HttpServletRequest request,
-            HttpServletResponse response) throws UserException
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException
     {
         return pageToShow;
     }

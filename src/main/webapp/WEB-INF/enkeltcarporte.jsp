@@ -13,11 +13,21 @@
 
     <jsp:body>
         <h4>Enkelt carporte</h4><br>
-        <c:forEach var="carport" items="${requestScope.enkeltcarporte}" varStatus="status">
-${carport.name}
-            <img src="${pageContext.request.contextPath}/image/test.png" alt="1">
-
-
+        <c:forEach var="carport" items="${applicationScope.enkeltcarporte}" varStatus="status">
+            <form action="fc/addtocart" method="get" id="" class="">
+                <img src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="1" >
+                varenr. ${carport.id}
+                <br>
+                Carport ${carport.type} ${carport.width}cm x${carport.length}cm ${carport.name}
+                 pr. stk ${carport.price} + evt fragt
+                <br>
+                <form method="get" action="fc/addtocart">
+                    <label for="antal">Antal</label>
+                    <input type="number" name="antal" id="antal" placeholder="1" value="" min="0" max="10">
+                    <button type="submit">LÆG I KURV</button>
+                </form>
+            </form>
+            <br><br>
         </c:forEach>
 
     </jsp:body>
