@@ -15,6 +15,8 @@
         <h4>Enkelt carporte</h4><br>
         <c:forEach var="carport" items="${requestScope.enkeltcarporte}" varStatus="status">
 ${carport.name}
+            <img src="${pageContext.request.contextPath}/image/test.png" alt="1">
+
 
         </c:forEach>
 
