@@ -22,9 +22,8 @@ public class FrontController extends HttpServlet {
     private final static String USER = "root";
     private final static String PASSWORD = "Timmy2008";
     private final static String URL = "jdbc:mysql://localhost:3306/fog?serverTimezone=CET";
-
     public static Database database;
-    CarportFacade carportFacade;
+
 
     public void init() throws ServletException {
         // Initialize database connection
@@ -34,17 +33,6 @@ public class FrontController extends HttpServlet {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger("web").log(Level.SEVERE, ex.getMessage(), ex);
             }
-        }
-        try {
-            // Initialize whatever global datastructures needed here:
-            carportFacade = new CarportFacade(database);
-            List<Carport> enkeltcarporte = carportFacade.getEnkeltcarporte();
-            getServletContext().setAttribute("enkeltcarporte", enkeltcarporte);
-            for (Carport c : enkeltcarporte) {
-                System.out.println(c.getId());
-            }
-        } catch (UserException ignored) {
-
         }
     }
 

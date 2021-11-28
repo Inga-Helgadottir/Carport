@@ -16,46 +16,67 @@ public class Carport {
     private String svg;
 
     public Carport(int length, int width, int height, int roof_angle, int shed_length, int shed_width, String name, String type, double price, String info) {
-
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.roof_angle = roof_angle;
+        this.shed_length = shed_length;
+        this.shed_width = shed_width;
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.info = info;
     }
 
 
     public int getId() {
         return id;
     }
+
     public String getType() {
         return type;
     }
+
     public double getPrice() {
         return price;
     }
+
     public int getLength() {
         return length;
     }
+
     public int getWidth() {
         return width;
     }
+
     public int getHeight() {
         return height;
     }
+
     public int getShed_length() {
         return shed_length;
     }
+
     public int getShed_width() {
         return shed_width;
     }
+
     public int getRoof_angle() {
         return roof_angle;
     }
+
     public String getInfo() {
         return info;
     }
+
     public String getSvg() {
         return svg;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public void setSvg(String svg) {
         this.svg = svg;
     }

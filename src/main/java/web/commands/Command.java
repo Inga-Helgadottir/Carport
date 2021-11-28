@@ -28,12 +28,10 @@ public abstract class Command
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
-        commands.put("enkeltcarporte", new CommandUnprotectedPage("enkeltcarporte"));
+        commands.put("enkeltcarporte", new EnkeltCarportCommand("enkeltcarporte"));
     }
 
-    public static Command fromPath(
-            HttpServletRequest request,
-            Database db)
+    public static Command fromPath(HttpServletRequest request, Database db)
     {
         String action = request.getPathInfo().replaceAll("^/+", "");
         System.out.println("--> " + action);

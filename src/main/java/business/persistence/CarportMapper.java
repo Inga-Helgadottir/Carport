@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarportMapper {
-
     private Database database;
 
 
@@ -28,7 +27,7 @@ public class CarportMapper {
                 ResultSet rs = ps.executeQuery();
                 List<Carport> carportList = new ArrayList<>();
                 while (rs.next()) {
-                    int id = rs.getInt("carport_id");
+                    int id = rs.getInt("id");
                     int length = rs.getInt("length");
                     int width = rs.getInt("width");
                     int height = rs.getInt("height");
