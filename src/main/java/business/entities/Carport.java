@@ -28,19 +28,6 @@ public class Carport {
         this.info = info;
     }
 
-
-    public int getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
     public int getLength() {
         return length;
     }
@@ -53,6 +40,10 @@ public class Carport {
         return height;
     }
 
+    public int getRoof_angle() {
+        return roof_angle;
+    }
+
     public int getShed_length() {
         return shed_length;
     }
@@ -61,12 +52,24 @@ public class Carport {
         return shed_width;
     }
 
-    public int getRoof_angle() {
-        return roof_angle;
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getInfo() {
         return info;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getSvg() {
