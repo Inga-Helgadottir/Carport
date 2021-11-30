@@ -61,11 +61,10 @@ public class CarportMapper {
                 ps.setInt(1, carportID);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    int length = rs.getString("length");
-                    int width = rs.getString("width");
-                    int height = rs.getString("height");
-                    int angle = rs.getString("angle");
-                    int angle = rs.getString("angle");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int angle = rs.getInt("angle");
                     int shed_length = rs.getInt("shed_length");
                     int shed_width = rs.getInt("shed_width");
                     String name = rs.getString("name");
@@ -74,6 +73,7 @@ public class CarportMapper {
                     String info = rs.getString("info");
                     return new Carport(length,width,height,angle,shed_length,shed_width,name,type,price,info);
                 }
+                else throw new UserException("Could not find the single-carport");
 
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());

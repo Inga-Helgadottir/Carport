@@ -14,6 +14,7 @@ public class Carport {
 
     private int id;
     private String svg;
+    private int quantity;
 
     public Carport(int length, int width, int height, int roof_angle, int shed_length, int shed_width, String name, String type, double price, String info) {
         this.length = length;
@@ -26,6 +27,15 @@ public class Carport {
         this.type = type;
         this.price = price;
         this.info = info;
+    }
+
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getLength() {

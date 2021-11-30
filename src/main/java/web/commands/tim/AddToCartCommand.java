@@ -32,10 +32,10 @@ public class AddToCartCommand extends CommandProtectedPage {
             shoppingcart.add(carport);
             double total = 0;
             for (Carport c : shoppingcart) {
-                total += c.getPrice();
+                total += (c.getPrice() * quantity);
             }
-            request.setAttribute("shoppingcart", shoppingcart);
-            request.setAttribute("total", total);
+            request.getSession().setAttribute("shoppingcart", shoppingcart);
+            request.getSession().setAttribute("total", total);
             return pageToShow;
 
         } catch (UserException exception) {

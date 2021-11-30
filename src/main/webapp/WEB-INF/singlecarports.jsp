@@ -13,7 +13,7 @@
 
     <jsp:body>
         <h4>Enkelt carporte</h4><br>
-        <c:forEach var="carport" items="${applicationScope.enkeltcarporte}" varStatus="status">
+        <c:forEach var="carport" items="${sessionScope.shoppingcart}" varStatus="status">
             <form action="fc/addtocart" method="get" id="" class="">
                 <img src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="carport billede">
                 varenr. ${carport.id}
