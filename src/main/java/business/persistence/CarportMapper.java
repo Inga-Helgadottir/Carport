@@ -51,4 +51,35 @@ public class CarportMapper {
             throw new UserException("Connection to database could not be established");
         }
     }
+
+    public Carport getEnkeltCarport(int carportID) throws UserException {
+
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `carport` WHERE `id` = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, carportID);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int length = rs.getString("length");
+                    int width = rs.getString("width");
+                    int height = rs.getString("height");
+                    int angle = rs.getString("angle");
+                    int angle = rs.getString("angle");
+                    int shed_length = rs.getInt("shed_length");
+                    int shed_width = rs.getInt("shed_width");
+                    String name = rs.getString("name");
+                    String type = rs.getString("type");
+                    double price = rs.getDouble("price");
+                    String info = rs.getString("info");
+                    return new Carport(length,width,height,angle,shed_length,shed_width,name,type,price,info);
+                }
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 }
