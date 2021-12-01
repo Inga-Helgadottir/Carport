@@ -1,7 +1,10 @@
-package business.persistence;
+
 
 import business.entities.User;
 import business.exceptions.UserException;
+import business.persistence.Database;
+import business.persistence.OrderMapper;
+import business.persistence.UserMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserMapperTest {
 
-    private final static String DATABASE = "startcode";  // Change this to your own database
+    private final static String DATABASE = "fog";  // Change this to your own database
     private final static String TESTDATABASE = DATABASE + "_test";
-    private final static String USER = "dev";
-    private final static String PASSWORD = "ax2";
-    private final static String URL = "jdbc:mysql://localhost:3306/" + TESTDATABASE + "?serverTimezone=CET&useSSL=false";
+    private final static String USER = "sih";
+    private final static String PASSWORD = "mysqlPasswordSIH995";
+    private final static String URL = "jdbc:mysql://localhost:3306/fog?" + TESTDATABASE + "serverTimezone=CET&useSSL=false";
 
     private static Database database;
     private static UserMapper userMapper;
@@ -65,7 +68,6 @@ public class UserMapperTest {
         // We should get an exception if we use the wrong password
         assertThrows(UserException.class, () ->
             {User user = userMapper.login( "jens@somewhere.com", "larsen" ); });
-
     }
 
     @Test
