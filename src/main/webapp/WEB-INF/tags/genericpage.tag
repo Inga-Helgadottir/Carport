@@ -17,6 +17,7 @@
           integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/styles.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/navBar.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/customerpage.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
@@ -27,12 +28,12 @@
     <header>
         <nav class="navBar row">
             <div class="navBarDiv col-lg-9 col-md-8 col-sm-7">
-                <a href="#">
+                <a href="<%=request.getContextPath()%>">
                     <img src="<%=request.getContextPath()%>/images/fogLogo.png" alt="fog logo" class="navImg">
                 </a>
                 <%--        husk at tilføje href til alle links----------------------------------------------%>
                 <a class="aTag" href="#">Byggematerialer</a>
-                <a class="aTag" href="#">Carporte</a>
+                <a class="aTag" href="${pageContext.request.contextPath}/fc/enkeltcarporte">Carporte</a>
                 <a class="aTag" href="#">Tilbud</a>
             </div>
             <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">

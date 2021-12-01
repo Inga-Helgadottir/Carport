@@ -5,73 +5,65 @@ import business.entities.User;
 
 import java.sql.*;
 
-public class UserMapper
-{
+public class UserMapper {
     private Database database;
 
-    public UserMapper(Database database)
-    {
+    public UserMapper(Database database) {
         this.database = database;
     }
 
-    public void createUser(User user) throws UserException
-    {
-        try (Connection connection = database.connect())
-        {
-            String sql = "INSERT INTO `user` (email, password, role) VALUES (?, ?, ?)";
+    public User createUser(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO `user` (`name`,`email`, `password`, `role`, `telefon`, `address_id`) VALUES (?,?,?,?,?,?)";
 
-            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
-            {
-                ps.setString(1, user.getEmail());
-                ps.setString(2, user.getPassword());
-                ps.setString(3, user.getRole());
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, user.getName());
+                ps.setString(2, user.getEmail());
+                ps.setString(3, user.getPassword());
+                ps.setString(4, user.getRole());
+                ps.setInt(5, user.getTelephone());
+                ps.setInt(6, user.getAddress_id());
                 ps.executeUpdate();
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
                 int id = ids.getInt(1);
                 user.setId(id);
-            }
-            catch (SQLException ex)
-            {
+                return user;
+            } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new UserException(ex.getMessage());
         }
     }
 
-    public User login(String email, String password) throws UserException
-    {
-        try (Connection connection = database.connect())
-        {
-            String sql = "SELECT id, role FROM `user` WHERE email=? AND password=?";
+    public User login(String email, String password) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `user` WHERE `email`=? AND `password`=?";
 
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-                {
-                    String role = rs.getString("role");
+                if (rs.next()) {
                     int id = rs.getInt("id");
-                    User user = new User(email, password, role);
+                    String name = rs.getString("name");
+                    String role = rs.getString("role");
+                    int telephone = rs.getInt("telephone");
+                    int address_id = rs.getInt("address_id");
+                    User user = new User(email,password,role);
+                    user.setName(name);
+                    user.setTelephone(telephone);
+                    user.setAddress_id(address_id);
                     user.setId(id);
                     return user;
-                } else
-                {
+                } else {
                     throw new UserException("Could not validate user");
                 }
-            }
-            catch (SQLException ex)
-            {
+            } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
         }
     }

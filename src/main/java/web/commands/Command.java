@@ -2,6 +2,7 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
+import web.commands.tim.AddToCartCommand;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public abstract class Command
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
+        commands.put("enkeltcarporte", new CommandUnprotectedPage("enkeltcarporte"));
+        commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
     }
 
     public static Command fromPath(
