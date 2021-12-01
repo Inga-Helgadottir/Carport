@@ -22,17 +22,22 @@ public class AddToCartCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
+            System.out.println("quantity as parameter from form: " + quantity);
             int carportID = Integer.parseInt(request.getParameter("carportID"));
+            System.out.println("carportID as parameter from form: " + carportID);
             Carport carport = carportFacade.getEnkeltCarport(carportID);
+            carport.setQuantity(quantity);
 
             List<Carport> shoppingcart = (List<Carport>) request.getSession().getAttribute("shoppingcart");
             if (shoppingcart == null) {
                 shoppingcart = new ArrayList<>();
             }
+
             shoppingcart.add(carport);
             double total = 0;
             for (Carport c : shoppingcart) {
                 total += (c.getPrice() * quantity);
+                System.out.println("carport name: " +c.getName());
             }
             request.getSession().setAttribute("shoppingcart", shoppingcart);
             request.getSession().setAttribute("total", total);

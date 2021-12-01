@@ -9,44 +9,38 @@
     </jsp:attribute>
 
     <jsp:attribute name="footer">
-        <c:set var="addHomeLink" value="${false}" scope="request"/>
     </jsp:attribute>
 
     <jsp:body>
 
-        <c:forEach var="carport" items="${sessionScope.shoppingCart}" varStatus="status">
-            <div>
-                <div>
-                    <h2 class="">Indkøbskurv:</h2>
-                    <img class="" src="${pageContext.request.contextPath}/image/${carport.name}" alt="cupcakefoto">
-                    Carport ${carport.type} ${carport.width}cm x${carport.length}cm ${carport.name}
-                    pr. stk ${carport.price} + evt fragt
-                    <br>
-                    varenr. ${carport.id}
-                </div>
+        <c:forEach var="carport" items="${sessionScope.shoppingcart}">
 
-                <div>
-                    <form method="get" action="fc/updateCommand">
-                        <label for="antal">Antal</label>
-                        <input type="number" name="antal" id="antal" placeholder="${carport.id}" value="" min="0"
-                               max="10">
-                            <%--<input type="hidden" name="queriedId" value="${carport.id}"/> --%>
-                        <button type="submit" name="opdater" value="${carport.id}">Opdater</button>
-                        <button type="submit" name="remove" value="${carport.id}">Remove</button>
-                    </form>
-                </div>
-            </div>
-            <%---------------add to cart command -----------------------------------------------------------------------%>
+
+            <h2 class="">Indkøbskurv:</h2>
+            <img class="" src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="cupcakefoto">
+            <p class="">Carport ${carport.type} ${carport.width}cm x${carport.length}cm ${carport.name}
+                pr. stk ${carport.price} + evt fragt </p>
+            <br>
+            varenr. ${carport.id}
+
+            <form method="get" action="${pageContext.request.contextPath}/fc/updateCommand">
+                <label for="quantity">Antal</label>
+                <input type="number" name="quantity" id="quantity" value="${carport.quantity}" min="1" max="10">
+                    <%--<input type="hidden" name="queriedId" value="${carport.id}"/> --%>
+                <button type="submit" name="opdater" value="${carport.id}">Opdater</button>
+                <button type="submit" name="remove" value="${carport.id}">Remove</button>
+            </form>
         </c:forEach>
+        <br><b>
         <div>
-            <p class="">Subtotal:
-                <span class="">${sessionScope.total}kr</span>
-            </p>
-            <a href="createorder" class="">Tjek ud</a>
+        <p class="">Subtotal:
+            <span class="">${sessionScope.total}kr</span>
+        </p>
+        <a href="createorder" class="">Tjek ud</a>
 
         </div>
 
-        <%---------------here-----------------------------------------------------------------------%>
+
 
 
         <c:if test="${requestScope.error != null }">

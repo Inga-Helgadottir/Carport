@@ -3,6 +3,7 @@ package web.commands;
 import business.exceptions.UserException;
 import business.persistence.Database;
 import web.commands.tim.AddToCartCommand;
+import web.commands.tim.StandartCarportCommand;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public abstract class Command
 
     private static void initCommands(Database database)
     {
+        //--------------------commands from startcode---------------------
         commands = new HashMap<>();
         commands.put("index", new CommandUnprotectedPage("index"));
         commands.put("loginpage", new CommandUnprotectedPage("loginpage"));
@@ -29,8 +31,13 @@ public abstract class Command
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
-        commands.put("enkeltcarporte", new CommandUnprotectedPage("enkeltcarporte"));
-        commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
+
+
+        //-----------------------------links---------------------------------------------------
+        commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
+        commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
+        //----------------------------commands--------------------------
+        commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
     }
 
     public static Command fromPath(HttpServletRequest request, Database db)

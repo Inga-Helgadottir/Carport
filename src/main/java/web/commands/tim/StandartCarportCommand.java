@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class EnkeltCarportCommand extends CommandUnprotectedPage {
+public class StandartCarportCommand extends CommandUnprotectedPage {
 
-    public EnkeltCarportCommand(String pageToShow) {
+    public StandartCarportCommand(String pageToShow) {
         super(pageToShow);
 
     }
@@ -19,15 +19,6 @@ public class EnkeltCarportCommand extends CommandUnprotectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
-        CarportFacade carportFacade;
-        carportFacade = new CarportFacade(database);
-        try {
-            List<Carport> enkeltcarporte = carportFacade.getEnkeltcarporte();
-            request.setAttribute("enkeltcarporte",enkeltcarporte);
-
-        } catch (UserException ex) {
-            request.setAttribute("error", ex.getMessage());
-        }
         return pageToShow;
     }
 }

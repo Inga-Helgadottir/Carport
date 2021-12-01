@@ -1,0 +1,29 @@
+.singleCarportH4{
+    padding: 3% 0 0 0;
+    font-size: 40px;
+}
+.allSingleCarports{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.oneSingleCarport button:hover{
+    background-color: #ffcc00;
+}
+.aboutCarport h2{
+    font-size: 30px;
+}
+.oneSingleCarport img{
+    width:60%;
+}
+@media only screen and (max-width: 770px) {
+    .allSingleCarports{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+    }
+}
+@media only screen and (max-width: 425px) {
+    .oneSingleCarport img {
+        width: 80%;
+    }
+}

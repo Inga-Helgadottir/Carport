@@ -15,7 +15,7 @@
         <div class="dropdown">
             <button class="dropbtn">Dropdown</button>
             <div class="dropdown-content">
-                <a href="${pageContext.request.contextPath}/fc/enkeltcarporte">Enkelt Carporte</a>
+                <a href="${pageContext.request.contextPath}/fc/standartcarportpage">Enkelt Carporte</a>
                 <a href="${pageContext.request.contextPath}/fc/dobbeltcarporte">Dobbelt Carporte</a>
                 <a href="${pageContext.request.contextPath}/fc/ekspertip">Expertens Tips</a>
             </div>

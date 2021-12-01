@@ -38,10 +38,10 @@ public class FrontController extends HttpServlet {
 
 
             carportFacade = new CarportFacade(database);
-            List<Carport> enkeltcarporte;
+            List<Carport> standartcarporte;
             try {
-                enkeltcarporte = carportFacade.getEnkeltcarporte();
-                getServletContext().setAttribute("enkeltcarporte", enkeltcarporte);
+                standartcarporte = carportFacade.getEnkeltcarporte();
+                getServletContext().setAttribute("standartcarporte", standartcarporte);
             } catch (UserException e) {
                 e.printStackTrace();
             }
