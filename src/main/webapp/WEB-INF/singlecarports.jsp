@@ -12,24 +12,31 @@
     </jsp:attribute>
 
     <jsp:body>
-        <h4>Enkelt carporte</h4><br>
-        <c:forEach var="carport" items="${sessionScope.shoppingcart}" varStatus="status">
-            <form action="fc/addtocart" method="get" id="" class="">
-                <img src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="carport billede">
-                varenr. ${carport.id}
-                <br>
-                Carport ${carport.type} ${carport.width}cm x${carport.length}cm ${carport.name}
-                pr. stk ${carport.price} + evt fragt
-                <br>
-                <form method="get" action="fc/addtocart">
-                    <label for="quantity">Antal</label>
-                    <input type="number" name="quantity" id="quantity" placeholder="1" value="" min="0" max="10">
-                        <%--<input type="hidden" name="queriedId" value="${carport.id}"/> --%>
-                    <button type="submit" name="carportID" value="${carport.id}">LÆG I KURV</button>
-                </form>
-            </form>
-            <br><br>
-        </c:forEach>
+
+        <h4 class="singleCarportH4">Enkelt carporte</h4>
+        <div class="allSingleCarports">
+            <c:forEach var="carport" items="${sessionScope.shoppingcart}" varStatus="status">
+                <div class="oneSingleCarport">
+                    <form action="fc/addtocart" method="get" id="" class="">
+                        <img src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="carport billede">
+                        <div class="aboutCarport">
+                            <h2>${carport.name}</h2>
+                            <p>varenr. ${carport.id}</p>
+                            <p>Carport</p>
+                            <p>${carport.type}</p>
+                            <p>${carport.width}cm</p>
+                            <p>x${carport.length}cm</p>
+                            <p>pr. stk ${carport.price} + evt fragt</p>
+                        </div>
+                        <form method="get" action="fc/addtocart">
+                            <label for="quantity">Antal</label>
+                            <input type="number" name="quantity" id="quantity" placeholder="1" value="" min="0" max="10">
+                                <%--<input type="hidden" name="queriedId" value="${carport.id}"/> --%>
+                            <button type="submit" name="carportID" value="${carport.id}">LÆG I KURV</button>
+                        </form>
+                    </form>
+            </c:forEach>
+        </div>
 
     </jsp:body>
 </t:genericpage>
