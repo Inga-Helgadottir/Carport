@@ -51,8 +51,8 @@
                         <a class="d-flex justify-content-between flex-row textAndIcon" href="#">Inkøbskurv<i class="fas fa-shopping-cart myIcon"></i></a>
                     </c:if>
                     <c:if test="${sessionScope.user == null }">
-                        <a class="textAndIcon" href="#">Log in<i class="fas fa-user myIcon"></i></a>
-                        <a class="textAndIcon" href="#">Sign up<i class="far fa-user myIcon"></i></a>
+                        <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logincommand">Log in<i class="fas fa-user myIcon"></i></a>
+                        <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registercommand">Sign up<i class="far fa-user myIcon"></i></a>
                     </c:if>
                 </c:if>
             </div>

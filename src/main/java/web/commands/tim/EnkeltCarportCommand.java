@@ -13,9 +13,7 @@ public class EnkeltCarportCommand extends CommandUnprotectedPage {
 
     public EnkeltCarportCommand(String pageToShow) {
         super(pageToShow);
-
     }
-
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
