@@ -15,7 +15,7 @@ public class OrderMapper {
 
     public void createQuery(Order order) throws UserException, SQLException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `fog`.`query` (`price`, `carport_id`, `user_id`) VALUES (?, ?, ?);";
+            String sql = "INSERT INTO `query` (`price`, `carport_id`, `user_id`) VALUES (?, ?, ?);";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setDouble(1, order.getPrice());
@@ -33,9 +33,9 @@ public class OrderMapper {
         }
     }
 
-    public void createOrder(Order order) throws UserException, SQLException {//Order order
+    public void createOrder(Order order) throws UserException, SQLException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `fog`.`order` (`price`, `query_id`, `user_id`) VALUES (?, ?, ?);";
+            String sql = "INSERT INTO `order` (`price`, `query_id`, `user_id`) VALUES (?, ?, ?);";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setDouble(1, order.getPrice());
