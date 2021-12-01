@@ -1,8 +1,9 @@
-package web.commands.tim;
+package web.commands.team;
 
 import business.entities.Carport;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
+import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import web.commands.CommandProtectedPage;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,33 +13,28 @@ import java.util.List;
 
 public class AddToCartCommand extends CommandProtectedPage {
     CarportFacade carportFacade;
+    boolean triggered;
 
     public AddToCartCommand(String pageToShow, String role) {
         super(pageToShow, role);
         carportFacade = new CarportFacade(database);
+        triggered = false;
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
-            System.out.println("quantity as parameter from form: " + quantity);
             int carportID = Integer.parseInt(request.getParameter("carportID"));
-            System.out.println("carportID as parameter from form: " + carportID);
             Carport carport = carportFacade.getEnkeltCarport(carportID);
-            carport.setQuantity(quantity);
 
             List<Carport> shoppingcart = (List<Carport>) request.getSession().getAttribute("shoppingcart");
             if (shoppingcart == null) {
                 shoppingcart = new ArrayList<>();
             }
-
+            carport.setQuantity(quantity);
             shoppingcart.add(carport);
-            double total = 0;
-            for (Carport c : shoppingcart) {
-                total += (c.getPrice() * quantity);
-                System.out.println("carport name: " +c.getName());
-            }
+            double total = total(shoppingcart);
             request.getSession().setAttribute("shoppingcart", shoppingcart);
             request.getSession().setAttribute("total", total);
             return pageToShow;
@@ -47,5 +43,13 @@ public class AddToCartCommand extends CommandProtectedPage {
             request.setAttribute("error", exception.getMessage());
             return pageToShow;
         }
+    }
+
+    private double total(List<Carport> shoppingcartlist) {
+        double total = 0;
+        for (Carport c : shoppingcartlist) {
+            total += (c.getPrice() * c.getQuantity());
+        }
+        return total;
     }
 }

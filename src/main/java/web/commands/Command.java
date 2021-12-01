@@ -2,8 +2,9 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
-import web.commands.tim.AddToCartCommand;
-import web.commands.tim.StandartCarportCommand;
+import web.commands.team.AddToCartCommand;
+import web.commands.team.StandartCarportCommand;
+import web.commands.team.UpdateCartCommand;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,7 @@ public abstract class Command
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
         //----------------------------commands--------------------------
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
+        commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
     }
 
     public static Command fromPath(HttpServletRequest request, Database db)
