@@ -31,25 +31,6 @@ class OrderMapperTest {
             fail("Database connection failed. Missing jdbc driver");
         }
     }
-    @BeforeEach
-    public void setUp() {
-
-        // reset test database
-        try ( Statement stmt = database.connect().createStatement() ) {
-            stmt.execute("drop table if exists query" );
-            stmt.execute("create table " + TESTDATABASE + ".query LIKE " + DATABASE + ".users;" );
-            stmt.execute(
-                    "insert into query values " +
-                            "('24998', '1', '1')");
-            stmt.execute("drop table if exists `order`" );
-            stmt.execute("create table " + TESTDATABASE + ".`order` LIKE " + DATABASE + ".users;" );
-            stmt.execute(
-                    "insert into query values " +
-                            "('24998', '1', '1')");
-        } catch (SQLException ex) {
-            System.out.println( "Could not open connection to database: " + ex.getMessage() );
-        }
-    }
 
     @Test
     void createQuery() throws SQLException, UserException {
