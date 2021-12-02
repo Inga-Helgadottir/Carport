@@ -3,6 +3,7 @@ package web.commands;
 import business.exceptions.UserException;
 import business.persistence.Database;
 import web.commands.team.AddToCartCommand;
+import web.commands.team.CreateOrderStandardCommand;
 import web.commands.team.StandartCarportCommand;
 import web.commands.team.UpdateCartCommand;
 
@@ -40,6 +41,7 @@ public abstract class Command
         //----------------------------commands--------------------------
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
+        commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage","customer"));
     }
 
     public static Command fromPath(HttpServletRequest request, Database db)

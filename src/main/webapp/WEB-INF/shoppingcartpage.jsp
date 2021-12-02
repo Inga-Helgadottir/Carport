@@ -33,7 +33,7 @@
                 <span class="">${sessionScope.total}kr</span>
             </p>
 
-            <a href="createorder" class="btn btn-primary">Tjek ud</a>
+            <a href="${pageContext.request.contextPath}/fc/createorderstandard" class="btn btn-primary">Tjek ud</a>
 
         </div>
 
