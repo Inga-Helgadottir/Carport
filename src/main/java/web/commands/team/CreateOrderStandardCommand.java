@@ -21,6 +21,8 @@ public class CreateOrderStandardCommand extends CommandProtectedPage {
         List<Carport> shoppingcart = (List<Carport>) request.getSession().getAttribute("shoppingcart");
 
 
+
+
         int userId = (int) request.getSession().getAttribute("userId");
         //Order o = new Order(price, userId, queryId, carportId);
         // orderFacede.createQuery(o);

@@ -9,15 +9,21 @@ public class Query {
 
     private String status;
     private double price;
-    private int carport_id;
+    private int user_id;
     private String message;
 
-    public Query(String status, double price, int carport_id, String message) {
+    public Query(String status, double price, int user_id, String message) {
         this.status = status;
         this.price = price;
-        this.carport_id = carport_id;
+        this.user_id = user_id;
         this.message = message;
         this.carportList = new ArrayList<>();
+    }
+
+
+
+    public int getUser_id() {
+        return user_id;
     }
 
     public int getId() {
@@ -36,14 +42,9 @@ public class Query {
         return price;
     }
 
-    public int getCarport_id() {
-        return carport_id;
-    }
-
     public String getMessage() {
         return message;
     }
-
 
     public void setId(int id) {
         this.id = id;
