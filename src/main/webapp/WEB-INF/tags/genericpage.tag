@@ -38,10 +38,6 @@
                 <a class="aTag" href="#">Tilbud</a>
             </div>
             <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">
-                <c:if test="${sessionScope.user != null }">
-                    <p class="userEmail">${sessionScope.user.email}</p>
-                </c:if>
-
                 <c:set var="thisPage" value="${pageContext.request.servletPath}"/>
                 <c:set var="isNotLoginPage" value="${!fn:endsWith(thisPage,'loginpage.jsp')}"/>
                 <c:set var="isNotRegisterPage" value="${!fn:endsWith(thisPage,'registerpage.jsp')}"/>
@@ -55,6 +51,10 @@
                         <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logincommand">Log in<i class="fas fa-user myIcon"></i></a>
                         <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registercommand">Sign up<i class="far fa-user myIcon"></i></a>
                     </c:if>
+                </c:if>
+
+                <c:if test="${sessionScope.user != null }">
+                    <p class="userEmail">User: ${sessionScope.user.email}</p>
                 </c:if>
             </div>
         </nav>
