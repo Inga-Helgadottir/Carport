@@ -39,7 +39,7 @@
             </div>
             <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">
                 <c:if test="${sessionScope.user != null }">
-                    ${sessionScope.user.email}
+                    <p class="userEmail">${sessionScope.user.email}</p>
                 </c:if>
 
                 <c:set var="thisPage" value="${pageContext.request.servletPath}"/>

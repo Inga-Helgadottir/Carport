@@ -2,7 +2,7 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
-import web.commands.tim.AddToCartCommand;
+import web.commands.team.AddToCartCommand;
 import web.commands.tim.EnkeltCarportCommand;
 
 import java.util.HashMap;
@@ -30,9 +30,9 @@ public abstract class Command
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
+
         commands.put("enkeltcarporte", new EnkeltCarportCommand("singlecarports"));
         commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
-
         commands.put("createOrder", new CreateOrderCommand("createOrder", "employee"));//-------------------CHANGE
     }
 

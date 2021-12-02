@@ -18,6 +18,7 @@ public class Order {
         this.queryId = queryId;
         this.carportId = carportId;
     }
+
     public Order(int id, double price, int userId, int queryId, int carportId) {
         this.id = id;
         this.price = price;

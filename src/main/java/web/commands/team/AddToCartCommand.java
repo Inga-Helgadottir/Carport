@@ -1,4 +1,4 @@
-package web.commands.tim;
+package web.commands.team;
 
 import business.entities.Carport;
 import business.exceptions.UserException;
@@ -12,10 +12,12 @@ import java.util.List;
 
 public class AddToCartCommand extends CommandProtectedPage {
     CarportFacade carportFacade;
+    boolean triggered;
 
     public AddToCartCommand(String pageToShow, String role) {
         super(pageToShow, role);
         carportFacade = new CarportFacade(database);
+        triggered = false;
     }
 
     @Override
@@ -29,11 +31,9 @@ public class AddToCartCommand extends CommandProtectedPage {
             if (shoppingcart == null) {
                 shoppingcart = new ArrayList<>();
             }
+            carport.setQuantity(quantity);
             shoppingcart.add(carport);
-            double total = 0;
-            for (Carport c : shoppingcart) {
-                total += (c.getPrice() * quantity);
-            }
+            double total = total(shoppingcart);
             request.getSession().setAttribute("shoppingcart", shoppingcart);
             request.getSession().setAttribute("total", total);
             return pageToShow;
@@ -42,5 +42,13 @@ public class AddToCartCommand extends CommandProtectedPage {
             request.setAttribute("error", exception.getMessage());
             return pageToShow;
         }
+    }
+
+    private double total(List<Carport> shoppingcartlist) {
+        double total = 0;
+        for (Carport c : shoppingcartlist) {
+            total += (c.getPrice() * c.getQuantity());
+        }
+        return total;
     }
 }
