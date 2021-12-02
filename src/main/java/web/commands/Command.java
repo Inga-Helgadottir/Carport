@@ -38,6 +38,7 @@ public abstract class Command
         //-----------------------------links---------------------------------------------------
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
+        commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
         //----------------------------commands--------------------------
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));

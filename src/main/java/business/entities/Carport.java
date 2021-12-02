@@ -11,7 +11,7 @@ public class Carport {
     private double price;
     private String type;
     private String info;
-
+///-----------------udenfor constructor-------------------
     private int id;
     private String svg;
     private int quantity;

@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Carport> carportList;
-    private int id;
     private String status;
     private Timestamp created;
     private double price;
     private String message;
     private int query_id;
     private int user_id;
-
+//-------------udenfor constructor--------------
+private List<Carport> carportList;
+    private int id;
 
     public Order(String status, Timestamp created, double price, String message, int query_id, int user_id) {
         this.status = status;

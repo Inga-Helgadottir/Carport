@@ -38,8 +38,6 @@ public class CreateOrderStandardCommand extends CommandProtectedPage {
             }
             Query query = new Query("standard", price, userId, "standard order");
             Query query1 = queryFacade.makeQuery(query, shoppingcart);
-
-
             Date date = new Date();
             long time = date.getTime();
             Timestamp created = new Timestamp(time);

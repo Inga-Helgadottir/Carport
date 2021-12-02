@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Query {
-    private int id;
-    private List<Carport> carportList;
-
     private String status;
     private double price;
     private int user_id;
     private String message;
+//-------udenfor constructor---------------
+    private int id;
+    private List<Carport> carportList;
 
     public Query(String status, double price, int user_id, String message) {
         this.status = status;
