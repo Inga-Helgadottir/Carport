@@ -15,13 +15,12 @@ public class OrderMapper {
 
     public void createQuery(Order order) throws UserException, SQLException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `query` (`id`, `price`, `carport_id`, `user_id`) VALUES (?, ?, ?, ?);";
+            String sql = "INSERT INTO `query` (`price`, `carport_id`, `user_id`) VALUES (?, ?, ?);";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, 1);//------------------------------------------------------------------------CHANGE STATIC VALUE
-                ps.setDouble(2, order.getPrice());
-                ps.setInt(3, order.getCarportId());
-                ps.setInt(4, order.getUserId());
+                ps.setDouble(1, order.getPrice());
+                ps.setInt(2, order.getCarportId());
+                ps.setInt(3, order.getUserId());
                 ps.executeUpdate();
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
