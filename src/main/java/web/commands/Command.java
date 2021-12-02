@@ -2,10 +2,7 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
-import web.commands.team.AddToCartCommand;
-import web.commands.team.CreateOrderStandardCommand;
-import web.commands.team.StandartCarportCommand;
-import web.commands.team.UpdateCartCommand;
+import web.commands.team.*;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +40,7 @@ public abstract class Command
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
         commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage","customer"));
+        commands.put("sendrequest", new SendRequest("customerpage", "customer"));
     }
 
     public static Command fromPath(HttpServletRequest request, Database db)

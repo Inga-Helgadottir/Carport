@@ -41,7 +41,7 @@ public class CreateOrderStandardCommand extends CommandProtectedPage {
             Date date = new Date();
             long time = date.getTime();
             Timestamp created = new Timestamp(time);
-            Order order = new Order("standard", created, price, "standard ordre", query1.getId(), userId);
+            Order order = new Order("standard", created, price, "standard order", query1.getId(), userId);
             orderFacade.makeOrder(order);
             shoppingcart.clear();
             request.getSession().setAttribute("shoppingcart", shoppingcart);
