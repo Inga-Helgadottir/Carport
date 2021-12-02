@@ -11,6 +11,7 @@
     <jsp:body>
         <h1>Hello ${sessionScope.email} </h1>
         Role: ${sessionScope.role}
+        ID: ${sessionScope.userID}
         <br><br><h2>Carporte</h2>
         <div class="dropdown">
             <button class="dropbtn">Dropdown</button>
@@ -20,6 +21,16 @@
                 <a href="${pageContext.request.contextPath}/fc/ekspertip">Expertens Tips</a>
             </div>
         </div>
+
+        <c:if test="${requestScope.error != null }">
+            <p style="color:red">
+                    ${requestScope.error}
+            </p>
+        </c:if>
+
+        <c:if test="${not empty param.msg}">
+            <p style="font-size: large">${param.msg}</p>
+        </c:if>
     </jsp:body>
 </t:genericpage>
 
