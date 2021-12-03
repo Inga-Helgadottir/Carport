@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/navBar.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/customerpage.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/singlecarports.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/showHide.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>

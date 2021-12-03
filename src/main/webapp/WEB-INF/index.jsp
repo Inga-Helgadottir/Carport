@@ -20,6 +20,11 @@
             <div style="margin-top: 3em;margin-bottom: 3em;">
                 Main page for this 2. semester start project used at cphbusiness.dk
             </div>
+            <!----------------------------------------------------------------------MOVE LATER-->
+            <button id="showHide">show hide</button>
+            <div id="showHideDiv">
+                <p>replace this with SVG</p>
+            </div>
 
             <c:if test="${sessionScope.role == 'employee' }">
                 <p style="font-size: larger">This is what you can do,
@@ -35,5 +40,16 @@
 
         </div>
 
+        <script>//----------------------------------------------------------------MOVE LATER
+            let btn = document.getElementById("showHide");
+            let div = document.getElementById("showHideDiv");
+            btn.addEventListener("click", ()=>{
+                if(div.style.display == "block"){
+                    div.style.display = "none";
+                }else{
+                    div.style.display = "block";
+                }
+            });
+        </script>
     </jsp:body>
 </t:genericpage>
