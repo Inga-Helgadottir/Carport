@@ -49,4 +49,37 @@ public class MaterialMapper {
         }
 
     }
+
+    public Material getMaterialByCategory(String rem, int length) throws UserException {
+
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE `category`=? AND `length`=?" ;
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1,rem );
+                ps.setInt(2, length);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int mat_width = rs.getInt("width");
+                    int mat_height = rs.getInt("height");
+                    int mat_length = rs.getInt("length");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material material = new Material(name,mat_width,mat_height,mat_length,category,cost);
+                    material.setMaterial_id(id);
+                    material.setDescription(description);
+                    return material;
+                } else {
+                    throw new UserException("Could not find material under this category with the with the specified length");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 }

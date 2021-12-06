@@ -17,12 +17,12 @@ public class MaterialCalculator {
         orderFacade = new OrderFacade(database);
         materialFacade = new MaterialFacade(database);
     }
-    public void calcRem(int length){
+    public void calcRem(int length) throws UserException{
         Material rem = materialFacade.getMaterialByCategory("rem",length);
         rem.setQuantity(2);
         materialList.add(rem);
     }
-    public void calcRoof(int length){
+    public void calcRoof(int length) throws UserException{
         Material roof = materialFacade.getMaterialByCategory("roof",length);
         roof.setMaterial_id(6);//TODO
         Material roof_under = materialFacade.getMaterialByCategory("roof",length/2);
