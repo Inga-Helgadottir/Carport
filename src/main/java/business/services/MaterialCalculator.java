@@ -17,7 +17,17 @@ public class MaterialCalculator {
         orderFacade = new OrderFacade(database);
         materialFacade = new MaterialFacade(database);
     }
-
+    public void calcRem(int length){
+        Material rem = materialFacade.getMaterialByCategory("rem",length);
+        rem.setQuantity(2);
+        materialList.add(rem);
+    }
+    public void calcRoof(int length){
+        Material roof = materialFacade.getMaterialByCategory("roof",length);
+        roof.setMaterial_id(6);//TODO
+        Material roof_under = materialFacade.getMaterialByCategory("roof",length/2);
+        roof_under.setQuantity(6);
+    }
 
     public int calcPost(int length, int width) throws UserException {
         boolean isDouble = width >= 4300;
@@ -56,7 +66,6 @@ public class MaterialCalculator {
         }
         return beamQuatity;
     }
-
 
     public void calcRafters(int beamQuantity, int width, int length, boolean isDouble) throws UserException {
         int raftquantity = 0;
@@ -165,7 +174,13 @@ public class MaterialCalculator {
     }
 
     private int getRaftQuantity(int length, int beamspacing, int beamwidth) {
-        return (int) Math.ceil((double) length / beamspacing) + 1;
+        int Quantity = 0;
+        int t = (int) Math.floor((double) (length - beamwidth) / beamspacing);
+        int diff = length - (t * beamspacing);
 
+        if (diff >= 101) {
+            return Quantity = t + 2;
+        }
+        return Quantity = t + 1;
     }
 }
