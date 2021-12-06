@@ -13,23 +13,20 @@
 
     <jsp:body>
 
-        <h4 class="singleCarportH4">Enkelt carporte</h4>
+        <h2 class="display-4">Standard Carporte</h2>
         <div class="allSingleCarports">
             <c:forEach var="carport" items="${applicationScope.standartcarporte}">
                 <div class="oneSingleCarport">
                     <img src="${pageContext.request.contextPath}/image/${carport.name}.png" alt="carport billede">
-                    <p>varenr. ${carport.id}</p>
+                    <p>Varenr. #1000${carport.id}</p>
                     <div class="aboutCarport">
-                        <h2>${carport.name}</h2>
-                        <p>Carport ${carport.type}</p>
-                        <p>${carport.width}cm x${carport.length}cm</p>
-                        <p>pr. stk ${carport.price} + evt fragt</p>
+                        <p>Carport ${carport.type} ${carport.width}cm x${carport.length}cm pr. stk ${carport.price} + evt fragt</p>
                     </div>
                     <form method="get" action="${pageContext.request.contextPath}/fc/addtocart">
                         <label for="quantity">Antal</label>
                         <input type="number" name="quantity" id="quantity" value="${carport.quantity}" min="1" max="10">
 
-                        <button type="submit" name="carportID" value="${carport.id}">LÆG I KURV</button>
+                        <button class="btn btn-success my-2" type="submit" name="carportID" value="${carport.id}">Læg I Kurv</button>
                     </form>
                 </div>
             </c:forEach>
