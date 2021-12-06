@@ -3,6 +3,7 @@ package web.commands.team;
 import business.entities.Carport;
 import business.entities.Order;
 import business.entities.Query;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.services.OrderFacede;
 import business.services.QueryFacade;
@@ -31,7 +32,8 @@ public class CreateOrderStandardCommand extends CommandProtectedPage {
         try {
             //Opret ordre
             List<Carport> shoppingcart = (List<Carport>) request.getSession().getAttribute("shoppingcart");
-            int userId = (int) request.getSession().getAttribute("userID");
+            User user = (User) request.getSession().getAttribute("user");
+            int userId = user.getId();
             double price = 0;
             for (Carport c : shoppingcart) {
                 price += c.getPrice() * c.getQuantity();
