@@ -44,7 +44,6 @@ public abstract class Command
         commands.put("seeQueries", new CommandProtectedPage("adminSeeQueries", "employee"));
 
         commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
-        commands.put("createOrder", new CreateOrderCommand("createOrder", "employee"));//-------------------CHANGE
 
     }
 

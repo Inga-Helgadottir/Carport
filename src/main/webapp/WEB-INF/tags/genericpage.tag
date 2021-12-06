@@ -36,7 +36,7 @@
                 </a>
                 <%--        husk at tilføje href til alle links----------------------------------------------%>
                 <a class="aTag" href="#">Byggematerialer</a>
-                <a class="aTag" href="${pageContext.request.contextPath}/fc/enkeltcarporte">Carporte</a>
+                <a class="aTag" href="${pageContext.request.contextPath}/fc/standartcarportpage">Carporte</a>
                 <a class="aTag" href="${pageContext.request.contextPath}/fc/salepage">Tilbud</a>
             </div>
             <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">

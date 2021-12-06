@@ -14,6 +14,8 @@ public class QueryMapper {
         this.database = database;
     }
 
+//    public List<Carport> getAllQueries(){
+//    }
 
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         try (Connection connection = database.connect()) {

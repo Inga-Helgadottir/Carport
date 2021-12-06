@@ -20,7 +20,7 @@ class OrderMapperTest {
 
     private static Database database;
     private static OrderMapper orderMapper;
-    Order o = new Order(24998, 1, 1, 1);
+//    Order o = new Order(24998, 1, 1, 1);
 
     @BeforeAll
     public static void setUpClass() {
@@ -32,8 +32,8 @@ class OrderMapperTest {
         }
     }
 
-    @Test
-    void createQuery() throws SQLException, UserException {
-        orderMapper.createQuery(o);
-    }
+//    @Test
+//    void createQuery() throws SQLException, UserException {
+//        orderMapper.createQuery(o);
+//    }
 }

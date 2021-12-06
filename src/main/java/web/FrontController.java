@@ -21,8 +21,8 @@ import javax.servlet.jsp.PageContext;
 
 @WebServlet(name = "FrontController", urlPatterns = {"/fc/*"})
 public class FrontController extends HttpServlet {
-    private final static String USER = "root";
-    private final static String PASSWORD = "Timmy2008";
+    private final static String USER = "sih";
+    private final static String PASSWORD = "mysqlPasswordSIH995";
     private final static String URL = "jdbc:mysql://localhost:3306/fog?serverTimezone=CET";
     public static Database database;
     CarportFacade carportFacade;
