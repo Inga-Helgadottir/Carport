@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.Material;
+import business.exceptions.UserException;
 import business.persistence.Database;
 
 import java.util.ArrayList;
@@ -9,14 +10,16 @@ import java.util.List;
 public class MaterialCalculator {
     private List<Material> materialList;
     private OrderFacade orderFacade;
+    private MaterialFacade materialFacade;
 
     public MaterialCalculator(Database database) {
         materialList = new ArrayList<>();
         orderFacade = new OrderFacade(database);
+        materialFacade = new MaterialFacade(database);
     }
 
 
-    public int calcPost(int length, int width) {
+    public int calcPost(int length, int width) throws UserException {
         boolean isDouble = width >= 4300;
         double squarefeet = (double) (width / 1000) * (double) (length / 1000);
         int beamQuatity = 0;
@@ -55,9 +58,114 @@ public class MaterialCalculator {
     }
 
 
-    public void calcRafters(int beamQuantity, int width, int length, boolean isHeavy, boolean isDouble) {
-        // find spærafstand og dimensioner på spær med spærvidde på?
+    public void calcRafters(int beamQuantity, int width, int length, boolean isDouble) throws UserException {
+        int raftquantity = 0;
+        int beamspacing = 0;
+        int beamheight;
+        int beamwidth = 45;
+
+
+        if (width >= 5700) {
+            beamspacing = 600;
+            beamheight = 295;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 5100) {
+            beamspacing = 800;
+            beamheight = 295;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 4800) {
+            beamspacing = 600;
+            beamheight = 245;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 4500) {
+            beamspacing = 800;
+            beamheight = 245;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 4200) {
+            beamspacing = 600;
+            beamheight = 220;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 3600) {
+            beamspacing = 600;
+            beamheight = 195;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 3300) {
+            beamspacing = 600;
+            beamheight = 170;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 3000) {
+            beamspacing = 800;
+            beamheight = 170;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 2700) {
+            beamspacing = 600;
+            beamheight = 145;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        } else if (width >= 2400) {
+            beamspacing = 800;
+            beamheight = 145;
+            Material raft = materialFacade.getRafters(beamheight, beamwidth, width);
+            raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
+            raft.setQuantity(raftquantity);
+            materialList.add(raft);
+        }
+
+
+        switch (width) {
+            case 6000:
+                System.out.println("Monday");
+                break;
+            case 5700:
+                System.out.println("Tuesday");
+                break;
+            case 3:
+                System.out.println("Wednesday");
+                break;
+            case 4:
+                System.out.println("Thursday");
+                break;
+            case 5:
+                System.out.println("Friday");
+                break;
+            case 6:
+                System.out.println("Saturday");
+                break;
+            case 7:
+                System.out.println("Sunday");
+                break;
+        }
 
     }
 
+    private int getRaftQuantity(int length, int beamspacing, int beamwidth) {
+        return (int) Math.ceil((double) length / beamspacing) + 1;
+
+    }
 }
