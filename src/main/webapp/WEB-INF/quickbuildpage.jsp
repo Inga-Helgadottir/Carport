@@ -16,7 +16,7 @@
 
 
         <div class="container my-5">
-            <h2 class="display-4"> Quick-byg carport</h2>
+            <h2 class="display-4"> Quick-byg carport, Fladt Tag</h2>
 
             <div class="row mt-4">
                 <hr class="border-white">
@@ -56,8 +56,10 @@
                             <div class="form-group my-2">
                                 <label for="roof">Tag</label>
                                 <select class="form-control" id="roof" name="roof">
-                                    <option value="flad">Fladt</option>
-                                    <option value="Rejst" disabled="disabled">Rejst</option>
+                                    <option value="Betontag, sort">Fladt</option>
+                                    <option value="Betontag, rød">Fladt</option>
+                                    <option value="Eternittag, sort">Rejst</option>
+                                    <option value="Eternittag, grå">Rejst</option>
                                 </select>
                             </div>
                             <div class="form-group my-2">
