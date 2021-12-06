@@ -16,7 +16,7 @@ public class OrderFacede {
         orderMapper = new OrderMapper(database);
     }
 
-    public void createQuery(Order order) throws UserException, SQLException {
-        orderMapper.createQuery(order);
+    public Order createQuery(Order order) throws UserException, SQLException {
+        return orderMapper.makeOrder(order);
     }
 }

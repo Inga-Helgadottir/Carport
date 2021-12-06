@@ -2,8 +2,7 @@ package web.commands;
 
 import business.exceptions.UserException;
 import business.persistence.Database;
-import web.commands.team.AddToCartCommand;
-import web.commands.tim.EnkeltCarportCommand;
+import web.commands.team.*;
 
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -31,11 +30,22 @@ public abstract class Command
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
 
+//-----------------------------links---------------------------------------------------
+        commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
+        commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
+        commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
         commands.put("salepage", new CommandUnprotectedPage("onSalePage"));
+        //----------------------------commands--------------------------
+        commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
+        commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
+        commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage","customer"));
+        commands.put("sendrequest", new SendRequest("customerpage", "customer"));
 
-        commands.put("enkeltcarporte", new EnkeltCarportCommand("singlecarports"));
+        commands.put("seeQueries", new CommandProtectedPage("adminSeeQueries", "employee"));
+
         commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
         commands.put("createOrder", new CreateOrderCommand("createOrder", "employee"));//-------------------CHANGE
+
     }
 
     public static Command fromPath(

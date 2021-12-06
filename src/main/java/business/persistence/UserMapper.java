@@ -67,4 +67,5 @@ public class UserMapper {
             throw new UserException("Connection to database could not be established");
         }
     }
+
 }

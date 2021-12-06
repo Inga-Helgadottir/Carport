@@ -1,104 +1,69 @@
 package business.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
-    private int id;
     private String status;
     private Timestamp created;
     private double price;
     private String message;
-    private int userId;
-    private int queryId;
-    private int carportId;
+    private int query_id;
+    private int user_id;
+    //-------------udenfor constructor--------------
+    private List<Carport> carportList;
+    private int id;
 
-    public Order(double price, int userId, int queryId, int carportId) {
-        this.price = price;
-        this.userId = userId;
-        this.queryId = queryId;
-        this.carportId = carportId;
-    }
-
-    public Order(int id, double price, int userId, int queryId, int carportId) {
-        this.id = id;
-        this.price = price;
-        this.userId = userId;
-        this.queryId = queryId;
-        this.carportId = carportId;
-    }
-
-    public Order(int id, String status, Timestamp created, double price, String message, int userId, int queryId, int carportId) {
-        this.id = id;
+    public Order(String status, Timestamp created, double price, String message, int query_id, int user_id) {
         this.status = status;
         this.created = created;
         this.price = price;
         this.message = message;
-        this.userId = userId;
-        this.queryId = queryId;
-        this.carportId = carportId;
+        this.query_id = query_id;
+        this.user_id = user_id;
+        this.carportList =  new ArrayList<>();
+    }
+
+    public Order(double price, int userId, int queryId) {
+        this.price = price;
+        this.user_id = userId;
+        this.query_id = queryId;
+    }
+
+    public void setCarportList(List<Carport> carportList) {
+        this.carportList = carportList;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public int getQuery_id() {
+        return query_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getQueryId() {
-        return queryId;
-    }
-
-    public void setQueryId(int queryId) {
-        this.queryId = queryId;
-    }
-
-    public int getCarportId() {
-        return carportId;
-    }
-
-    public void setCarportId(int carportId) {
-        this.carportId = carportId;
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 package web.commands.team;
 
 import business.entities.Carport;
+import business.exceptions.UserException;
 import web.commands.CommandProtectedPage;
 
 import javax.servlet.http.HttpServletRequest;

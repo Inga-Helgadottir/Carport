@@ -11,17 +11,18 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 @WebServlet(name = "FrontController", urlPatterns = {"/fc/*"})
-public class FrontController extends HttpServlet
-{
-    private final static String USER = "sih";
-    private final static String PASSWORD = "mysqlPasswordSIH995";
+public class FrontController extends HttpServlet {
+    private final static String USER = "root";
+    private final static String PASSWORD = "Timmy2008";
     private final static String URL = "jdbc:mysql://localhost:3306/fog?serverTimezone=CET";
     public static Database database;
     CarportFacade carportFacade;
@@ -37,10 +38,10 @@ public class FrontController extends HttpServlet
 
 
             carportFacade = new CarportFacade(database);
-            List<Carport> enkeltcarporte;
+            List<Carport> standartcarporte;
             try {
-                enkeltcarporte = carportFacade.getEnkeltcarporte();
-                getServletContext().setAttribute("enkeltcarporte", enkeltcarporte);
+                standartcarporte = carportFacade.getEnkeltcarporte();
+                getServletContext().setAttribute("standartcarporte", standartcarporte);
             } catch (UserException e) {
                 e.printStackTrace();
             }

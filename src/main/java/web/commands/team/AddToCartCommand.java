@@ -3,6 +3,7 @@ package web.commands.team;
 import business.entities.Carport;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
+import org.omg.CosNaming.NamingContextPackage.NotEmpty;
 import web.commands.CommandProtectedPage;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class AddToCartCommand extends CommandProtectedPage {
             }
             carport.setQuantity(quantity);
             shoppingcart.add(carport);
-            double total = total(shoppingcart);
+            double total = calculateTotal(shoppingcart);
             request.getSession().setAttribute("shoppingcart", shoppingcart);
             request.getSession().setAttribute("total", total);
             return pageToShow;
@@ -44,7 +45,7 @@ public class AddToCartCommand extends CommandProtectedPage {
         }
     }
 
-    private double total(List<Carport> shoppingcartlist) {
+    private double calculateTotal(List<Carport> shoppingcartlist) {
         double total = 0;
         for (Carport c : shoppingcartlist) {
             total += (c.getPrice() * c.getQuantity());
