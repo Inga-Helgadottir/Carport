@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/customerpage.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/singlecarports.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/showHide.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/onSale.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
@@ -36,7 +37,7 @@
                 <%--        husk at tilføje href til alle links----------------------------------------------%>
                 <a class="aTag" href="#">Byggematerialer</a>
                 <a class="aTag" href="${pageContext.request.contextPath}/fc/enkeltcarporte">Carporte</a>
-                <a class="aTag" href="#">Tilbud</a>
+                <a class="aTag" href="${pageContext.request.contextPath}/fc/salepage">Tilbud</a>
             </div>
             <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">
                 <c:set var="thisPage" value="${pageContext.request.servletPath}"/>
