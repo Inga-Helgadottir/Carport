@@ -5,6 +5,8 @@ import business.exceptions.UserException;
 import business.persistence.Database;
 import business.persistence.MaterialMapper;
 
+import java.util.List;
+
 public class MaterialFacade {
     MaterialMapper materialMapper;
 
@@ -17,7 +19,13 @@ public class MaterialFacade {
         return materialMapper.getRafters(beamheight, beamwidth, beamlength);
     }
 
-    public Material getMaterialByCategory(String rem, int length) throws UserException {
-        return materialMapper.getMaterialByCategory(rem,length);
+    public Material getMaterialByCategory(String category, int length) throws UserException {
+        return materialMapper.getMaterialByCategory(category,length);
     }
+
+    public List<Material> getAllMaterialsByCategory(String category) throws UserException{
+        return materialMapper.getAllMaterialsByCategory(category);
+    }
+
+
 }

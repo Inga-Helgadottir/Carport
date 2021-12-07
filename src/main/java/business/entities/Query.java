@@ -10,7 +10,8 @@ public class Query {
     private String message;
 //-------udenfor constructor---------------
     private int id;
-    private List<Carport> carportList;
+    private List<Carport> carportList;//only used for standard carport
+    private List<Material> BOM;
 
     public Query(String status, double price, int user_id, String message) {
         this.status = status;
@@ -18,9 +19,16 @@ public class Query {
         this.user_id = user_id;
         this.message = message;
         this.carportList = new ArrayList<>();
+        this.BOM = new ArrayList<>();
     }
 
+    public List<Material> getBOM() {
+        return BOM;
+    }
 
+    public void setBOM(List<Material> BOM) {
+        this.BOM = BOM;
+    }
 
     public int getUser_id() {
         return user_id;

@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MaterialMapper {
     private Database database;
@@ -18,7 +20,7 @@ public class MaterialMapper {
 
     public Material getRafters(int beamheight, int beamwidth, int beamlength) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE `width`=? AND `height`=? AND `length`=?" ;
+            String sql = "SELECT * FROM `material` WHERE `width`=? AND `height`=? AND `length`=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, beamwidth);
@@ -34,7 +36,7 @@ public class MaterialMapper {
                     String category = rs.getString("category");
                     double cost = rs.getDouble("cost");
                     String description = rs.getString("description");
-                    Material material = new Material(name,width,height,length,category,cost);
+                    Material material = new Material(name, width, height, length, category, cost);
                     material.setMaterial_id(id);
                     material.setDescription(description);
                     return material;
@@ -50,13 +52,13 @@ public class MaterialMapper {
 
     }
 
-    public Material getMaterialByCategory(String rem, int length) throws UserException {
+    public Material getMaterialByCategory(String mat_category, int length) throws UserException {
 
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE `category`=? AND `length`=?" ;
+            String sql = "SELECT * FROM `material` WHERE `category`=? AND `length`=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1,rem );
+                ps.setString(1, mat_category);
                 ps.setInt(2, length);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
@@ -68,7 +70,7 @@ public class MaterialMapper {
                     String category = rs.getString("category");
                     double cost = rs.getDouble("cost");
                     String description = rs.getString("description");
-                    Material material = new Material(name,mat_width,mat_height,mat_length,category,cost);
+                    Material material = new Material(name, mat_width, mat_height, mat_length, category, cost);
                     material.setMaterial_id(id);
                     material.setDescription(description);
                     return material;
@@ -80,6 +82,36 @@ public class MaterialMapper {
             }
         } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
+        }
+    }
+
+    public List<Material> getAllMaterialsByCategory(String category) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM material  WHERE category = ? ORDER BY length";
+            List<Material> materials = new ArrayList<>();
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, category);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material mat = new Material(name, width, height, length, category, cost);
+                    mat.setDescription(description);
+                    mat.setMaterial_id(id);
+                    materials.add(mat);
+                }
+                return materials;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
         }
     }
 }
