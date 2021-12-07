@@ -55,22 +55,13 @@
 }
 @media only screen and (max-width: 1024px) {
     .navBarDiv {
-        width:75% !important;
+        width:65% !important;
     }
     .navBarDiv2 {
         width: 35% !important;
     }
 
 }
-/*@media only screen and (max-width: 992px) {*/
-/*    .navBarDiv {*/
-/*        width:60% !important;*/
-/*    }*/
-/*    .navBarDiv2 {*/
-/*        width: 40% !important;*/
-/*    }*/
-
-/*}*/
 @media only screen and (max-width: 994px) {
     .navBar .aTag, .navBar .aTag {
         padding: 0.5% 2%;
@@ -107,7 +98,7 @@
     }
 }
 
-@media only screen and (max-width: 700px) {/*630*/
+@media only screen and (max-width: 700px) {
     .navBar{
         height:120px;
     }

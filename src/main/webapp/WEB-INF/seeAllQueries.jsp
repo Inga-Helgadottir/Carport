@@ -19,13 +19,13 @@
                 <thead>
                 <tr>
                     <th scope="col">Brugernavn</th>
-                    <th scope="col">Bruger email</th>
-                    <th scope="col">Bruger tlf.</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Telefon</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Status</th>
                     <th scope="col">Besked</th>
                     <th scope="col">Pris</th>
-                    <th scope="col">Dato på forespørgsel</th>
+                    <th scope="col">Dato</th>
                     <th scope="col">Carport id</th>
                 </tr>
                 </thead>
