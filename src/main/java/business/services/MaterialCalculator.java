@@ -20,12 +20,12 @@ public class MaterialCalculator {
     }
 
 
-    public List<Material> calcBOM(Carport carport, Query query) throws UserException {
+    public List<Material> calcBOM(int carport_length, int carport_width) throws UserException {
         materialList.clear();
-        calcPost(carport.getLength(), carport.getWidth());
-        calcRafters(carport.getWidth(), carport.getLength());
-        calcRem(carport.getLength(), carport.getWidth());
-        calcRoof(carport.getLength());
+        calcPost(carport_length, carport_width);
+        calcRafters(carport_width, carport_length);
+        calcRem(carport_length, carport_width);
+        calcRoof(carport_length);
         return materialList;
     }
 

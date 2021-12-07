@@ -27,7 +27,7 @@ public class GetQueryCollection extends CommandProtectedPage {
             return pageToShow;
 
         } catch (UserException e) {
-            request.getSession().setAttribute("error", e.getMessage());
+            request.setAttribute("error", e.getMessage());
             return pageToShow;
         }
     }

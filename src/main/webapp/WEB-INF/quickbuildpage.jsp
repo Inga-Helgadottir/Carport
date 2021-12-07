@@ -43,7 +43,7 @@
                                 <label for="shedWidth">Bredde, skur</label>
                                 <input class="form-control" id="shedWidth" name="shedWidth"
                                        placeholder="vælg skur bredde"
-                                       type="number" min="210" max="720" step="30"/>
+                                       type="number" min="210" max="720" step="30" />
                                 <small class="form-text text-muted">centimeter</small>
                             </div>
                             <div class="form-group my-2">
