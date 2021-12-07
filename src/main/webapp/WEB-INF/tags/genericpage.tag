@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/singlecarports.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/showHide.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/onSale.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/seeAllQueries.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
@@ -51,7 +52,7 @@
                     </c:if>
                     <c:if test="${sessionScope.role == 'employee'}">
                         <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i class="far fa-user myIcon"></i></a>
-                        <a class="textAndIcon" href="#">Se forespørgelser<i class="fas fa-shopping-cart myIcon"></i></a><!-----------------------------------CHANGE-->
+                        <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/queries">Se forespørgelser</a>
                     </c:if>
 
                     <c:if test="${sessionScope.user == null }">
