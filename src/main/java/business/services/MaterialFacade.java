@@ -16,7 +16,7 @@ public class MaterialFacade {
     }
 
     public Material getRafters(int beamheight, int beamwidth, int beamlength) throws UserException {
-        return materialMapper.getRafters(beamheight, beamwidth, beamlength);
+        return materialMapper.getRafters(beamheight, beamwidth, beamlength,"bjælkespær");
     }
 
     public Material getMaterialByCategory(String category, int length) throws UserException {

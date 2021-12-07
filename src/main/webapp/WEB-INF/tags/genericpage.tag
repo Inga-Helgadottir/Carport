@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/navbar.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/customerpage.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/standartcarport.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/seequeries.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
@@ -50,6 +51,10 @@
                 <c:if test="${sessionScope.user != null }">
                     <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i class="far fa-user myIcon"></i></a>
                     <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/cartpage">Inkøbskurv<i class="fas fa-shopping-cart myIcon"></i></a>
+                </c:if>
+                <c:if test="${sessionScope.role == 'employee'}">
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i class="far fa-user myIcon"></i></a>
+                    <a class="queries" href="${pageContext.request.contextPath}/fc/queries">Forespørgelser</a>
                 </c:if>
                 <c:if test="${sessionScope.user == null }">
                     <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/loginpage">Log in<i class="fas fa-user myIcon"></i></a>

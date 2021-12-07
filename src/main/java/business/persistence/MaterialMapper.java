@@ -18,14 +18,15 @@ public class MaterialMapper {
         this.database = database;
     }
 
-    public Material getRafters(int beamheight, int beamwidth, int beamlength) throws UserException {
+    public Material getRafters(int beamheight, int beamwidth, int beamlength, String category) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE `width`=? AND `height`=? AND `length`=?";
+            String sql = "SELECT * FROM `material` WHERE `width`=? AND `height`=? AND `length`=? AND `category`=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, beamwidth);
                 ps.setInt(2, beamheight);
                 ps.setInt(3, beamlength);
+                ps.setString(4,category);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int id = rs.getInt("id");
@@ -33,7 +34,6 @@ public class MaterialMapper {
                     int width = rs.getInt("width");
                     int height = rs.getInt("height");
                     int length = rs.getInt("length");
-                    String category = rs.getString("category");
                     double cost = rs.getDouble("cost");
                     String description = rs.getString("description");
                     Material material = new Material(name, width, height, length, category, cost);
