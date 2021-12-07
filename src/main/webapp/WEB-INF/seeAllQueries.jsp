@@ -13,7 +13,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <h1 class="mb-5 mt-4 h1">Queries</h1>
+        <h1 class="mb-5 mt-4 h1">Forespørgelser</h1>
         <section class="queries">
             <table class="table table-striped">
                 <thead>
@@ -21,7 +21,7 @@
                     <th scope="col">Brugernavn</th>
                     <th scope="col">Bruger email</th>
                     <th scope="col">Bruger tlf.</th>
-                    <th scope="col">Andtal</th>
+                    <th scope="col">Antal</th>
                     <th scope="col">Status</th>
                     <th scope="col">Besked</th>
                     <th scope="col">Pris</th>
