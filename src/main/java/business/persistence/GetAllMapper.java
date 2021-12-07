@@ -16,7 +16,7 @@ public class GetAllMapper {
     public List<GetAll> GetAll() {
         List<GetAll> getAllList = new ArrayList<>();
         try (Connection connection = database.connect()) {
-            String sql = "SELECT o.status, o.message, o.created, o.price AS totalPrice, u.name AS username, u.email, u.telephone, l.quantity, c.id, c.type, c.price, c.name, c.length, c.width, c.height, c.roof_angle, c.shed_length, c.shed_width " +
+            String sql = "SELECT o.id, o.status, o.created, o.price AS totalPrice, q.id AS queryId, q.message, u.id, u.name AS username, u.email, u.telephone, l.quantity, c.id AS carportId, c.type, c.price, c.name, c.length, c.width, c.height, c.roof_angle, c.shed_length, c.shed_width " +
                     "FROM `user` AS u " +
                     "INNER JOIN `order` AS o " +
                     "ON u.id = o.user_id " +
@@ -30,7 +30,9 @@ public class GetAllMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    int carportId = rs.getInt("id");
+                    int userId = rs.getInt("id");
+                    int queryId = rs.getInt("queryId");
+                    int carportId = rs.getInt("carportId");
                     String status = rs.getString("status");
                     String type = rs.getString("type");
                     String message = rs.getString("message");
@@ -48,7 +50,8 @@ public class GetAllMapper {
                     int roof_angle = rs.getInt("roof_angle");
                     int shed_length = rs.getInt("shed_length");
                     int shed_width = rs.getInt("shed_width");
-                    GetAll getAll = new GetAll(status, message, created, totalPrice, userName, userEmail, userPhone, quantity, carportId, type, price, carportName, length, width, height, roof_angle, shed_length, shed_width);
+
+                    GetAll getAll = new GetAll(status, message, created, totalPrice, userId, userName, userEmail, userPhone, quantity, carportId, type, price, carportName, length, width, height, roof_angle, shed_length, shed_width, queryId);
                     getAllList.add(getAll);
                 }
             } catch (SQLException ex) {

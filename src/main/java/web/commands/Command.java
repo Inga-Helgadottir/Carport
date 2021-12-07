@@ -37,6 +37,7 @@ public abstract class Command
         commands.put("salepage", new CommandUnprotectedPage("onSalePage"));
         //----------------------------commands--------------------------
         commands.put("queries", new GetAllQueries("seeAllQueries", "employee"));
+        commands.put("pricechange", new ChangeQueryPrice("seeAllQueries", "employee"));
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
         commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage","customer"));

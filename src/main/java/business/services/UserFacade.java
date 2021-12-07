@@ -20,4 +20,12 @@ public class UserFacade {
         return userMapper.createUser(user);
     }
 
+    public void changeQueryPrice(int queryId, String msg){
+        userMapper.changeQueryPrice(queryId, msg);
+    }
+
+    public User getUserById(int id) throws UserException {
+        return userMapper.getUserById(id);
+    }
+
 }

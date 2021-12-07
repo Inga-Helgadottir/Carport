@@ -14,7 +14,7 @@
 
     <jsp:body>
         <h1 class="mb-5 mt-4 h1">Forespørgelser</h1>
-        <section class="queries">
+        <form action="${pageContext.request.contextPath}/fc/pricechange" method="get" class="queries">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -32,13 +32,18 @@
                 <tbody>
                     <c:forEach var="item" items="${sessionScope.getAllList}" varStatus="status">
                         <tr>
-                            <th scope="row">${item.userName}</th>
+                            <th scope="row">
+                                <input class="checkbox" type="checkbox" name="orderCheck" value="${item.queryId}/${item.userId}" onclick="onlyOne(this)">
+                                ${item.userName}
+                            </th>
                             <td>${item.userEmail}</td>
                             <td>${item.userPhone}</td>
                             <td>${item.quantity}</td>
                             <td>${item.status}</td>
                             <td>${item.msg}</td>
-                            <td>${item.singlePrice}</td>
+                            <td>
+                                <input type="number" value="${item.singlePrice}" name="inputSaldo${item.queryId}" class="balanceCheck">kr
+                            </td>
                             <td>${item.created}</td>
                             <td>${item.carportId}</td>
                         </tr>
@@ -77,7 +82,19 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </section>
+            <button type="submit" class="btn btn-success">Giv tilbud</button>
+        </form>
 
+        <script>
+            function onlyOne(checkbox) {
+                //selects all the checkboxes
+                let checkboxes = document.getElementsByName("orderCheck");
+                //loops through them
+                checkboxes.forEach((item) => {
+                    //if this box is checked it unchecks all the others
+                    if (item !== checkbox) item.checked = false;
+                })
+            }
+        </script>
     </jsp:body>
 </t:genericpage>

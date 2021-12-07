@@ -2,14 +2,6 @@ package business.entities;
 
 public class User
 {
-
-    public User(String email, String password, String role)
-    {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-
-    }
     private String name;
     private int telephone;
     private int address_id;
@@ -19,6 +11,23 @@ public class User
     private String role;
     private int zipcode;
     private String city;
+    private String message;
+
+    public User(String email, String password, String role)
+    {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public int getZipcode() {
         return zipcode;

@@ -68,4 +68,45 @@ public class UserMapper {
         }
     }
 
+    public void changeQueryPrice(int queryId, String msg) {
+        try (Connection connection = database.connect()) {
+            String sql = "UPDATE `query` SET message = ? WHERE id = ?;";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, msg);
+                ps.setInt(2, queryId);
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    public User getUserById(int id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM user WHERE id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String role = rs.getString("role");
+                    User u = new User(email, password, role);
+                    return u;
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+        return null;
+    }
 }

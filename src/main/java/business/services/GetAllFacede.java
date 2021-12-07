@@ -17,4 +17,5 @@ public class GetAllFacede {
         return getAllMapper.GetAll();
     }
 
+
 }

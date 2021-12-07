@@ -7,6 +7,7 @@ public class GetAll {
     private String msg;
     private Timestamp created;
     private double totalPrice;
+    private int userId;
     private String userName;
     private String userEmail;
     private int userPhone;
@@ -20,12 +21,15 @@ public class GetAll {
     private int height;
     private int roofAngle;
     private int shedLength;
+    private int shedWidth;
+    private int queryId;
 
-    public GetAll(String status, String msg, Timestamp created, double totalPrice, String userName, String userEmail, int userPhone, int quantity, int carportId, String carportType, int singlePrice, String carportName, int length, int width, int height, int roofAngle, int shedLength, int shedWidth) {
+    public GetAll(String status, String msg, Timestamp created, double totalPrice, int userId, String userName, String userEmail, int userPhone, int quantity, int carportId, String carportType, int singlePrice, String carportName, int length, int width, int height, int roofAngle, int shedLength, int shedWidth, int queryId) {
         this.status = status;
         this.msg = msg;
         this.created = created;
         this.totalPrice = totalPrice;
+        this.userId = userId;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPhone = userPhone;
@@ -40,6 +44,7 @@ public class GetAll {
         this.roofAngle = roofAngle;
         this.shedLength = shedLength;
         this.shedWidth = shedWidth;
+        this.queryId = queryId;
     }
 
     public String getStatus() {
@@ -52,6 +57,14 @@ public class GetAll {
 
     public String getMsg() {
         return msg;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public void setMsg(String msg) {
@@ -186,6 +199,11 @@ public class GetAll {
         this.shedWidth = shedWidth;
     }
 
-    int shedWidth;
+    public int getQueryId() {
+        return queryId;
+    }
 
+    public void setQueryId(int queryId) {
+        this.queryId = queryId;
+    }
 }
