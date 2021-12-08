@@ -14,7 +14,7 @@
 
     <jsp:body>
         <h1 class="mb-5 mt-4 h1">Forespørgelser</h1>
-        <form action="" method="get" class="queries">
+        <form action="${pageContext.request.contextPath}/fc/queryinfo" method="get" class="queries">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -34,7 +34,7 @@
                         <td>${item.message}</td>
                         <td>${item.user_id}</td>
                         <td>
-                            <button type="submit" class="btn btn-success">Giv tilbud</button>
+                            <button type="submit" name="queryId" value="${item.id}" class="btn btn-success">Administre Forespørgsel</button>
                         </td>
                     </tr>
                 </c:forEach>

@@ -29,14 +29,14 @@
                                 <label for="width">Bredde, carport</label>
                                 <input class="form-control" id="width" name="width" placeholder="vælg bredde"
                                        type="number"
-                                       min="240" max="600" step="30"/> <small
+                                       min="2400" max="6000" step="300"/> <small
                                     class="form-text text-muted">centimeter</small>
                             </div>
                             <div class="form-group my-2">
                                 <label for="length">Længde, carport</label>
                                 <input class="form-control" id="length" name="length" placeholder="vælg længde"
                                        type="number"
-                                       min="240" max="780" step="30"/><small
+                                       min="2400" max="7800" step="300"/><small
                                     class="form-text text-muted">centimeter</small>
                             </div>
                             <div class="form-group my-2">
@@ -56,10 +56,10 @@
                             <div class="form-group my-2">
                                 <label for="roof">Tag</label>
                                 <select class="form-control" id="roof" name="roof">
-                                    <option value="Betontag, sort">Fladt</option>
-                                    <option value="Betontag, rød">Fladt</option>
-                                    <option value="Eternittag, sort">Rejst</option>
-                                    <option value="Eternittag, grå">Rejst</option>
+                                    <option value="Betontag, sort">Beton, sort</option>
+                                    <option value="Betontag, rød">Beton, rød</option>
+                                    <option value="Eternittag, sort">Eternit, sort</option>
+                                    <option value="Eternittag, grå">eternit, grå</option>
                                 </select>
                             </div>
                             <div class="form-group my-2">

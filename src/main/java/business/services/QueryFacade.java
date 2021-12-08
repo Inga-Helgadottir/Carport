@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.Carport;
+import business.entities.Material;
 import business.entities.Query;
 import business.entities.QueryCollection;
 import business.exceptions.UserException;
@@ -17,13 +18,12 @@ public class QueryFacade {
     }
 
 
-
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
-        return queryMapper.makeQuery(query,carports);
+        return queryMapper.makeQuery(query, carports);
     }
 
-    public List<QueryCollection> getQueryCollection() throws UserException{
-        return queryMapper.getQueryCollection();
+    public Query makeQueryCustom(Query query) throws UserException {
+        return queryMapper.makeQueryCustom(query);
     }
 
     public List<Query> getAllQueries(String status) throws UserException {

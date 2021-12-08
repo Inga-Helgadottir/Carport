@@ -18,15 +18,79 @@ public class MaterialMapper {
         this.database = database;
     }
 
-    public Material getRafters(int beamheight, int beamwidth, int beamlength, String category) throws UserException {
+
+    public List<Material> getMaterialsByCategory(String name) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE `width`=? AND `height`=? AND `length`=? AND `category`=?";
+            String sql = "SELECT * FROM material WHERE name = ?";
+
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ResultSet rs = ps.executeQuery();
+                List<Material> materials = new ArrayList<>();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(id);
+                    m.setDescription(description);
+                    materials.add(m);
+                }
+                return materials;
+            } catch (SQLException ex) {
+                throw new UserException("Connection to database could not be established");
+            }
+        } catch (SQLException e) {
+            throw new UserException(e.getMessage());
+        }
+    }
+
+
+    public Material SelectMaterialByCategory(String name, int length) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE name = ? and length = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ps.setInt(2, length);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int material_id = rs.getInt("id");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(material_id);
+                    return m;
+                }
+                else {
+                    throw new UserException("Could not find material " + name);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public Material getRafters(int beamheight, int beamwidth, int beamlength, String category) throws
+            UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE width=? AND height=? AND length=? AND category=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, beamwidth);
                 ps.setInt(2, beamheight);
                 ps.setInt(3, beamlength);
-                ps.setString(4,category);
+                ps.setString(4, category);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int id = rs.getInt("id");
@@ -36,9 +100,41 @@ public class MaterialMapper {
                     int length = rs.getInt("length");
                     double cost = rs.getDouble("cost");
                     String description = rs.getString("description");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(id);
+                    return m;
+                } else {
+                    throw new UserException("Could not find rafter");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+
+    }
+}
+/*
+    public Material getMaterialByCategory2(int length, String category) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE length=? AND category=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, length);
+                ps.setString(2, category);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
                     Material material = new Material(name, width, height, length, category, cost);
                     material.setMaterial_id(id);
                     material.setDescription(description);
+                    material.setMaterial_id(id);
                     return material;
                 } else {
                     throw new UserException("Could not find rafter");
@@ -52,14 +148,14 @@ public class MaterialMapper {
 
     }
 
-    public Material getMaterialByCategory(String mat_category, int length) throws UserException {
+    public Material getMaterialByCategory(int length, String mat_category) throws UserException {
 
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE `category`=? AND `length`=?";
+            String sql = "SELECT * FROM `material` WHERE length=? AND category=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, mat_category);
-                ps.setInt(2, length);
+                ps.setInt(1, length);
+                ps.setString(2, mat_category);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int id = rs.getInt("id");
@@ -67,10 +163,9 @@ public class MaterialMapper {
                     int mat_width = rs.getInt("width");
                     int mat_height = rs.getInt("height");
                     int mat_length = rs.getInt("length");
-                    String category = rs.getString("category");
                     double cost = rs.getDouble("cost");
                     String description = rs.getString("description");
-                    Material material = new Material(name, mat_width, mat_height, mat_length, category, cost);
+                    Material material = new Material(name, mat_width, mat_height, mat_length, mat_category, cost);
                     material.setMaterial_id(id);
                     material.setDescription(description);
                     return material;
@@ -114,4 +209,6 @@ public class MaterialMapper {
             throw new UserException(ex.getMessage());
         }
     }
-}
+
+ */
+

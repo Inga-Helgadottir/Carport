@@ -14,12 +14,14 @@ public class Material {
     private int quantity;
 
 
-
-
-
-
-    public Material(String name,int width, int height, int length, String category, double cost) {
-
+    public Material(String name, int width, int height, int length, String category, double cost, String description) {
+        this.name = name;
+        this.width = width;
+        this.height = height;
+        this.length = length;
+        this.category = category;
+        this.cost = cost;
+        this.description = description;
     }
 
     public void setMaterial_id(int material_id) {

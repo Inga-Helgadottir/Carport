@@ -15,17 +15,31 @@ public class MaterialFacade {
         materialMapper = new MaterialMapper(database);
     }
 
-    public Material getRafters(int beamheight, int beamwidth, int beamlength) throws UserException {
-        return materialMapper.getRafters(beamheight, beamwidth, beamlength,"bjælkespær");
+
+    public List<Material> getMaterialsByCategory(String name) throws UserException {
+        return materialMapper.getMaterialsByCategory(name);
     }
 
-    public Material getMaterialByCategory(String category, int length) throws UserException {
-        return materialMapper.getMaterialByCategory(category,length);
+    public Material SelectMaterialByCategory(String name, int length) throws UserException {
+        return materialMapper.SelectMaterialByCategory(name,length);
+    }
+    public Material getRafters(int beamheight, int beamwidth, int beamlength, String category) throws UserException {
+        return materialMapper.getRafters(beamheight, beamwidth, beamlength, category);
+    }
+}
+/*
+    public Material getMaterialByCategory(int length, String category) throws UserException {
+        return materialMapper.getMaterialByCategory(length,category);
+    }
+    public Material getMaterialByCategory2(int length, String category) throws UserException {
+        return materialMapper.getMaterialByCategory2(length,category);
     }
 
     public List<Material> getAllMaterialsByCategory(String category) throws UserException{
         return materialMapper.getAllMaterialsByCategory(category);
     }
 
+ */
 
-}
+
+
