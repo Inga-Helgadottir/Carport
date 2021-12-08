@@ -34,10 +34,12 @@ public abstract class Command
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
         commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
-        commands.put("salepage", new CommandUnprotectedPage("onSalePage"));
+        commands.put("salepage", new CheckForQueryMessages("onSalePage", "customer"));
+        commands.put("acceptofferpage", new AcceptOfferCommand("onSalePage", "customer"));
+
         //----------------------------commands--------------------------
         commands.put("queries", new GetAllQueries("seeAllQueries", "employee"));
-        commands.put("pricechange", new ChangeQueryPrice("seeAllQueries", "employee"));
+        commands.put("pricechange", new ChangeQueryMessage("seeAllQueries", "employee"));
         commands.put("addtocart", new AddToCartCommand("standartcarport","customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
         commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage","customer"));
@@ -45,7 +47,6 @@ public abstract class Command
 
         commands.put("seeQueries", new CommandProtectedPage("adminSeeQueries", "employee"));
 
-//        commands.put("addtocart", new AddToCartCommand("singlecarports","customer"));
 
     }
 

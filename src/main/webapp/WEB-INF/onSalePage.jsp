@@ -14,7 +14,52 @@
 
     <jsp:body>
 
-       <h1 class="mb-5 mt-4 h1">Tilbud</h1>
+        <c:if test="${sessionScope.role == 'customer'}">
+            <h1 class="mb-5 mt-4 h1">Dine tilbud</h1>
+            <form action="${pageContext.request.contextPath}/fc/acceptofferpage" method="get" class="queries">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Tilbud</th>
+                        <th scope="col">Pris før</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Carport navn</th>
+                        <th scope="col">Carport type</th>
+                        <th scope="col">Carport mål</th>
+                        <th scope="col">Skur mål</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="item" items="${sessionScope.queryMsgs}" varStatus="status">
+                        <tr>
+                            <th scope="row">
+                                <input class="checkbox" type="checkbox" name="orderCheck" value="${item.queryId}/${item.orderId}/${item.msg}" onclick="onlyOne(this)">
+                                    ${item.msg}
+                            </th>
+                            <td>${item.singlePrice}</td>
+                            <td>${item.status}</td>
+                            <td>${item.carportName}</td>
+                            <td>${item.carportType}</td>
+                            <td>${item.length} x ${item.width} x ${item.height}</td>
+                            <c:choose>
+                                <c:when test="${item.shedLength == 0}">
+                                    <td>Uden skur</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td>${item.shedLength} x ${item.shedWidth} x ${item.height}</td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn-success">Ja tak</button>
+                <button href="" class="btn-danger">Nej tak</button>
+            </form>
+                <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+        </c:if>
+       <h2 class="mb-5 mt-4 h2">Andre tilbud</h2>
         <div class="onSaleItems">
             <div class="onSaleItem">
                 <h3 class="text-center h3">Ugens tilbud</h3>
@@ -55,5 +100,17 @@
             </div>
             <!-------------------------------------------------------------------------------------------------------------------->
         </div>
+
+        <script>
+            function onlyOne(checkbox) {
+                //selects all the checkboxes
+                let checkboxes = document.getElementsByName("orderCheck");
+                //loops through them
+                checkboxes.forEach((item) => {
+                    //if this box is checked it unchecks all the others
+                    if (item !== checkbox) item.checked = false;
+                })
+            }
+        </script>
     </jsp:body>
 </t:genericpage>

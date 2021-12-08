@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.GetAll;
+import business.exceptions.UserException;
 import business.persistence.Database;
 import business.persistence.GetAllMapper;
 
@@ -15,6 +16,10 @@ public class GetAllFacede {
 
     public List<GetAll> GetAll() {
         return getAllMapper.GetAll();
+    }
+
+    public List<GetAll> checkForMessages(int userId) throws UserException {
+        return getAllMapper.checkForMessages(userId);
     }
 
 

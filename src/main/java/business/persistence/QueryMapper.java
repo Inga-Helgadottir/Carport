@@ -1,10 +1,12 @@
 package business.persistence;
 
 import business.entities.Carport;
+import business.entities.GetAll;
 import business.entities.Query;
 import business.exceptions.UserException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QueryMapper {
@@ -59,4 +61,5 @@ public class QueryMapper {
             throw new UserException(ex.getMessage());
         }
     }
+
 }

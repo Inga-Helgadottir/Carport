@@ -3,6 +3,7 @@ package business.entities;
 import java.sql.Timestamp;
 
 public class GetAll {
+    private int orderId;
     private String status;
     private String msg;
     private Timestamp created;
@@ -23,6 +24,25 @@ public class GetAll {
     private int shedLength;
     private int shedWidth;
     private int queryId;
+
+    public GetAll(int queryId, int orderID, String status, String msg, Timestamp created, double totalPrice, int quantity, String carportType, int singlePrice, String carportName, int length, int width, int height, int roofAngle, int shedLength, int shedWidth) {
+        this.queryId = queryId;
+        this.status = status;
+        this.msg = msg;
+        this.created = created;
+        this.totalPrice = totalPrice;
+        this.quantity = quantity;
+        this.carportType = carportType;
+        this.singlePrice = singlePrice;
+        this.carportName = carportName;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+        this.roofAngle = roofAngle;
+        this.shedLength = shedLength;
+        this.shedWidth = shedWidth;
+        this.orderId = orderID;
+    }
 
     public GetAll(String status, String msg, Timestamp created, double totalPrice, int userId, String userName, String userEmail, int userPhone, int quantity, int carportId, String carportType, int singlePrice, String carportName, int length, int width, int height, int roofAngle, int shedLength, int shedWidth, int queryId) {
         this.status = status;
@@ -201,6 +221,14 @@ public class GetAll {
 
     public int getQueryId() {
         return queryId;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public void setQueryId(int queryId) {

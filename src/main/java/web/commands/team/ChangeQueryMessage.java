@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ChangeQueryPrice extends CommandProtectedPage {
+public class ChangeQueryMessage extends CommandProtectedPage {
     GetAllFacede getAllFacede;
     UserFacade userFacade;
-    public ChangeQueryPrice(String pageToShow, String role) {
+    public ChangeQueryMessage(String pageToShow, String role) {
         super(pageToShow, role);
         getAllFacede = new GetAllFacede(database);
         userFacade = new UserFacade(database);
@@ -30,9 +30,9 @@ public class ChangeQueryPrice extends CommandProtectedPage {
             int userId = Integer.parseInt(idArr[1]);
 
             int newPrice = Integer.parseInt(request.getParameter("inputSaldo" + queryId));
-            System.out.println(queryId + " " + newPrice);
-            String msg = "Tilbud: " + newPrice;
-            userFacade.changeQueryPrice(queryId, msg);
+
+            String msg = String.valueOf(newPrice);
+            userFacade.changeQueryMsg(queryId, msg);
 
             User u = userFacade.getUserById(userId);
             u.setMessage(msg);

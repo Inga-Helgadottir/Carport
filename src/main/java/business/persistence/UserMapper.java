@@ -68,13 +68,47 @@ public class UserMapper {
         }
     }
 
-    public void changeQueryPrice(int queryId, String msg) {
+    public void changeQueryMsg(int queryId, String msg) {
         try (Connection connection = database.connect()) {
             String sql = "UPDATE `query` SET message = ? WHERE id = ?;";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, msg);
                 ps.setInt(2, queryId);
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void changeQueryPrices(int queryId, int newPrice) {
+        try (Connection connection = database.connect()) {
+            String sql = "UPDATE `query` SET price = ? WHERE id = ?;";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, newPrice);
+                ps.setInt(2, queryId);
+                ps.executeUpdate();
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void changeOrderPrices(int orderId, int newPrice) {
+        try (Connection connection = database.connect()) {
+            String sql = "UPDATE `order` SET price = ? WHERE id = ?;";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, newPrice);
+                ps.setInt(2, orderId);
                 ps.executeUpdate();
 
             } catch (SQLException ex) {

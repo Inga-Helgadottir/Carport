@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.Carport;
+import business.entities.GetAll;
 import business.entities.Query;
 import business.exceptions.UserException;
 import business.persistence.Database;
