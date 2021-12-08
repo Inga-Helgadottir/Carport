@@ -58,7 +58,7 @@
 
                     <c:if test="${sessionScope.user == null }">
                         <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logincommand">Log in<i class="fas fa-user myIcon"></i></a>
-                        <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registercommand">Sign up<i class="far fa-user myIcon"></i></a>
+                        <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registerpage">Sign up<i class="far fa-user myIcon"></i></a>
                     </c:if>
                 </c:if>
 

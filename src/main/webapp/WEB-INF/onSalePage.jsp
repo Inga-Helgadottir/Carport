@@ -53,9 +53,10 @@
                     </c:forEach>
                     </tbody>
                 </table>
-
-                <button type="submit" class="btn-success myBtn">Ja tak</button>
-                <button type="reset" href="${pageContext.request.contextPath}/fc/rejectofferpage" class="btn-danger myBtn">Nej tak</button>
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn-success myBtn">Ja tak</button>
+                    <button type="reset" href="${pageContext.request.contextPath}/fc/rejectofferpage" class="btn-danger myBtn">Nej tak</button>
+                </div>
             </form>
                 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
         </c:if>
