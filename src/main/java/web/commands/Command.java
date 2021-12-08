@@ -36,6 +36,7 @@ public abstract class Command
         commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
         commands.put("salepage", new CheckForQueryMessages("onSalePage", "customer"));
         commands.put("acceptofferpage", new AcceptOfferCommand("onSalePage", "customer"));
+        commands.put("rejectofferpage", new RejectOfferCommand("onSalePage", "customer"));
 
         //----------------------------commands--------------------------
         commands.put("queries", new GetAllQueries("seeAllQueries", "employee"));
