@@ -22,7 +22,6 @@ public class RejectOfferCommand extends CommandProtectedPage {
         String ids = request.getParameter("orderCheck");
         String[] idArr = ids.split("/");
         int queryId = Integer.parseInt(idArr[0]);
-        System.out.println(queryId);
 
         String msg = "standard order";
         userFacade.changeQueryMsg(queryId, msg);

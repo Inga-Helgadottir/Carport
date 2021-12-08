@@ -54,8 +54,8 @@
                     </tbody>
                 </table>
 
-                <button type="submit" class="btn-success">Ja tak</button>
-                <button type="reset" href="${pageContext.request.contextPath}/fc/rejectofferpage" class="btn-danger">Nej tak</button>
+                <button type="submit" class="btn-success myBtn">Ja tak</button>
+                <button type="reset" href="${pageContext.request.contextPath}/fc/rejectofferpage" class="btn-danger myBtn">Nej tak</button>
             </form>
                 <!--------------------------------------------------------------------------------------------------------------------------------------------------------------------->
         </c:if>

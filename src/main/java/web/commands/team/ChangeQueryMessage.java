@@ -26,7 +26,6 @@ public class ChangeQueryMessage extends CommandProtectedPage {
         String ids = request.getParameter("orderCheck");
         String[] idArr = ids.split("/");
         int queryId = Integer.parseInt(idArr[0]);
-
         int newPrice = Integer.parseInt(request.getParameter("inputSaldo" + queryId));
 
         String msg = String.valueOf(newPrice);
