@@ -46,19 +46,22 @@ public class MaterialCalculator {
         //roof_under.setQuantity(6);
     }
 
-
+    //rem
     public void calcRem(int length, int width) throws UserException {
         Material rem = materialFacade.SelectMaterialByCategory("rem", length);
         rem.setQuantity(2);
         materialList.add(rem);
     }
 
+    //stolper
     public void calcPost(int length, int width) throws UserException {
         Material post = materialFacade.SelectMaterialByCategory("post", 3000);
-        boolean isDouble = width >= 4300;
-        double squarefeet = (double) (width / 1000) * (double) (length / 1000);
+        double test = width * 0.001;
+        double test2 = length * 0.001;
+        double test3 = width * length;
+        double squarefeet = test3;
 
-        if (isDouble) {
+        if (width >= 4300) {
             if (squarefeet >= 44) {
                 post.setQuantity(10);
             } else if (squarefeet >= 38.5) {
@@ -90,6 +93,7 @@ public class MaterialCalculator {
         materialList.add(post);
     }
 
+    //spær
     public void calcRafters(int width, int length) throws UserException {
         int raftquantity = 0;
         int beamspacing = 0;
@@ -176,12 +180,13 @@ public class MaterialCalculator {
         int t = (int) Math.floor((double) (length - beamwidth) / beamspacing);
         int diff = length - (t * beamspacing);
 
-        if (diff >= 101) {
+        if (diff >= 100) {
             return Quantity = t + 2;
         }
         return Quantity = t + 1;
     }
 
+    //stern
     private void calcStern(int carport_length, int carport_width) throws UserException {
         //over og understern i siderne
 
