@@ -23,24 +23,16 @@ public class ChangeQueryMessage extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            String ids = request.getParameter("orderCheck");
-            String[] idArr = ids.split("/");
-            int queryId = Integer.parseInt(idArr[0]);
-            int userId = Integer.parseInt(idArr[1]);
+        String ids = request.getParameter("orderCheck");
+        String[] idArr = ids.split("/");
+        int queryId = Integer.parseInt(idArr[0]);
 
-            int newPrice = Integer.parseInt(request.getParameter("inputSaldo" + queryId));
+        int newPrice = Integer.parseInt(request.getParameter("inputSaldo" + queryId));
 
-            String msg = String.valueOf(newPrice);
-            userFacade.changeQueryMsg(queryId, msg);
+        String msg = String.valueOf(newPrice);
+        userFacade.changeQueryMsg(queryId, msg);
 
-            User u = userFacade.getUserById(userId);
-            u.setMessage(msg);
-
-            request.getSession().setAttribute("getAllList", getAllFacede.GetAll());
-        } catch (UserException e) {
-            e.printStackTrace();
-        }
+        request.getSession().setAttribute("getAllList", getAllFacede.GetAll());
 
         return pageToShow;
 
