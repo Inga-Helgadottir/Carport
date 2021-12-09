@@ -67,7 +67,7 @@ public class GetAllMapper {
         List<GetAll> checkForMsgs = new ArrayList<>();
 
         try (Connection connection = database.connect()) {
-            String sql = "SELECT o.id, o.status, o.created, o.price AS totalPrice, q.id AS queryId, q.message, u.id, u.name AS username, u.email, u.telephone, l.quantity, c.id AS carportId, c.type, c.price, c.name, c.length, c.width, c.height, c.roof_angle, c.shed_length, c.shed_width " +
+            String sql = "SELECT o.id, o.status, o.created, o.price AS totalPrice, q.id AS queryId, o.message, u.id, u.name AS username, u.email, u.telephone, l.quantity, c.id AS carportId, c.type, c.price, c.name, c.length, c.width, c.height, c.roof_angle, c.shed_length, c.shed_width " +
                     "FROM `user` AS u " +
                     "INNER JOIN `order` AS o " +
                     "ON u.id = o.user_id " +
@@ -77,7 +77,7 @@ public class GetAllMapper {
                     "ON q.id = l.query_id " +
                     "INNER JOIN carport AS c " +
                     "ON l.carport_id = c.id " +
-                    "WHERE q.user_id = ? AND q.message != ?;";
+                    "WHERE o.user_id = ? AND o.message != ?;";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, userId);
@@ -90,7 +90,7 @@ public class GetAllMapper {
                     String message = rs.getString("message");
                     int price = rs.getInt("price");
                     int orderId = rs.getInt("id");
-                    int queryId = rs.getInt("id");
+                    int queryId = rs.getInt("queryId");
                     String status = rs.getString("status");
                     String type = rs.getString("type");
                     String carportName = rs.getString("name");

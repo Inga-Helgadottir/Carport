@@ -27,9 +27,9 @@ public class AcceptOfferCommand extends CommandProtectedPage {
         int newPrice = Integer.parseInt(idArr[2]);
 
         String msg = "standard order";
-        userFacade.changeQueryMsg(queryId, msg);
+        userFacade.changeOrderMessage(orderId, msg);
 
-        userFacade.changeQueryPrices(queryId, newPrice);
+        userFacade.changeQueryPrices(queryId, newPrice);//--------fix
         userFacade.changeOrderPrices(orderId, newPrice);
 
         request.getSession().setAttribute("getAllList", getAllFacede.GetAll());

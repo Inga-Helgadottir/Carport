@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class CheckForQueryMessages extends CommandProtectedPage {
+public class CheckForOrderMessages extends CommandProtectedPage {
     GetAllFacede getAllFacede;
-    public CheckForQueryMessages(String pageToShow, String role) {
+    public CheckForOrderMessages(String pageToShow, String role) {
         super(pageToShow, role);
         getAllFacede = new GetAllFacede(database);
     }

@@ -5,10 +5,6 @@ import business.persistence.Database;
 import business.persistence.UserMapper;
 import business.exceptions.UserException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class UserFacade {
     UserMapper userMapper;
 
@@ -24,8 +20,8 @@ public class UserFacade {
         return userMapper.createUser(user);
     }
 
-    public void changeQueryMsg(int queryId, String msg){
-        userMapper.changeQueryMsg(queryId, msg);
+    public void changeOrderMessage(int queryId, String msg){
+        userMapper.changeOrderMessage(queryId, msg);
     }
 
     public User getUserById(int id) throws UserException {

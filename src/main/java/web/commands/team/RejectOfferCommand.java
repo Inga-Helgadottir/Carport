@@ -21,10 +21,10 @@ public class RejectOfferCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws UserException {
         String ids = request.getParameter("orderCheck");
         String[] idArr = ids.split("/");
-        int queryId = Integer.parseInt(idArr[0]);
+        int orderId = Integer.parseInt(idArr[1]);
 
         String msg = "standard order";
-        userFacade.changeQueryMsg(queryId, msg);
+        userFacade.changeOrderMessage(orderId, msg);
 
         request.getSession().setAttribute("getAllList", getAllFacede.GetAll());
         return pageToShow;

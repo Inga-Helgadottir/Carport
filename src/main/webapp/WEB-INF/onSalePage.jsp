@@ -16,7 +16,7 @@
 
         <c:if test="${sessionScope.role == 'customer'}">
             <h1 class="mb-5 mt-4 h1">Dine tilbud</h1>
-            <form action="${pageContext.request.contextPath}/fc/acceptofferpage" method="get" class="queries">
+            <form method="get" class="queries">
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -54,7 +54,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn-success myBtn">Ja tak</button>
+                    <button type="reset" href="${pageContext.request.contextPath}/fc/acceptofferpage" class="btn-success myBtn">Ja tak</button>
                     <button type="reset" href="${pageContext.request.contextPath}/fc/rejectofferpage" class="btn-danger myBtn">Nej tak</button>
                 </div>
             </form>
