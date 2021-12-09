@@ -26,6 +26,8 @@
                 <p>replace this with SVG</p>
             </div>
 
+            <a href="${pageContext.request.contextPath}/fc/a">here</a>
+
             <c:if test="${sessionScope.role == 'employee' }">
                 <p style="font-size: larger">This is what you can do,
                     since your are logged in as an employee</p>

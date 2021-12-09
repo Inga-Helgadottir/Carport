@@ -30,6 +30,8 @@ public abstract class Command
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
 
+        commands.put("a", new CommandUnprotectedPage("renameLater"));
+
 //-----------------------------links---------------------------------------------------
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));

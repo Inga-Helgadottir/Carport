@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/showHide.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/onSale.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/seeAllQueries.css">
+
+
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/renameLater.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
