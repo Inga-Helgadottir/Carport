@@ -99,12 +99,13 @@
                             </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary btnWidth" name="carport_id" value="${requestScope.query.carport.id}">Opdater mål</button>
+                        <button class="btn btn-primary btnWidth" name="carport_id"
+                                value="${requestScope.query.carport.id}">Opdater mål
+                        </button>
                     </form>
                 </div>
-
-
             </div>
+
             <div class="d-flex flex-row">
                 <div class="half mb-5">
                     <table class="table table-striped">
@@ -117,15 +118,15 @@
                         <tbody>
                         <tr>
                             <td>Indkøbspris ex. moms:</td>
-                            <td>2288.36</td><!------------------------------------------->
+                            <td>${requestScope.query.price}</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
-                                    <input type="number" value="80.8" class="input2">
-                                    <!------------------------------------------->
-                                    %
+                                    <input type="number" value="80.8" class="input2" name="coverage">
+                                    <input type="hidden" value="${requestScope.query.id}" name="query_id">
+                                    <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                 </div>
                                 <button class="btn btn-primary">Opdater dækningsgrad</button>
                             </td>
@@ -165,29 +166,21 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${requestScope.query.BOM}" var="material">
                 <tr>
-                    <td>1601</td><!------------------------------------------->
-                    <td>97x97 mm. trykimo. stolpe</td><!------------------------------------------->
-                    <td>Stolper nedgraves 90cm. i jord</td><!------------------------------------------->
-                    <td>3000 mm</td><!------------------------------------------->
-                    <td>6</td><!------------------------------------------->
-                    <td>Stk.</td><!------------------------------------------->
-                    <td>112.5</td><!------------------------------------------->
-                    <td>675.0</td><!------------------------------------------->
+                    <td>${material.material_id}</td>
+                    <td>${material.width}x${material.height} mm. ${material.category}</td>
+                    <td>${material.description}</td>
+                    <td>${material.length}</td>
+                    <td>${material.quantity}</td>
+                    <td>Stk.</td>
+                    <td>${material.cost}</td>
+                    <td>skal regnes ud ?</td>
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </section>
-        <script>
-            let btn = document.getElementById("showHide");
-            let div = document.getElementById("showHideDiv");
-            btn.addEventListener("click", () => {
-                if (div.style.display == "block") {
-                    div.style.display = "none";
-                } else {
-                    div.style.display = "block";
-                }
-            });
-        </script>
+
     </jsp:body>
 </t:genericpage>
