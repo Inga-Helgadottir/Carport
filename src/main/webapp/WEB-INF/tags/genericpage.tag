@@ -25,6 +25,7 @@
 
 
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/renameLater.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/renameLater2.css">
     <meta name="theme-color" content="#7952b3">
 </head>
 <body>
