@@ -24,27 +24,23 @@
                 <tbody>
                 <tr>
                     <td>Fulde navn:</td>
-                    <td>Kunde</td><!------------------------------------------->
+                    <td>${requestScope.offer.user.name}</td><!------------------------------------------->
                 </tr>
                 <tr>
                     <td>Adresse:</td>
-                    <td>Kundegade 1</td><!------------------------------------------->
-                </tr>
-                <tr>
-                    <td>Postnummer:</td>
-                    <td>3720</td><!------------------------------------------->
+                    <td>${requestScope.offer.user.address}</td><!------------------------------------------->
                 </tr>
                 <tr>
                     <td>By:</td>
-                    <td>Rønne</td><!------------------------------------------->
+                    <td>${requestScope.offer.user.city}</td><!------------------------------------------->
                 </tr>
                 <tr>
                     <td>Telefon nr :</td>
-                    <td>10203040</td><!------------------------------------------->
+                    <td>${requestScope.offer.user.telephone}</td><!------------------------------------------->
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td>q@q.dk</td><!------------------------------------------->
+                    <td>q@q.${requestScope.offer.user.email}</td><!------------------------------------------->
                 </tr>
                 </tbody>
             </table>
@@ -59,19 +55,11 @@
                     <tbody>
                     <tr>
                         <td>Ref. nr.:</td>
-                        <td>15</td><!------------------------------------------->
-                    </tr>
-                    <tr>
-                        <td>Oprettet:</td>
-                        <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
-                    </tr>
-                    <tr>
-                        <td>Ændret:</td>
-                        <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
+                        <td>${requestScope.offer.id}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Status:</td>
-                        <td>request</td><!------------------------------------------->
+                        <td>${requestScope.offer.status}</td><!------------------------------------------->
                     </tr>
                     </tbody>
                 </table>
@@ -87,18 +75,14 @@
                     <tr>
                         <td>Bredde:</td>
                         <td>
-                            420 cm<!------------------------------------------->
+                                ${requestScope.offer.carport.width}
                         </td>
                     </tr>
                     <tr>
                         <td>Længde:</td>
                         <td>
-                            600 cm<!------------------------------------------->
+                                ${requestScope.offer.carport.length}
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Tag:</td>
-                        <td>Plasmo Ecolite blåtonet</td><!------------------------------------------->
                     </tr>
                     </tbody>
                 </table>
@@ -113,7 +97,7 @@
                     <tbody>
                     <tr>
                         <td>Pris (Dkk):</td>
-                        <td>Afventer tilbud</td>
+                        <td>${requestScope.offer.price}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -123,16 +107,6 @@
                 </div>
             </div>
         </section>
-        <script>
-            let btn = document.getElementById("showHide");
-            let div = document.getElementById("showHideDiv");
-            btn.addEventListener("click", ()=>{
-                if(div.style.display == "block"){
-                    div.style.display = "none";
-                }else{
-                    div.style.display = "block";
-                }
-            });
-        </script>
+
     </jsp:body>
 </t:genericpage>

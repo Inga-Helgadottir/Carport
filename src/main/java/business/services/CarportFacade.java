@@ -20,8 +20,8 @@ public class CarportFacade {
         return carportMapper.createCarport(carport);
     }
 
-    public List<Carport> getEnkeltcarporte() throws UserException {
-        return carportMapper.getEnkeltcarporte();
+    public List<Carport> getEnkeltcarporte(String type) throws UserException {
+        return carportMapper.getEnkeltcarporte(type);
     }
 
     public Carport getEnkeltCarport(int carportID) throws UserException {

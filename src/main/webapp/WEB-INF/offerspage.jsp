@@ -29,15 +29,15 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>${sessionScope.query.id}</td>
-                    <td>${sessionScope.query.carport.length}</td>
-                    <td>${sessionScope.query.carport.width}</td>
-                    <td>${sessionScope.query.carport.roof_angle}</td>
-                    <td>${sessionScope.query.carport.shed_length}</td>
-                    <td>${sessionScope.query.carport.shed_width}</td>
-                    <td>${sessionScope.query.status}</td>
+                    <td>${requestScope.offer.id}</td>
+                    <td>${requestScope.offer.carport.length}</td>
+                    <td>${requestScope.offer.carport.width}</td>
+                    <td>${requestScope.offer.carport.roof_angle}</td>
+                    <td>${requestScope.offer.carport.shed_length}</td>
+                    <td>${requestScope.offer.carport.shed_width}</td>
+                    <td>${requestScope.offer.status}</td>
                     <td>
-                        <button type="submit" name="queryId" value="${sessionScope.query.id}" class="btn btn-success">Se
+                        <button type="submit" name="query_id" value="${requestScope.offer.id}" class="btn btn-success">Se
                             Forespørgsel
                         </button>
                     </td>

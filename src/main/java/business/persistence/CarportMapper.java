@@ -48,11 +48,12 @@ public class CarportMapper {
     }
 
 
-    public List<Carport> getEnkeltcarporte() throws UserException {
+    public List<Carport> getEnkeltcarporte(String type) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `carport`";
+            String sql = "SELECT * FROM `carport` WHERE type=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, type);
                 ResultSet rs = ps.executeQuery();
                 List<Carport> carportList = new ArrayList<>();
                 while (rs.next()) {
@@ -64,7 +65,6 @@ public class CarportMapper {
                     int shed_length = rs.getInt("shed_length");
                     int shed_width = rs.getInt("shed_width");
                     String name = rs.getString("name");
-                    String type = rs.getString("type");
                     double price = rs.getDouble("price");
                     String info = rs.getString("info");
                     Carport carport = new Carport(length, width, height, roof_angle, shed_length, shed_width, name, type, price, info);

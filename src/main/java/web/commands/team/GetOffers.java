@@ -16,13 +16,13 @@ import java.util.List;
 public class GetOffers extends CommandProtectedPage {
     private QueryFacade queryFacade;
     private CarportFacade carportFacade;
-    private MaterialCalculator materialCalculator;
+    //private MaterialCalculator materialCalculator;
 
     public GetOffers(String pageToShow, String role) {
         super(pageToShow, role);
         queryFacade = new QueryFacade(database);
         carportFacade = new CarportFacade(database);
-        materialCalculator = new MaterialCalculator(database);
+        //materialCalculator = new MaterialCalculator(database);
     }
 
     @Override
@@ -32,10 +32,9 @@ public class GetOffers extends CommandProtectedPage {
             Query query = queryFacade.getQuery("requested", user_id);
             Carport carport = carportFacade.getCarportByQuery(query);
             query.setCarport(carport);
-            query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
-            request.getSession().setAttribute("offer", query);
+            request.setAttribute("offer", query);
+            //query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
             return pageToShow;
-
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());
             return pageToShow;
