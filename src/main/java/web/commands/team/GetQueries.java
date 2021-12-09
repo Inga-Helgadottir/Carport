@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetQueryCollection extends CommandProtectedPage {
+public class GetQueries extends CommandProtectedPage {
     QueryFacade queryFacade;
 
-    public GetQueryCollection(String pageToShow, String role) {
+    public GetQueries(String pageToShow, String role) {
         super(pageToShow, role);
         queryFacade = new QueryFacade(database);
     }
@@ -22,7 +22,7 @@ public class GetQueryCollection extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            List<Query> queries = queryFacade.getAllQueries("custom");
+            List<Query> queries = queryFacade.getAllQueries("requested");
             request.getSession().setAttribute("queries", queries);
             return pageToShow;
 

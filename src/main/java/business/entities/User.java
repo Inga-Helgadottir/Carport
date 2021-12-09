@@ -19,6 +19,7 @@ public class User
     private String role;
     private int zipcode;
     private String city;
+    private String address;
 
     public int getZipcode() {
         return zipcode;
@@ -100,4 +101,9 @@ public class User
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 }

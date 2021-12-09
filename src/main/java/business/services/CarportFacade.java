@@ -1,6 +1,7 @@
 package business.services;
 
 import business.entities.Carport;
+import business.entities.Query;
 import business.exceptions.UserException;
 import business.persistence.CarportMapper;
 import business.persistence.Database;
@@ -15,6 +16,10 @@ public class CarportFacade {
     }
 
 
+    public Carport createCarport(Carport carport) throws UserException {
+        return carportMapper.createCarport(carport);
+    }
+
     public List<Carport> getEnkeltcarporte() throws UserException {
         return carportMapper.getEnkeltcarporte();
     }
@@ -22,5 +27,9 @@ public class CarportFacade {
     public Carport getEnkeltCarport(int carportID) throws UserException {
 
         return carportMapper.getEnkeltCarport(carportID);
+    }
+
+    public Carport getCarportByQuery(Query query) throws UserException {
+        return carportMapper.getCarportByQuery(query);
     }
 }

@@ -14,6 +14,23 @@ public class QueryMapper {
         this.database = database;
     }
 
+    public void fillLinkTable(int carport_id, int query_id, int quantity) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO link_carport_query (carport_id, query_id, quantity) VALUES (?,?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, carport_id);
+                ps.setInt(2, query_id);
+                ps.setInt(3, quantity);
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
     public Query makeQueryCustom(Query query) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO `query` (`status`, price, message, user_id) VALUES (?,?,?,?)";
@@ -28,6 +45,8 @@ public class QueryMapper {
                 ids.next();
                 int query_id = ids.getInt(1);
                 query.setId(query_id);
+
+
                 return query;
 
             } catch (SQLException ex) {
@@ -35,6 +54,84 @@ public class QueryMapper {
             }
         } catch (SQLException | UserException ex) {
             throw new UserException(ex.getMessage());
+        }
+    }
+
+    public Query customCarportQuery(Carport carport, Query query) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO `carport` (`length`, `width`, height, `roof_angle`, shed_length, shed_width,`name`, type, price, info) VALUES (?,?,?,?,?,?,?,?,?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, carport.getLength());
+                ps.setInt(2, carport.getWidth());
+                ps.setInt(3, carport.getHeight());
+                ps.setInt(4, carport.getRoof_angle());
+                ps.setInt(5, carport.getShed_length());
+                ps.setInt(6, carport.getShed_width());
+                ps.setString(7, carport.getName());
+                ps.setString(8, carport.getType());
+                ps.setDouble(9, carport.getPrice());
+                ps.setString(10, carport.getInfo());
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int carport_id = ids.getInt(1);
+                carport.setId(carport_id);
+
+                Query q = makeQueryCustom(query);
+                fillLinkTable(carport_id, q.getId(), 1);
+
+                q.setCarport(carport);
+                return q;
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException | UserException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public boolean checkForQuery(String status, int user_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `query` WHERE `status`=? AND user_id=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setInt(2, user_id);
+                ResultSet rs = ps.executeQuery();
+                return rs.next();
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
+
+    public Query getQuery(String status, int user_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `query` WHERE `status`=? AND user_id=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setInt(2, user_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    double price = rs.getDouble("price");
+                    String msg = rs.getString("message");
+                    Query query = new Query(status, price, user_id, msg);
+                    query.setId(id);
+                    return query;
+                } else {
+                    throw new UserException("Cant find any queries with this status and user_id i database");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
         }
     }
 
@@ -84,12 +181,43 @@ public class QueryMapper {
         }
     }
 
+    private User getUser(int user_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `user` WHERE `id`=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, user_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    String email = rs.getString("email");
+                    String password = rs.getString("password");
+                    String role = rs.getString("role");
+                    int telephone = rs.getInt("telephone");
+                    int address_id = rs.getInt("address_id");
+                    String address = rs.getString("address");
+                    User user = new User(email, password, role);
+                    user.setName(name);
+                    user.setTelephone(telephone);
+                    user.setAddress_id(address_id);
+                    user.setAddress(address);
+                    user.setId(user_id);
+                    return user;
+                } else {
+                    throw new UserException("Could not find user");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 
     public List<Query> getAllQueries(String status) throws UserException {
         List<Query> queries = new ArrayList<>();
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM `query`  WHERE `status` = ?";
-            List<Material> materials = new ArrayList<>();
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
                 ResultSet rs = ps.executeQuery();
@@ -100,7 +228,8 @@ public class QueryMapper {
                     int user_id = rs.getInt("user_id");
                     Query query = new Query(status, price, user_id, msg);
                     query.setId(id);
-                    // query.setBOM(BOM);
+                    User user = getUser(user_id);
+                    query.setUser(user);
                     queries.add(query);
                 }
                 return queries;
@@ -112,3 +241,32 @@ public class QueryMapper {
         }
     }
 }
+
+/*
+//skal kun bruges hvis kunden kan mere end en forespørgsel ad gangen.
+    public List<Query> getUserQueries(String status, int user_id) throws UserException {
+        List<Query> queries = new ArrayList<>();
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `query`  WHERE `status` = ? AND user_id = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setInt(2, user_id);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    double price = rs.getDouble("price");
+                    String msg = rs.getString("message");
+                    Query query = new Query(status, price, user_id, msg);
+                    query.setId(id);
+                    queries.add(query);
+                }
+                return queries;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+ */

@@ -12,6 +12,8 @@ public class Query {
     private int id;
     private List<Carport> carportList;//only used for standard carport
     private List<Material> BOM;
+    private Carport carport;
+    private User user;
 
     public Query(String status, double price, int user_id, String message) {
         this.status = status;
@@ -20,6 +22,22 @@ public class Query {
         this.message = message;
         this.carportList = new ArrayList<>();
         this.BOM = new ArrayList<>();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Carport getCarport() {
+        return carport;
+    }
+
+    public void setCarport(Carport carport) {
+        this.carport = carport;
     }
 
     public List<Material> getBOM() {

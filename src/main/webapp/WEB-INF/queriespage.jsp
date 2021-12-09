@@ -18,23 +18,25 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">QueryId</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Ref nr.</th>
+                    <th scope="col">Kunde nr.</th>
+                    <th scope="col">Telefon nr.</th>
                     <th scope="col">Price</th>
                     <th scope="col">Message</th>
-                    <th scope="col">UserId</th>
+                    <th scope="col">Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="item" items="${sessionScope.queries}" varStatus="status">
+                <c:forEach var="item" items="${sessionScope.queries}">
                     <tr>
                         <td>${item.id}</td>
-                        <td>${item.status}</td>
+                        <td>${item.user_id}</td>
+                        <td>${item.user.telephone}</td>
                         <td>${item.price}</td>
                         <td>${item.message}</td>
-                        <td>${item.user_id}</td>
+                        <td>${item.status}</td>
                         <td>
-                            <button type="submit" name="queryId" value="${item.id}" class="btn btn-success">Administre Forespørgsel</button>
+                            <button type="submit" name="queryId" value="${item.id}" class="btn btn-success">Se Forespørgsel</button>
                         </td>
                     </tr>
                 </c:forEach>

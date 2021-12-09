@@ -1,0 +1,23 @@
+.tableWidth{
+    width:49%;
+    margin-right:1%;
+}
+.firstTable{
+    height: 53%;
+}
+.yesNoBtn{
+    width:30%;
+}
+
+@media only screen and (max-width: 768px) {
+    .flex-row {
+        flex-direction: column!important;
+    }
+    .tableWidth{
+        width:100%;
+        margin-right:0;
+    }
+    .firstTable{
+        height: auto;
+    }
+}
