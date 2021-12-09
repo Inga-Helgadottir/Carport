@@ -34,9 +34,9 @@ public abstract class Command
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
         commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
-        commands.put("salepage", new CheckForOrderMessages("onSalePage", "customer"));
-        commands.put("acceptofferpage", new AcceptOfferCommand("onSalePage", "customer"));
-        commands.put("rejectofferpage", new RejectOfferCommand("onSalePage", "customer"));
+        commands.put("salepage", new CheckForOrderMessages("offerpage", "customer"));
+        commands.put("acceptofferpage", new AcceptOfferCommand("offerpage", "customer"));
+        commands.put("rejectofferpage", new RejectOfferCommand("offerpage", "customer"));
 
         //----------------------------commands--------------------------
         commands.put("queries", new GetAllQueries("seeAllQueries", "employee"));
