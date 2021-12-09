@@ -27,7 +27,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="item" items="${sessionScope.queries}">
+                <c:forEach var="item" items="${requestScope.queries}">
                     <tr>
                         <td>${item.id}</td>
                         <td>${item.user_id}</td>
@@ -36,7 +36,8 @@
                         <td>${item.message}</td>
                         <td>${item.status}</td>
                         <td>
-                            <button type="submit" name="queryId" value="${item.id}" class="btn btn-success">Se Forespørgsel</button>
+                            <button type="submit" name="query_id" value="${item.id}" class="btn btn-success">Se Forespørgsel</button>
+                            <input type="hidden" name="user_id" value="${item.user.id}"/>
                         </td>
                     </tr>
                 </c:forEach>

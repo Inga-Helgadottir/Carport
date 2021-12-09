@@ -25,31 +25,27 @@
                     <tbody>
                     <tr>
                         <td>Kunde nr.:</td>
-                        <td>2</td><!------------------------------------------->
+                        <td>${requestScope.query.user.id}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Fulde navn:</td>
-                        <td>Kunde</td><!------------------------------------------->
+                        <td>${requestScope.query.user.name}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Adresse:</td>
-                        <td>Kundegade 1</td><!------------------------------------------->
-                    </tr>
-                    <tr>
-                        <td>Postnummer:</td>
-                        <td>3720</td><!------------------------------------------->
+                        <td>${requestScope.query.user.address}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>By:</td>
-                        <td>Rønne</td><!------------------------------------------->
+                        <td>${requestScope.query.user.city}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Telefon nr :</td>
-                        <td>10203040</td><!------------------------------------------->
+                        <td>${requestScope.query.user.telephone}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>q@q.dk</td><!------------------------------------------->
+                        <td>${requestScope.query.user.email}</td><!------------------------------------------->
                     </tr>
                     </tbody>
                 </table>
@@ -65,54 +61,49 @@
                         <tbody>
                         <tr>
                             <td>Ref. nr.:</td>
-                            <td>15</td><!------------------------------------------->
-                        </tr>
-                        <tr>
-                            <td>Oprettet:</td>
-                            <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
-                        </tr>
-                        <tr>
-                            <td>Ændret:</td>
-                            <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
+                            <td>${requestScope.query.id}</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Status:</td>
-                            <td>request</td><!------------------------------------------->
+                            <td>${requestScope.query.status}</td><!------------------------------------------->
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Carport</th>
-                            <th scope="col">
-                                Lås <input class="checkbox" type="checkbox" name="orderCheck" value=""><!--------------------------------->
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Bredde:</td>
-                            <td>
-                                <input type="number" value="420" class="input"><!------------------------------------------->
-                                cm
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Længde:</td>
-                            <td>
-                                <input type="number" value="600" class="input"><!------------------------------------------->
-                                cm
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tag:</td>
-                            <td>Plasmo Ecolite blåtonet</td><!------------------------------------------->
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn btn-primary btnWidth">Opdater mål</button>
+                    <form action="" method="get">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Carport</th>
+                                <th scope="col">
+                                    Lås <input class="checkbox" type="checkbox" name="orderCheck" value="" onclick="">
+                                    <!--------------------------------->
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Bredde:</td>
+                                <td>
+                                    <input type="number" value="${requestScope.query.carport.width}" class="input">
+                                    <!------------------------------------------->
+                                    cm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Længde:</td>
+                                <td>
+                                    <input type="number" value="${requestScope.query.carport.length}" class="input">
+                                    <!------------------------------------------->
+                                    cm
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary btnWidth" name="carport_id" value="${requestScope.query.carport.id}">Opdater mål</button>
+                    </form>
                 </div>
+
+
             </div>
             <div class="d-flex flex-row">
                 <div class="half mb-5">
@@ -132,7 +123,8 @@
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
-                                    <input type="number" value="80.8" class="input2"><!------------------------------------------->
+                                    <input type="number" value="80.8" class="input2">
+                                    <!------------------------------------------->
                                     %
                                 </div>
                                 <button class="btn btn-primary">Opdater dækningsgrad</button>
@@ -189,10 +181,10 @@
         <script>
             let btn = document.getElementById("showHide");
             let div = document.getElementById("showHideDiv");
-            btn.addEventListener("click", ()=>{
-                if(div.style.display == "block"){
+            btn.addEventListener("click", () => {
+                if (div.style.display == "block") {
                     div.style.display = "none";
-                }else{
+                } else {
                     div.style.display = "block";
                 }
             });

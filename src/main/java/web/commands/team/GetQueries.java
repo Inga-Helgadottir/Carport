@@ -23,7 +23,7 @@ public class GetQueries extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             List<Query> queries = queryFacade.getAllQueries("requested");
-            request.getSession().setAttribute("queries", queries);
+            request.setAttribute("queries", queries);
             return pageToShow;
 
         } catch (UserException e) {

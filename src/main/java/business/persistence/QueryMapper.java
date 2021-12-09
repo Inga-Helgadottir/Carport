@@ -109,6 +109,34 @@ public class QueryMapper {
         }
     }
 
+    public Query getQuery(int query_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `query` WHERE `id` = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, query_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String status = rs.getString("status");
+                    double price = rs.getDouble("price");
+                    String msg = rs.getString("message");
+                    int user_id = rs.getInt("user_id");
+                    Query query = new Query(status, price, user_id, msg);
+                    query.setId(id);
+                    query.setUser(getUser(user_id));
+                    return query;
+                } else {
+                    throw new UserException("Cant find any queries with this status and user_id i database");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
+
     public Query getQuery(String status, int user_id) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM `query` WHERE `status`=? AND user_id=?";
@@ -240,6 +268,8 @@ public class QueryMapper {
             throw new UserException(ex.getMessage());
         }
     }
+
+
 }
 
 /*

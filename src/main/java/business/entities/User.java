@@ -77,6 +77,9 @@ public class User
         this.id = id;
     }
 
+    public String getAddress() {
+        return address;
+    }
 
     public String getName() {
         return name;

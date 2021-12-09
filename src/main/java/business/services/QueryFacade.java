@@ -18,12 +18,15 @@ public class QueryFacade {
     }
 
 
-public Boolean checkForQuery(String status, int user_id) throws UserException{
-        return queryMapper.checkForQuery(status,user_id);
-}
+    public Boolean checkForQuery(String status, int user_id) throws UserException {
+        return queryMapper.checkForQuery(status, user_id);
+    }
 
     public Query getQuery(String status, int user_id) throws UserException {
         return queryMapper.getQuery(status, user_id);
+    }
+    public Query getQuery(int query_id)throws UserException{
+     return queryMapper.getQuery(query_id);
     }
 
 
@@ -32,7 +35,7 @@ public Boolean checkForQuery(String status, int user_id) throws UserException{
     }
 
     public Query customCarportQuery(Carport carport, Query query) throws UserException {
-        return queryMapper.customCarportQuery(carport,query);
+        return queryMapper.customCarportQuery(carport, query);
     }
 
     public List<Query> getAllQueries(String status) throws UserException {

@@ -126,8 +126,7 @@ public class CarportMapper {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int carport_id = rs.getInt("carport_id");
-                    Carport carport = getEnkeltCarport(carport_id);
-                    return carport;
+                    return getEnkeltCarport(carport_id);
                 } else {
                     throw new UserException("could not find carport_id from link_carport_query with that query_id");
                 }
