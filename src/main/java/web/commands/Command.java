@@ -30,7 +30,7 @@ public abstract class Command
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
 
-        commands.put("a", new CommandUnprotectedPage("renameLater2"));
+        commands.put("a", new CommandUnprotectedPage("renameLater4"));
 
 //-----------------------------links---------------------------------------------------
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
