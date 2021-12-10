@@ -13,7 +13,7 @@
     </jsp:attribute>
 
     <jsp:body>
-        <section class="allTables d-flex flex-row">
+        <section class="allTables2 d-flex flex-row">
             <table class="table table-striped tableWidth firstTable">
                 <thead>
                 <tr>
