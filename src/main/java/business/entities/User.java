@@ -12,6 +12,9 @@ public class User
     private int zipcode;
     private String city;
     private String message;
+    private String address;
+    private int zipcodeId;
+    private int cityId;
 
     public User(String email, String password, String role)
     {
@@ -19,6 +22,30 @@ public class User
         this.password = password;
         this.role = role;
 
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public int getZipcodeId() {
+        return zipcodeId;
+    }
+
+    public void setZipcodeId(int zipcodeId) {
+        this.zipcodeId = zipcodeId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getMessage() {

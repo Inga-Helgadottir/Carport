@@ -36,4 +36,26 @@ public class UserFacade {
         userMapper.changeOrderPrices(orderId, newPrice);
     }
 
+    //------------------------------------------------------------------------------------------------------------------NEW
+
+    public int createUserCheckZipcode(User user) throws UserException {
+        return userMapper.createUserCheckZipcode(user);
+    }
+
+    public int createUserZipcode(User user) throws UserException{
+        return userMapper.createUserZipcode(user);
+    }
+
+    public int createUserCity(User user) throws UserException {
+        return userMapper.createUserCity(user);
+    }
+
+    public int createUserCheckCity(User user) throws UserException {
+        return userMapper.createUserCheckCity(user);
+    }
+
+    public int createUserAddress(User user) throws UserException {
+        return userMapper.createUserAddress(user);
+    }
+    //------------------------------------------------------------------------------------------------------------------
 }
