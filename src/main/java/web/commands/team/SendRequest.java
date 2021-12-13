@@ -4,29 +4,23 @@ import business.entities.Carport;
 import business.entities.Material;
 import business.entities.Query;
 import business.exceptions.UserException;
-import business.persistence.MaterialMapper;
-import business.services.CarportFacade;
 import business.services.MaterialCalculator;
-import business.services.MaterialFacade;
 import business.services.QueryFacade;
 import web.commands.CommandProtectedPage;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class SendRequest extends CommandProtectedPage {
-    private MaterialCalculator materialCalculator;
-    private QueryFacade queryFacade;
-    private MaterialFacade materialFacade;
-    private CarportFacade carportFacade;
+    private final MaterialCalculator materialCalculator;
+    private final QueryFacade queryFacade;
 
     public SendRequest(String pageToShow, String role) {
         super(pageToShow, role);
         materialCalculator = new MaterialCalculator(database);
         queryFacade = new QueryFacade(database);
-        materialFacade = new MaterialFacade(database);
-        carportFacade = new CarportFacade(database);
     }
 
     @Override
@@ -44,14 +38,16 @@ public class SendRequest extends CommandProtectedPage {
 
             //skal kun gøres hvis brugeren ikke har en query i forvejen
             if (!queryFacade.checkForQuery("requested", user_id)) {
-                //query + price
+                //query + price + timestamp
+                Date date = new Date();
+                long time = date.getTime();
+                Timestamp created = new Timestamp(time);
                 List<Material> BOM = materialCalculator.calcBOM(carport_length, carport_width);
                 double price = materialCalculator.getPrice(BOM);
-                Query query = new Query("requested", price, user_id, msg);
+                Query query = new Query("requested", price, user_id, msg, created);
                 //carport
                 Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", 0, "info");
                 queryFacade.customCarportQuery(carport, query);
-
 
                 // hvis der allerede er en query fra burgeren
             } else {

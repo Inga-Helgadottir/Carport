@@ -1,18 +1,15 @@
 package web.commands.team;
 
 import business.entities.Query;
-import business.entities.QueryCollection;
 import business.exceptions.UserException;
 import business.services.QueryFacade;
 import web.commands.CommandProtectedPage;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetQueries extends CommandProtectedPage {
-    QueryFacade queryFacade;
+    private final QueryFacade queryFacade;
 
     public GetQueries(String pageToShow, String role) {
         super(pageToShow, role);

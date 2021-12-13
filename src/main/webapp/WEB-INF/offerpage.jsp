@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <td>Email:</td>
-                    <td>q@q.${requestScope.offer.user.email}</td><!------------------------------------------->
+                    <td>${requestScope.offer.user.email}</td><!------------------------------------------->
                 </tr>
                 </tbody>
             </table>
@@ -56,6 +56,10 @@
                     <tr>
                         <td>Ref. nr.:</td>
                         <td>${requestScope.offer.id}</td><!------------------------------------------->
+                    </tr>
+                    <tr>
+                        <td>Oprettet:</td>
+                        <td>${requestScope.offer.created}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Status:</td>

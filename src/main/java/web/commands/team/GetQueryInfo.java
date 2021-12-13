@@ -1,6 +1,7 @@
 package web.commands.team;
 
 import business.entities.Carport;
+import business.entities.Material;
 import business.entities.Query;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
@@ -10,11 +11,12 @@ import web.commands.CommandProtectedPage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class GetQueryInfo extends CommandProtectedPage {
-    private QueryFacade queryFacade;
-    private CarportFacade carportFacade;
-    private MaterialCalculator materialCalculator;
+    private final QueryFacade queryFacade;
+    private final CarportFacade carportFacade;
+    private final MaterialCalculator materialCalculator;
 
     public GetQueryInfo(String pageToShow, String role) {
         super(pageToShow, role);
@@ -27,19 +29,16 @@ public class GetQueryInfo extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             int query_id = Integer.parseInt(request.getParameter("query_id"));
-           //int user_id = Integer.parseInt(request.getParameter("user_id"));
-
             Query query = queryFacade.getQuery(query_id);
             Carport carport = carportFacade.getCarportByQuery(query);
             query.setCarport(carport);
-            query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
-          //regn pris forskellene ud
+            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth());
+            query.setBOM(BOM);
 
-
-
+            //pris halløjsa skal gøres i front end med scripts
             request.setAttribute("query", query);
-
             return pageToShow;
+
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());
             return pageToShow;

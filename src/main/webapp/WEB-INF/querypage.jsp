@@ -64,6 +64,10 @@
                             <td>${requestScope.query.id}</td><!------------------------------------------->
                         </tr>
                         <tr>
+                            <td>Oprettet:</td>
+                            <td>${requestScope.query.created}</td><!------------------------------------------->
+                        </tr>
+                        <tr>
                             <td>Status:</td>
                             <td>${requestScope.query.status}</td><!------------------------------------------->
                         </tr>
@@ -124,7 +128,7 @@
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
-                                    <input type="number" value="80.8" class="input2" name="coverage">
+                                    <input type="number" value="30.0" class="input2" name="coverage">
                                     <input type="hidden" value="${requestScope.query.id}" name="query_id">
                                     <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                 </div>
@@ -133,15 +137,15 @@
                         </tr>
                         <tr>
                             <td>Dækningsbidrag:</td>
-                            <td>1830.69</td><!------------------------------------------->
+                            <td>0</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris ex. moms:</td>
-                            <td>4119.05</td><!------------------------------------------->
+                            <td>0</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris incl. moms:</td>
-                            <td>5148.81</td><!------------------------------------------->
+                            <td>0</td><!------------------------------------------->
                         </tr>
                         </tbody>
                     </table>

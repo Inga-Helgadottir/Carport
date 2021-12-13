@@ -32,16 +32,18 @@ public class CreateOrderStandardCommand extends CommandProtectedPage {
             //Opret ordre
             List<Carport> shoppingcart = (List<Carport>) request.getSession().getAttribute("shoppingcart");
             int userId = (int) request.getSession().getAttribute("userID");
+            Date date = new Date();
+            long time = date.getTime();
+            Timestamp created = new Timestamp(time);
             double price = 0;
             for (Carport c : shoppingcart) {
                 price += c.getPrice() * c.getQuantity();
             }
-            Query query = new Query("standard", price, userId, "standard order");
+
+            Query query = new Query("ordered", price, userId, "standard",created);
+            query.setType("standard");
             Query query1 = queryFacade.makeQuery(query, shoppingcart);
-            Date date = new Date();
-            long time = date.getTime();
-            Timestamp created = new Timestamp(time);
-            Order order = new Order("standard", created, price, "standard order", query1.getId(), userId);
+            Order order = new Order("standard", created, price, "", query1.getId(), userId);
             orderFacade.makeOrder(order);
             shoppingcart.clear();
             request.getSession().setAttribute("shoppingcart", shoppingcart);

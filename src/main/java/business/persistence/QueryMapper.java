@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryMapper {
-    private Database database;
+    private final Database database;
 
     public QueryMapper(Database database) {
         this.database = database;
@@ -33,13 +33,14 @@ public class QueryMapper {
 
     public Query makeQueryCustom(Query query) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `query` (`status`, price, message, user_id) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO `query` (`status`, price, message, user_id, created) VALUES (?,?,?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, query.getStatus());
                 ps.setDouble(2, query.getPrice());
                 ps.setString(3, query.getMessage());
                 ps.setInt(4, query.getUser_id());
+                ps.setTimestamp(5, query.getCreated());
                 ps.executeUpdate();
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
@@ -122,9 +123,12 @@ public class QueryMapper {
                     double price = rs.getDouble("price");
                     String msg = rs.getString("message");
                     int user_id = rs.getInt("user_id");
-                    Query query = new Query(status, price, user_id, msg);
+                    Timestamp created = rs.getTimestamp("created");
+                    Query query = new Query(status, price, user_id, msg, created);
                     query.setId(id);
-                    query.setUser(getUser(user_id));
+                    User user = getUser(user_id);
+                    query.setUser(user);
+
                     return query;
                 } else {
                     throw new UserException("Cant find any queries with this status and user_id i database");
@@ -149,7 +153,8 @@ public class QueryMapper {
                     int id = rs.getInt("id");
                     double price = rs.getDouble("price");
                     String msg = rs.getString("message");
-                    Query query = new Query(status, price, user_id, msg);
+                    Timestamp created = rs.getTimestamp("created");
+                    Query query = new Query(status, price, user_id, msg, created);
                     query.setId(id);
                     return query;
                 } else {
@@ -165,13 +170,15 @@ public class QueryMapper {
 
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `query` (`status`, price, message, user_id) VALUES (?,?,?,?)";
+            String sql = "INSERT INTO `query` (`status`, price, message, user_id, type, created) VALUES (?,?,?,?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, query.getStatus());
                 ps.setDouble(2, query.getPrice());
                 ps.setString(3, query.getMessage());
                 ps.setInt(4, query.getUser_id());
+                ps.setString(5, query.getStatus());
+                ps.setTimestamp(6, query.getCreated());
                 ps.executeUpdate();
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
@@ -209,6 +216,35 @@ public class QueryMapper {
         }
     }
 
+
+    public List<Query> getAllQueries(String status) throws UserException {
+        List<Query> queries = new ArrayList<>();
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `query`  WHERE `status` = ?";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    double price = rs.getDouble("price");
+                    String msg = rs.getString("message");
+                    int user_id = rs.getInt("user_id");
+                    Timestamp created = rs.getTimestamp("created");
+                    Query query = new Query(status, price, user_id, msg, created);
+                    query.setId(id);
+                    User user = getUser(user_id);
+                    query.setUser(user);
+                    queries.add(query);
+                }
+                return queries;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
     private User getUser(int user_id) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM `user` WHERE `id`=?";
@@ -230,6 +266,8 @@ public class QueryMapper {
                     user.setAddress_id(address_id);
                     user.setAddress(address);
                     user.setId(user_id);
+                    String cityname = getCity(address_id);
+                    user.setCity(cityname);
                     return user;
                 } else {
                     throw new UserException("Could not find user");
@@ -242,33 +280,46 @@ public class QueryMapper {
         }
     }
 
-    public List<Query> getAllQueries(String status) throws UserException {
-        List<Query> queries = new ArrayList<>();
+    private String getCity(int address_id) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `query`  WHERE `status` = ?";
+            String sql = "SELECT city_id FROM `address` WHERE `id`=?";
+
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1, status);
+                ps.setInt(1, address_id);
                 ResultSet rs = ps.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt("id");
-                    double price = rs.getDouble("price");
-                    String msg = rs.getString("message");
-                    int user_id = rs.getInt("user_id");
-                    Query query = new Query(status, price, user_id, msg);
-                    query.setId(id);
-                    User user = getUser(user_id);
-                    query.setUser(user);
-                    queries.add(query);
+                if (rs.next()) {
+                    int city_id = rs.getInt("city_id");
+                    return getCityName(city_id);
+                } else {
+                    throw new UserException("Could not find city"+address_id);
                 }
-                return queries;
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
             }
         } catch (SQLException ex) {
-            throw new UserException(ex.getMessage());
+            throw new UserException("Connection to database could not be established");
         }
     }
 
+    private String getCityName(int city_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT `name` FROM `city` WHERE `id`=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, city_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return rs.getString("name");
+                } else {
+                    throw new UserException("Could not find city"+city_id);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 
 }
 
