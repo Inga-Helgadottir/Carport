@@ -10,7 +10,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><jsp:invoke fragment="header"/></title>
+    <title>
+        <jsp:invoke fragment="header"/>
+    </title>
     <link rel="icon" type="image/png" href="<%=request.getContextPath()%>/image/logo.png">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -38,9 +40,8 @@
             <%--        husk at tilføje href til alle links----------------------------------------------%>
             <a class="aTag" href="#">Byggematerialer</a>
             <a class="aTag" href="${pageContext.request.contextPath}/fc/standartcarportpage">Carporte</a>
-            <c:if test="${sessionScope.role == 'customer'}">
-            <a class="aTag" href="${pageContext.request.contextPath}/fc/offers">Mine Tilbud</a>
-            </c:if>
+            <a class="aTag" href="${pageContext.request.contextPath}/fc/offers">Tilbud</a>
+            <a class="aTag" href="${pageContext.request.contextPath}/fc/quickbuildpage">Quick Byg</a>
         </div>
         <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">
             <c:set var="thisPage" value="${pageContext.request.servletPath}"/>
@@ -49,18 +50,23 @@
 
             <c:if test="${isNotLoginPage && isNotRegisterPage}">
                 <c:if test="${sessionScope.role == 'customer' }">
-                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i class="far fa-user myIcon"></i></a>
-                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/cartpage">Inkøbskurv<i class="fas fa-shopping-cart myIcon"></i></a>
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i
+                            class="far fa-user myIcon"></i></a>
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/cartpage">Inkøbskurv<i
+                            class="fas fa-shopping-cart myIcon"></i></a>
                 </c:if>
 
                 <c:if test="${sessionScope.role == 'employee'}">
-                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i class="far fa-user myIcon"></i></a>
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logoutcommand">Logout<i
+                            class="far fa-user myIcon"></i></a>
                     <a class="queries" href="${pageContext.request.contextPath}/fc/queries">Forespørgelser</a>
                 </c:if>
 
                 <c:if test="${sessionScope.user == null }">
-                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/logincommand">Log in<i class="fas fa-user myIcon"></i></a>
-                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registerpage">Sign up<i class="far fa-user myIcon"></i></a>
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/loginpage">Log in<i
+                            class="fas fa-user myIcon"></i></a>
+                    <a class="textAndIcon" href="${pageContext.request.contextPath}/fc/registerpage">Sign up<i
+                            class="far fa-user myIcon"></i></a>
                 </c:if>
             </c:if>
 

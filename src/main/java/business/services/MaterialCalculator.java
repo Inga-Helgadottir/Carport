@@ -58,8 +58,8 @@ public class MaterialCalculator {
         Material post = materialFacade.SelectMaterialByCategory("post", 3000);
         double test = width * 0.001;
         double test2 = length * 0.001;
-        double test3 = width * length;
-        double squarefeet = test3;
+        double squarefeet = test * test2;
+
 
         if (width >= 4300) {
             if (squarefeet >= 44) {

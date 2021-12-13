@@ -27,14 +27,18 @@ public class GetQueryInfo extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             int query_id = Integer.parseInt(request.getParameter("query_id"));
-            int user_id = Integer.parseInt(request.getParameter("user_id"));
+           //int user_id = Integer.parseInt(request.getParameter("user_id"));
 
             Query query = queryFacade.getQuery(query_id);
             Carport carport = carportFacade.getCarportByQuery(query);
             query.setCarport(carport);
             query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
-            
+          //regn pris forskellene ud
+
+
+
             request.setAttribute("query", query);
+
             return pageToShow;
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());

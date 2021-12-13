@@ -23,18 +23,13 @@ public class LoginCommand extends CommandUnprotectedPage
     {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         try {
         User user = userFacade.login(email, password);
-
         HttpSession session = request.getSession();
-
         session.setAttribute("user", user);
         session.setAttribute("role", user.getRole());
         session.setAttribute("email", email);
         session.setAttribute("userID", user.getId());
-
-        String pageToShow =  user.getRole() + "page";
         return REDIRECT_INDICATOR + pageToShow;
         }
         catch (UserException ex)

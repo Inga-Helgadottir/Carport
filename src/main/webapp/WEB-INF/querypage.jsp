@@ -181,6 +181,16 @@
                 </tbody>
             </table>
         </section>
-
+        <script>
+            let btn = document.getElementById("showHide");
+            let div = document.getElementById("showHideDiv");
+            btn.addEventListener("click", ()=>{
+                if(div.style.display == "block"){
+                    div.style.display = "none";
+                }else{
+                    div.style.display = "block";
+                }
+            });
+        </script>
     </jsp:body>
 </t:genericpage>

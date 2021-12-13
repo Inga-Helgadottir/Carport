@@ -44,6 +44,20 @@
                 </tbody>
             </table>
         </form>
+
+
+
+        <script>
+            let btn = document.getElementById("showHide");
+            let div = document.getElementById("showHideDiv");
+            btn.addEventListener("click", ()=>{
+                if(div.style.display == "block"){
+                    div.style.display = "none";
+                }else{
+                    div.style.display = "block";
+                }
+            });
+        </script>
         <c:if test="${requestScope.error != null }">
             <p style="color:red">
                     ${requestScope.error}

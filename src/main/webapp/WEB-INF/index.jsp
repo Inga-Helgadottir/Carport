@@ -4,36 +4,32 @@
 
 <t:genericpage>
 
-    <jsp:attribute name="header">
-         Home
-    </jsp:attribute>
+    <jsp:attribute name="header"> Demo Page for Customer Roles </jsp:attribute>
 
-    <jsp:attribute name="footer">
-        <c:set var="addHomeLink" value="${false}" scope="request"/>
-    </jsp:attribute>
+    <jsp:attribute name="footer"> </jsp:attribute>
 
     <jsp:body>
-
-        <div>
-            <h2>Our Cool Site</h2>
-
-            <div style="margin-top: 3em;margin-bottom: 3em;">
-                Main page for this 2. semester start project used at cphbusiness.dk
+        <h1>Hello ${sessionScope.email} </h1>
+        Role: ${sessionScope.role}
+        ID: ${sessionScope.userID}
+        <br><br><h2>Carporte</h2>
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="${pageContext.request.contextPath}/fc/standartcarportpage">Standart Carporte</a>
+                <a href="${pageContext.request.contextPath}/fc/quickbuildpage">Quick Byg</a>
+                <a href="${pageContext.request.contextPath}/fc/ekspertip">Expertens Tips</a>
             </div>
-
-            <c:if test="${sessionScope.role == 'employee' }">
-                <p style="font-size: larger">This is what you can do,
-                    since your are logged in as an employee</p>
-                 <p><a href="fc/employeepage">Employee Page</a>
-             </c:if>
-
-             <c:if test="${sessionScope.role == 'customer' }">
-                <p style="font-size: larger">This is what you can do, since your
-                    are logged in as a customer</p>
-                <p><a href="fc/customerpage">Customer Page</a>
-            </c:if>
-
         </div>
 
+        <c:if test="${requestScope.error != null }">
+            <p style="color:red">
+                    ${requestScope.error}
+            </p>
+        </c:if>
+
+        <c:if test="${not empty param.msg}">
+            <p style="font-size: large">${param.msg}</p>
+        </c:if>
     </jsp:body>
 </t:genericpage>

@@ -31,25 +31,28 @@ public class SendRequest extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+        if (request.getParameter("width").equals("") && request.getParameter("length").equals("")) {
+            request.setAttribute("error", "Du skal angive dine ønskede dimensioner før du kan sende forespørgslen.");
+            return pageToShow;
+        }
         try {
-            int user_id = (int) request.getSession().getAttribute("userID");
             int carport_width = Integer.parseInt(request.getParameter("width"));
             int carport_length = Integer.parseInt(request.getParameter("length"));
+            int user_id = (int) request.getSession().getAttribute("userID");
             String msg = request.getParameter("message");
-            //check om der allerede er en query fra denne bruger
+
+            //skal kun gøres hvis brugeren ikke har en query i forvejen
             if (!queryFacade.checkForQuery("requested", user_id)) {
-                //query og carport oprettes//query og carport og link tabel udfyldes
-                Query query = new Query("requested", 0, user_id, msg);
-                Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", 0, "info");
-                Query q = queryFacade.customCarportQuery(carport, query);
-                /*
-                //Bill Of Material  og pris udregnes
+                //query + price
                 List<Material> BOM = materialCalculator.calcBOM(carport_length, carport_width);
-                //double price = materialCalculator.getPrice(BOM);
-                for (Material m : BOM) {
-                    System.out.println("material name: " + m.getName() + "  dimensions: " + m.getWidth() + "x" + m.getLength() + "  ID: " + m.getMaterial_id() + "  quantity: " + m.getQuantity());
-                }
-                 */
+                double price = materialCalculator.getPrice(BOM);
+                Query query = new Query("requested", price, user_id, msg);
+                //carport
+                Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", 0, "info");
+                queryFacade.customCarportQuery(carport, query);
+
+
                 // hvis der allerede er en query fra burgeren
             } else {
                 request.setAttribute("error", "Der var et problem med oprettelsen af din forespørgsel. " +

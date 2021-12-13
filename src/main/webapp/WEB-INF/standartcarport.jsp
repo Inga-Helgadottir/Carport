@@ -26,12 +26,16 @@
                         <label for="quantity">Antal</label>
                         <input type="number" name="quantity" id="quantity" value="${carport.quantity}" min="1" max="10">
 
-                        <button class="btn btn-success my-2" type="submit" name="carportID" value="${carport.id}">Læg I Kurv</button>
+                        <button onclick="myFunction()" class="btn btn-success my-2" type="submit" name="carportID" value="${carport.id}">Læg I Kurv</button>
                     </form>
                 </div>
             </c:forEach>
-
         </div>
+        <script>
+        function myFunction() {
+            alert("Du tilføjede en carport til indkøbskurv");
+        }
+    </script>
         <c:if test="${requestScope.error != null }">
             <p style="color:red">
                     ${requestScope.error}
