@@ -126,29 +126,29 @@
                         <tbody>
                         <tr>
                             <td>Indkøbspris ex. moms:</td>
-                            <td>2288.36</td><!------------------------------------------->
+                            <td id="inkobsprisExM">1000</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
-                                    <input type="number" value="80.8" class="input2"><!------------------------------------------->
+                                    <input id="daekningsgrad" type="number" value="30.0" class="input2"><!------------------------------------------->
                                     %
                                 </div>
-                                <button class="btn btn-primary">Opdater dækningsgrad</button>
+                                <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
                             </td>
                         </tr>
                         <tr>
                             <td>Dækningsbidrag:</td>
-                            <td>1830.69</td><!------------------------------------------->
+                            <td id="daekningsbidrag">wrong</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris ex. moms:</td>
-                            <td>4119.05</td><!------------------------------------------->
+                            <td id="tilbudsprisExM">wrong</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris incl. moms:</td>
-                            <td>5148.81</td><!------------------------------------------->
+                            <td id="tilbudsprisInclM">wrong</td><!------------------------------------------->
                         </tr>
                         </tbody>
                     </table>
@@ -187,6 +187,35 @@
             </table>
         </section>
         <script>
+            /* ting på jsp siden som skal tilføjes id på
+                <td id="inkobsprisExM">2288.36</td>
+                <input id="daekningsgrad" type="number" value="30,0" class="input2">
+                <td id="daekningsbidrag">1830.69</td>
+                <td id="tilbudsprisExM">4119.05</td>
+                <td id="tilbudsprisInclM">5148.81</td>
+
+               på knappen skal man tilføje onclick="calc()"
+                 <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
+             */
+            calc();
+
+            function calc(){
+                let ipem = document.getElementById("inkobsprisExM").textContent;
+                let dg = document.getElementById("daekningsgrad").value;
+                let db = document.getElementById("daekningsbidrag");
+                let tpem = document.getElementById("tilbudsprisExM");
+                let tpim = document.getElementById("tilbudsprisInclM");
+                let ipemInt = parseInt(ipem);
+                let dgp = dg / 100;
+                let dgtp = ipem * dgp;
+                let um = ipemInt + dgtp;
+                let mm = 1.25 * um;
+                db.innerText = dgtp;
+                tpem.innerText = um;
+                tpim.innerText = mm;
+            }
+
+            //-------------------------------------------show hide
             let btn = document.getElementById("showHide");
             let div = document.getElementById("showHideDiv");
             btn.addEventListener("click", ()=>{
