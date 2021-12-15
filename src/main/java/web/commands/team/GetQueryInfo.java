@@ -34,7 +34,6 @@ public class GetQueryInfo extends CommandProtectedPage {
             query.setCarport(carport);
             List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth());
             query.setBOM(BOM);
-
             //pris halløjsa skal gøres i front end med scripts
             request.setAttribute("query", query);
             return pageToShow;

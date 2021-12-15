@@ -18,11 +18,11 @@ public class QueryFacade {
     }
 
 
-    public Boolean checkForQuery(String status, int user_id) throws UserException {
-        return queryMapper.checkForQuery(status, user_id);
+    public Boolean checkForQuery(String status,String status1, int user_id) throws UserException {
+        return queryMapper.checkForQuery(status,status1, user_id);
     }
 
-    public Query getQuery(String status, int user_id) throws UserException {
+    public Query getQuery(String status,int user_id) throws UserException {
         return queryMapper.getQuery(status, user_id);
     }
     public Query getQuery(int query_id)throws UserException{
@@ -42,4 +42,7 @@ public class QueryFacade {
         return queryMapper.getAllQueries(status);
     }
 
+    public void updateQueryStatus(String status, int query_id) throws UserException {
+        queryMapper.updateQueryStatus(status,query_id);
+    }
 }

@@ -2,6 +2,7 @@ package web.commands.team;
 
 import business.entities.Carport;
 import business.entities.Query;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
 import business.services.MaterialCalculator;
@@ -28,12 +29,12 @@ public class GetOffers extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            int user_id = (int) request.getSession().getAttribute("userID");
-            Query query = queryFacade.getQuery("requested", user_id);
-            Carport carport = carportFacade.getCarportByQuery(query);
-            query.setCarport(carport);
-            request.setAttribute("offer", query);
-            //query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
+            int user_id = (int) request.getSession().getAttribute("user_id");
+            Query offer = queryFacade.getQuery("offered", user_id);
+            Carport carport = carportFacade.getCarportByQuery(offer);
+            offer.setCarport(carport);
+            request.setAttribute("offer", offer);
+
             return pageToShow;
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());

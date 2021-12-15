@@ -14,6 +14,7 @@ public class QueryMapper {
         this.database = database;
     }
 
+
     public void fillLinkTable(int carport_id, int query_id, int quantity) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO link_carport_query (carport_id, query_id, quantity) VALUES (?,?,?)";
@@ -93,17 +94,18 @@ public class QueryMapper {
         }
     }
 
-    public boolean checkForQuery(String status, int user_id) throws UserException {
+    public boolean checkForQuery(String status,String status1, int user_id) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `query` WHERE `status`=? AND user_id=?";
+            String sql = "SELECT * FROM `query` WHERE `status`=? OR `status`=? AND user_id=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
-                ps.setInt(2, user_id);
+                ps.setString(2, status1);
+                ps.setInt(3, user_id);
                 ResultSet rs = ps.executeQuery();
                 return rs.next();
             } catch (SQLException ex) {
-                throw new UserException(ex.getMessage());
+                throw new UserException(ex.getMessage()+"         "+status+status1);
             }
         } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
@@ -167,6 +169,7 @@ public class QueryMapper {
             throw new UserException("Connection to database could not be established");
         }
     }
+
 
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         try (Connection connection = database.connect()) {
@@ -291,7 +294,7 @@ public class QueryMapper {
                     int city_id = rs.getInt("city_id");
                     return getCityName(city_id);
                 } else {
-                    throw new UserException("Could not find city"+address_id);
+                    throw new UserException("Could not find city" + address_id);
                 }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
@@ -311,7 +314,7 @@ public class QueryMapper {
                 if (rs.next()) {
                     return rs.getString("name");
                 } else {
-                    throw new UserException("Could not find city"+city_id);
+                    throw new UserException("Could not find city" + city_id);
                 }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
@@ -321,6 +324,19 @@ public class QueryMapper {
         }
     }
 
+    public void updateQueryStatus(String status, int query_id) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "update `query` set `status` = ? where id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, status);
+                ps.setInt(2, query_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 /*

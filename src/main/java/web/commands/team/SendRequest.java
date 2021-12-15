@@ -3,6 +3,7 @@ package web.commands.team;
 import business.entities.Carport;
 import business.entities.Material;
 import business.entities.Query;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.services.MaterialCalculator;
 import business.services.QueryFacade;
@@ -33,11 +34,12 @@ public class SendRequest extends CommandProtectedPage {
         try {
             int carport_width = Integer.parseInt(request.getParameter("width"));
             int carport_length = Integer.parseInt(request.getParameter("length"));
-            int user_id = (int) request.getSession().getAttribute("userID");
+            User user = (User) request.getSession().getAttribute("user");
+            int user_id = user.getId();
             String msg = request.getParameter("message");
 
             //skal kun gøres hvis brugeren ikke har en query i forvejen
-            if (!queryFacade.checkForQuery("requested", user_id)) {
+            if (!queryFacade.checkForQuery("requested","offered", user_id)) {
                 //query + price + timestamp
                 Date date = new Date();
                 long time = date.getTime();
@@ -46,15 +48,15 @@ public class SendRequest extends CommandProtectedPage {
                 double price = materialCalculator.getPrice(BOM);
                 Query query = new Query("requested", price, user_id, msg, created);
                 //carport
-                Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", 0, "info");
+                Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", price, "info");
                 queryFacade.customCarportQuery(carport, query);
 
                 // hvis der allerede er en query fra burgeren
             } else {
                 request.setAttribute("error", "Der var et problem med oprettelsen af din forespørgsel. " +
-                        "Hvis du allerede har en forespørgsel skal du først tage stilling til det tilhørende tilbud." +
-                        "Hvis du ikke er tilfreds med det tilbud så kan du afvise tilbuddet og oprette en ny forespørgel" +
-                        "eller du kan ringe på 2020202002 og få svar på eventuelle spørgsmål.");
+                        "Hvis du allerede har en forespørgsel, men ikke har modtaget et tilbud endnu, må du vente på tilbuddet." +
+                        " Hvis du ikke er tilfreds med det tilbud så kan du afvise tilbuddet og oprette en ny forespørgel derefter." +
+                        " Ring på 49251225 og for at snakke med en medarbejder");
             }
             return pageToShow;
         } catch (UserException e) {

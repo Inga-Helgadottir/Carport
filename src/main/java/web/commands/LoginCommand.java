@@ -29,7 +29,7 @@ public class LoginCommand extends CommandUnprotectedPage
         session.setAttribute("user", user);
         session.setAttribute("role", user.getRole());
         session.setAttribute("email", email);
-        session.setAttribute("userID", user.getId());
+        session.setAttribute("user_id", user.getId());
         return REDIRECT_INDICATOR + pageToShow;
         }
         catch (UserException ex)

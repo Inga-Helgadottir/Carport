@@ -42,6 +42,8 @@ public abstract class Command {
         commands.put("queryinfo", new GetQueryInfo("querypage", "employee"));
         commands.put("offers", new GetOffers("offerspage", "customer"));
         commands.put("offerinfo", new GetOfferInfo("offerpage", "customer"));
+        commands.put("sendoffer", new SendOfferCommand("queriespage","employee"));
+        commands.put("processoffer", new ProcessOfferCommand("offerspage", "customer"));
 
     }
 
