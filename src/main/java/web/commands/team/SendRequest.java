@@ -56,7 +56,7 @@ public class SendRequest extends CommandProtectedPage {
                 request.setAttribute("error", "Der var et problem med oprettelsen af din forespørgsel. " +
                         "Hvis du allerede har en forespørgsel, men ikke har modtaget et tilbud endnu, må du vente på tilbuddet." +
                         " Hvis du ikke er tilfreds med det tilbud så kan du afvise tilbuddet og oprette en ny forespørgel derefter." +
-                        " Ring på 49251225 og for at snakke med en medarbejder");
+                        " Ring på 49251225 og for at snakke med en medarbejder ");
             }
             return pageToShow;
         } catch (UserException e) {
