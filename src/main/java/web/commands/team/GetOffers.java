@@ -31,10 +31,14 @@ public class GetOffers extends CommandProtectedPage {
         try {
             int user_id = (int) request.getSession().getAttribute("user_id");
             Query offer = queryFacade.getQuery("offered", user_id);
-            Carport carport = carportFacade.getCarportByQuery(offer);
-            offer.setCarport(carport);
-            request.setAttribute("offer", offer);
-
+            if (offer != null) {
+                Carport carport = carportFacade.getCarportByQuery(offer);
+                offer.setCarport(carport);
+                request.setAttribute("offer", offer);
+            }
+            else {
+                request.setAttribute("error","Afventer stadig tilbud");
+            }
             return pageToShow;
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());

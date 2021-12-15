@@ -84,7 +84,6 @@
                             <tr>
                                 <th scope="col">Carport</th>
                                 <th scope="col">
-                                    Lås <input class="checkbox" type="checkbox" name="orderCheck" value="" onclick="">
                                     <!--------------------------------->
                                 </th>
                             </tr>
@@ -118,7 +117,6 @@
             <div class="d-flex flex-row">
                 <div class="half mb-5">
                         <%---update price--%>
-                    <form method="get" action="${pageContext.request.contextPath}/fc/updatePrice">
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -135,7 +133,7 @@
                                 <td>Dækningsgrad:</td>
                                 <td class="d-flex justify-content-between">
                                     <div>
-                                        <input type="number" value="30.0" class="input2" name="coverage" id="coverage daekningsgrad">
+                                        <input type="number" value="30.0" class="input2" name="coverage" id="daekningsgrad">
                                         <input type="hidden" value="${requestScope.query.id}" name="query_id">
                                         <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                     </div>
@@ -144,19 +142,18 @@
                             </tr>
                             <tr>
                                 <td>Dækningsbidrag:</td>
-                                <td id="daekningsbidrag">0</td><!------------------------------------------->
+                                <td id="daekningsbidrag"></td><!------------------------------------------->
                             </tr>
                             <tr>
                                 <td>Tilbudspris ex. moms:</td>
-                                <td id="tilbudsprisExM">0</td><!------------------------------------------->
+                                <td id="tilbudsprisExM"></td><!------------------------------------------->
                             </tr>
                             <tr>
                                 <td>Tilbudspris incl. moms:</td>
-                                <td id="tilbudsprisInclM">0</td><!------------------------------------------->
+                                <td id="tilbudsprisInclM"></td><!------------------------------------------->
                             </tr>
                             </tbody>
                         </table>
-                    </form>
                         <%---svg--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/getSVG">
                         <input type="hidden" name="length" value="${requestScope.query.carport.length}">
@@ -169,6 +166,7 @@
                         <%---send offer--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/sendoffer">
                         <input type="hidden" name="query_id" value="${requestScope.query.id}">
+                        <input type="hidden" id="offerprice_moms" value="" name="offerprice_moms">
                         <button type="submit" class="btn btn-success my-2">Send Forespørgsel</button>
                     </form>
                 </div>
@@ -222,18 +220,10 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
+                document.getElementById("offerprice_moms").value = mm;
             }
 
 
-            let btn = document.getElementById("showHide");
-            let div = document.getElementById("showHideDiv");
-            btn.addEventListener("click", () => {
-                if (div.style.display == "block") {
-                    div.style.display = "none";
-                } else {
-                    div.style.display = "block";
-                }
-            });
         </script>
     </jsp:body>
 </t:genericpage>
