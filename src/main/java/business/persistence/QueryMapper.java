@@ -160,7 +160,8 @@ public class QueryMapper {
                     query.setId(id);
                     return query;
                 } else {
-                    throw new UserException("Cant find any queries with this status and user_id i database");
+                    return null;
+
                 }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
