@@ -93,7 +93,8 @@
                             <tr>
                                 <td>Bredde:</td>
                                 <td>
-                                    <input min="2400" max="6000" step="300" type="number" value="${requestScope.query.carport.width}" class="input">
+                                    <input min="2400" max="6000" step="300" type="number"
+                                           value="${requestScope.query.carport.width}" class="input">
                                     <!------------------------------------------->
                                     mm
                                 </td>
@@ -101,7 +102,8 @@
                             <tr>
                                 <td>Længde:</td>
                                 <td>
-                                    <input min="2400" max="7800" step="300" type="number" value="${requestScope.query.carport.length}" class="input">
+                                    <input min="2400" max="7800" step="300" type="number"
+                                           value="${requestScope.query.carport.length}" class="input">
                                     <!------------------------------------------->
                                     mm
                                 </td>
@@ -129,17 +131,21 @@
                             <tbody>
                             <tr>
                                 <td>Indkøbspris ex. moms:</td>
-                                <td id="inkobsprisExM">${requestScope.query.price}</td><!------------------------------------------->
+                                <td id="inkobsprisExM">${requestScope.query.price}</td>
+                                <!------------------------------------------->
                             </tr>
                             <tr>
                                 <td>Dækningsgrad:</td>
                                 <td class="d-flex justify-content-between">
                                     <div>
-                                        <input type="number" value="30.0" class="input2" name="coverage" id="coverage daekningsgrad">
+                                        <input type="number" value="30.0" class="input2" name="coverage"
+                                               id="coverage daekningsgrad">
                                         <input type="hidden" value="${requestScope.query.id}" name="query_id">
                                         <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                     </div>
-                                    <button type="submit" class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
+                                    <button type="submit" class="btn btn-primary" onclick="calc()">Opdater
+                                        dækningsgrad
+                                    </button>
                                 </td>
                             </tr>
                             <tr>
@@ -170,6 +176,7 @@
                     <form method="get" action="${pageContext.request.contextPath}/fc/sendoffer">
                         <input type="hidden" name="query_id" value="${requestScope.query.id}">
                         <button type="submit" class="btn btn-success my-2">Send Forespørgsel</button>
+                        <input type="hidden" id="offerprice_moms" value="" name="offerprice_moms">
                     </form>
                 </div>
             </div>
@@ -208,7 +215,7 @@
         <script>
             calc();
 
-            function calc(){
+            function calc() {
                 let ipem = document.getElementById("inkobsprisExM").textContent;
                 let dg = document.getElementById("daekningsgrad").value;
                 let db = document.getElementById("daekningsbidrag");
@@ -222,6 +229,7 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
+                document.getElementById("offerprice_moms").value = mm;
             }
 
 
