@@ -94,15 +94,48 @@
                         <tr>
                             <td>Bredde:</td>
                             <td>
-                                <input type="number" value="420" class="input"><!------------------------------------------->
-                                cm
+                                <select name="width" id="width">
+                                    <option value="240">240 cm</option>
+                                    <option value="270">270 cm</option>
+                                    <option value="300">300 cm</option>
+                                    <option value="330">330 cm</option>
+                                    <option value="360">360 cm</option>
+                                    <option value="390">390 cm</option>
+                                    <option value="420">420 cm</option>
+                                    <option value="450">450 cm</option>
+                                    <option value="480">480 cm</option>
+                                    <option value="510">510 cm</option>
+                                    <option value="540">540 cm</option>
+                                    <option value="570">570 cm</option>
+                                    <option value="600">600 cm</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Længde:</td>
                             <td>
-                                <input type="number" value="600" class="input"><!------------------------------------------->
-                                cm
+                                <select name="length" id="length">
+                                    <option value="240">240 cm</option>
+                                    <option value="270">270 cm</option>
+                                    <option value="300">300 cm</option>
+                                    <option value="330">330 cm</option>
+                                    <option value="360">360 cm</option>
+                                    <option value="390">390 cm</option>
+                                    <option value="420">420 cm</option>
+                                    <option value="450">450 cm</option>
+                                    <option value="480">480 cm</option>
+                                    <option value="510">510 cm</option>
+                                    <option value="540">540 cm</option>
+                                    <option value="570">570 cm</option>
+                                    <option value="600">600 cm</option>
+                                    <option value="630">630 cm</option>
+                                    <option value="660">660 cm</option>
+                                    <option value="690">690 cm</option>
+                                    <option value="720">720 cm</option>
+                                    <option value="750">750 cm</option>
+                                    <option value="780">780 cm</option>
+                                </select>
+
                             </td>
                         </tr>
                         <tr>
@@ -187,16 +220,19 @@
             </table>
         </section>
         <script>
-            /* ting på jsp siden som skal tilføjes id på
+            /*
+            der mangler også showHide.css hos Timmy
+            ting på jsp siden som skal tilføjes id på
                 <td id="inkobsprisExM">2288.36</td>
                 <input id="daekningsgrad" type="number" value="30,0" class="input2">
                 <td id="daekningsbidrag">1830.69</td>
                 <td id="tilbudsprisExM">4119.05</td>
                 <td id="tilbudsprisInclM">5148.81</td>
 
-               på knappen skal man tilføje onclick="calc()"
+            på knappen skal man tilføje onclick="calc()"
                  <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
              */
+
             calc();
 
             function calc(){
