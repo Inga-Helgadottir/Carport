@@ -101,26 +101,22 @@
                     <tbody>
                     <tr>
                         <td>Pris (Dkk):</td>
-                        <c:if test="${requestScope.offer.status == 'offered'}">
-                            <td>${requestScope.offer.price}</td>
-                        </c:if>
-                        <c:if test="${requestScope.offer.status == 'requested'}">
-                            <td>Venter på tilbud</td>
-                        </c:if>
-
+                        <td>${requestScope.offer.price}</td>
                     </tr>
                     </tbody>
                 </table>
-                    <form action="${pageContext.request.contextPath}/fc/processoffer" method="get">
-                        <input type="hidden" name="caport_id" value="${requestScope.offer.carport.id}">
-                        <input type="hidden" name="query_id" value="${requestScope.offer.id}">
-                <div class="d-flex justify-content-between">
+                <form action="${pageContext.request.contextPath}/fc/processoffer" method="get">
+                    <input type="hidden" name="carport_id" value="${requestScope.offer.carport.id}">
+                    <input type="hidden" name="query_id" value="${requestScope.offer.id}">
+                    <input type="hidden" name="user_id" value="${requestScope.offer.user.id}">
+                    <input type="hidden" name="offerprice" value="${requestScope.offer.price}">
+                    <div class="d-flex justify-content-between">
 
                         <button name="accept" value="accept" class="btn btn-success yesNoBtn">Accepter</button>
                         <button name="annul" value="annul" class="btn btn-danger yesNoBtn">Annuller</button>
 
-                </div>
-                    </form>
+                    </div>
+                </form>
             </div>
         </section>
 

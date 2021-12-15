@@ -3,6 +3,7 @@ package business.persistence;
 import business.entities.Carport;
 import business.entities.Query;
 import business.exceptions.UserException;
+import business.services.CarportFacade;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -127,6 +128,38 @@ public class CarportMapper {
                 if (rs.next()) {
                     int carport_id = rs.getInt("carport_id");
                     return getEnkeltCarport(carport_id);
+                } else {
+                    throw new UserException("could not find carport_id from link_carport_query with that query_id");
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
+
+    public Carport getCarport(int carport_id) throws UserException{
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `carport` WHERE `id`=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, carport_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                   int length = rs.getInt("length");
+                   int width = rs.getInt("width");
+                   int height = rs.getInt("height");
+                   int roof_angle = rs.getInt("roof_angle");
+                   int shed_length = rs.getInt("shed_length");
+                   int shed_width = rs.getInt("shed_width");
+                    String name = rs.getString("name");
+                    String type = rs.getString("type");
+                    double price = rs.getDouble("price");
+                    String info = rs.getString("info");
+                    Carport carport = new Carport(length,width,height,roof_angle,shed_length,shed_width,name,type,price,info);
+                    carport.setId(carport_id);
+                    return carport;
                 } else {
                     throw new UserException("could not find carport_id from link_carport_query with that query_id");
                 }

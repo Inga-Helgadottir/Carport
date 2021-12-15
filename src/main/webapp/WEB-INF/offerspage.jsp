@@ -29,18 +29,21 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>${requestScope.offer.id}</td>
-                    <td>${requestScope.offer.carport.length}</td>
-                    <td>${requestScope.offer.carport.width}</td>
-                    <td>${requestScope.offer.carport.roof_angle}</td>
-                    <td>${requestScope.offer.carport.shed_length}</td>
-                    <td>${requestScope.offer.carport.shed_width}</td>
-                    <td>${requestScope.offer.status}</td>
-                    <td>
-                        <button type="submit" name="query_id" value="${requestScope.offer.id}" class="btn btn-success">Se
-                            Forespørgsel
-                        </button>
-                    </td>
+                    <c:if test="${requestScope.offer != null}">
+                        <td>${requestScope.offer.id}</td>
+                        <td>${requestScope.offer.carport.length}</td>
+                        <td>${requestScope.offer.carport.width}</td>
+                        <td>${requestScope.offer.carport.roof_angle}</td>
+                        <td>${requestScope.offer.carport.shed_length}</td>
+                        <td>${requestScope.offer.carport.shed_width}</td>
+                        <td>${requestScope.offer.status}</td>
+                        <td>
+                            <button type="submit" name="query_id" value="${requestScope.offer.id}"
+                                    class="btn btn-success">Se
+                                Forespørgsel
+                            </button>
+                        </td>
+                    </c:if>
                 </tr>
                 </tbody>
             </table>
