@@ -170,4 +170,31 @@ public class CarportMapper {
             throw new UserException("Connection to database could not be established");
         }
     }
+
+    public void updateCarportLength(int length, int carport_id) {
+        try (Connection connection = database.connect()) {
+            String sql = "update `carport` set `length`=? where id=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1,length);
+                ps.setInt(2, carport_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateCarportWidth(int width, int carport_id) {
+        try (Connection connection = database.connect()) {
+            String sql = "update `carport` set `width`=? where id=?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1,width);
+                ps.setInt(2, carport_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

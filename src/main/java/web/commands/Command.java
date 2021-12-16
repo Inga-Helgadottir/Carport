@@ -28,15 +28,14 @@ public abstract class Command {
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
-        //-----------------------------links---------------------------------------------------------------------------
+        //-----------------------------vores---------------------------------------------------------------------------
         commands.put("cartpage", new CommandProtectedPage("shoppingcartpage", "customer"));
         commands.put("standartcarportpage", new StandartCarportCommand("standartcarport"));
         commands.put("quickbuildpage", new CommandProtectedPage("quickbuildpage", "customer"));
-        //----------------------------commands-------------------------------------------------------------------------
         commands.put("addtocart", new AddToCartCommand("standartcarport", "customer"));
         commands.put("updatecommand", new UpdateCartCommand("shoppingcartpage", "customer"));
         commands.put("createorderstandard", new CreateOrderStandardCommand("customerpage", "customer"));
-        //---------------------    ------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------
         commands.put("sendrequest", new SendRequest("customerpage", "customer"));
         commands.put("queries", new GetQueries("queriespage", "employee"));
         commands.put("queryinfo", new GetQueryInfo("querypage", "employee"));
@@ -44,6 +43,7 @@ public abstract class Command {
         commands.put("offerinfo", new GetOfferInfo("offerpage", "customer"));
         commands.put("sendoffer", new SendOfferCommand("queriespage","employee"));
         commands.put("processoffer", new ProcessOfferCommand("offerspage", "customer"));
+        commands.put("updateDimensions", new UpdateDimensions("index","employee"));
 
     }
 

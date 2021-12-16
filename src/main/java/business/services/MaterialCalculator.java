@@ -189,12 +189,12 @@ public class MaterialCalculator {
             Material m = materialFacade.SelectMaterialByCategory("understern", carport_length);
             if (carport_length == carport_width) {
                 m.setQuantity(4);
-                m.setDescription("understernbrædder til siderne");
+                m.setDescription("understernbrædder til siderne, front og bagende");
                 materialList.add(m);
 
                 Material m1 = materialFacade.SelectMaterialByCategory("overstern", carport_length);
                 m1.setQuantity(3);
-                m1.setDescription("oversternbrædder til siderne");
+                m1.setDescription("oversternbrædder til siderne, front og bagende");
                 materialList.add(m1);
             } else {
                 m.setQuantity(2);

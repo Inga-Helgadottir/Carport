@@ -92,7 +92,8 @@
                             <tr>
                                 <td>Bredde:</td>
                                 <td>
-                                    <input min="2400" max="6000" step="300" type="number" value="${requestScope.query.carport.width}" class="input">
+                                    <input name="width" min="2400" max="6000" step="300" type="number"
+                                           value="${requestScope.query.carport.width}" class="input">
                                     <!------------------------------------------->
                                     mm
                                 </td>
@@ -100,14 +101,16 @@
                             <tr>
                                 <td>Længde:</td>
                                 <td>
-                                    <input min="2400" max="7800" step="300" type="number" value="${requestScope.query.carport.length}" class="input">
+                                    <input name="length" min="2400" max="7800" step="300" type="number"
+                                           value="${requestScope.query.carport.length}" class="input">
                                     <!------------------------------------------->
                                     mm
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                        <button type="submit" class="btn btn-primary btnWidth" name="carport_id"
+                        <input name="query_id" type="hidden" value="${requestScope.query.id}">
+                        <button name="carport_id" onclick="myFunction()" type="submit" class="btn btn-primary btnWidth"
                                 value="${requestScope.query.carport.id}">Opdater mål
                         </button>
                     </form>
@@ -117,43 +120,45 @@
             <div class="d-flex flex-row">
                 <div class="half mb-5">
                         <%---update price--%>
-                        <table class="table table-striped">
-                            <thead>
-                            <tr>
-                                <th scope="col">Pris</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>Indkøbspris ex. moms:</td>
-                                <td id="inkobsprisExM">${requestScope.query.price}</td><!------------------------------------------->
-                            </tr>
-                            <tr>
-                                <td>Dækningsgrad:</td>
-                                <td class="d-flex justify-content-between">
-                                    <div>
-                                        <input type="number" value="30.0" class="input2" name="coverage" id="daekningsgrad">
-                                        <input type="hidden" value="${requestScope.query.id}" name="query_id">
-                                        <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Dækningsbidrag:</td>
-                                <td id="daekningsbidrag" ></td><!------------------------------------------->
-                            </tr>
-                            <tr>
-                                <td>Tilbudspris ex. moms:</td>
-                                <td id="tilbudsprisExM"></td><!------------------------------------------->
-                            </tr>
-                            <tr>
-                                <td>Tilbudspris incl. moms:</td>
-                                <td id="tilbudsprisInclM"></td><!------------------------------------------->
-                            </tr>
-                            </tbody>
-                        </table>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Pris</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Indkøbspris ex. moms:</td>
+                            <td id="inkobsprisExM">${requestScope.query.price}</td>
+                            <!------------------------------------------->
+                        </tr>
+                        <tr>
+                            <td>Dækningsgrad:</td>
+                            <td class="d-flex justify-content-between">
+                                <div>
+                                    <input type="number" value="30.0" class="input2" name="coverage" id="daekningsgrad">
+                                    <input type="hidden" value="${requestScope.query.id}" name="query_id">
+                                    <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
+                                </div>
+                                <button type="submit" class="btn btn-primary" onclick="calc()">Opdater dækningsgrad
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dækningsbidrag:</td>
+                            <td id="daekningsbidrag"></td><!------------------------------------------->
+                        </tr>
+                        <tr>
+                            <td>Tilbudspris ex. moms:</td>
+                            <td id="tilbudsprisExM"></td><!------------------------------------------->
+                        </tr>
+                        <tr>
+                            <td>Tilbudspris incl. moms:</td>
+                            <td id="tilbudsprisInclM"></td><!------------------------------------------->
+                        </tr>
+                        </tbody>
+                    </table>
                         <%---svg--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/getSVG">
                         <input type="hidden" name="length" value="${requestScope.query.carport.length}">
@@ -203,11 +208,10 @@
             </table>
         </section>
 
-
         <script>
             calc();
 
-            function calc(){
+            function calc() {
                 let ipem = document.getElementById("inkobsprisExM").textContent;
                 let dg = document.getElementById("daekningsgrad").value;
                 let db = document.getElementById("daekningsbidrag");
@@ -221,10 +225,16 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
-              document.getElementById("offerprice").value = mm;
+                document.getElementById("offerprice").value = mm;
             }
 
 
         </script>
+        <script>
+            function myFunction() {
+                alert("Ny Stykliste Udregnes");
+            }
+        </script>
+
     </jsp:body>
 </t:genericpage>
