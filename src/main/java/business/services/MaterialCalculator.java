@@ -1,8 +1,6 @@
 package business.services;
 
-import business.entities.Carport;
 import business.entities.Material;
-import business.entities.Query;
 import business.exceptions.UserException;
 import business.persistence.Database;
 
@@ -11,11 +9,9 @@ import java.util.List;
 
 public class MaterialCalculator {
     public final List<Material> materialList;
-    private OrderFacade orderFacade;
-    private MaterialFacade materialFacade;
+    private final MaterialFacade materialFacade;
 
     public MaterialCalculator(Database database) {
-        orderFacade = new OrderFacade(database);
         materialFacade = new MaterialFacade(database);
         this.materialList = new ArrayList<>();
     }
@@ -25,7 +21,7 @@ public class MaterialCalculator {
         materialList.clear();
         calcPost(carport_length, carport_width);
         calcRafters(carport_width, carport_length);
-        calcRem(carport_length, carport_width);
+        calcRem(carport_length);
         calcStern(carport_length, carport_width);
         //calcRoof(carport_length);
         return materialList;
@@ -47,7 +43,7 @@ public class MaterialCalculator {
     }
 
     //rem
-    public void calcRem(int length, int width) throws UserException {
+    public void calcRem(int length) throws UserException {
         Material rem = materialFacade.SelectMaterialByCategory("rem", length);
         rem.setQuantity(2);
         materialList.add(rem);
@@ -95,8 +91,8 @@ public class MaterialCalculator {
 
     //spær
     public void calcRafters(int width, int length) throws UserException {
-        int raftquantity = 0;
-        int beamspacing = 0;
+        int raftquantity;
+        int beamspacing;
         int beamheight;
         int beamwidth = 45;
         String category = "rafter";
@@ -176,14 +172,13 @@ public class MaterialCalculator {
     }
 
     private int getRaftQuantity(int length, int beamspacing, int beamwidth) {
-        int Quantity = 0;
         int t = (int) Math.floor((double) (length - beamwidth) / beamspacing);
         int diff = length - (t * beamspacing);
 
         if (diff >= 100) {
-            return Quantity = t + 2;
+            return t + 2;
         }
-        return Quantity = t + 1;
+        return t + 1;
     }
 
     //stern
@@ -192,73 +187,130 @@ public class MaterialCalculator {
 
         if (carport_length <= 5400) {
             Material m = materialFacade.SelectMaterialByCategory("understern", carport_length);
-            m.setQuantity(2);
-            m.setDescription("understernbrædder til siderne");
-            materialList.add(m);
+            if (carport_length == carport_width) {
+                m.setQuantity(4);
+                m.setDescription("understernbrædder til siderne");
+                materialList.add(m);
 
-            Material m1 = materialFacade.SelectMaterialByCategory("overstern", carport_length);
-            m1.setQuantity(2);
-            m1.setDescription("oversternbrædder til siderne");
-            materialList.add(m1);
+                Material m1 = materialFacade.SelectMaterialByCategory("overstern", carport_length);
+                m1.setQuantity(3);
+                m1.setDescription("oversternbrædder til siderne");
+                materialList.add(m1);
+            } else {
+                m.setQuantity(2);
+                m.setDescription("understernbrædder til siderne");
+                materialList.add(m);
+
+                Material m1 = materialFacade.SelectMaterialByCategory("overstern", carport_length);
+                m1.setQuantity(2);
+                m1.setDescription("oversternbrædder til siderne");
+                materialList.add(m1);
+            }
         } else {
             int max_sider = 5400;
-            int rest = carport_length - max_sider;
-            Material m2 = materialFacade.SelectMaterialByCategory("understern", max_sider);
-            m2.setQuantity(2);
-            m2.setDescription("understernbrædder til siderne");
-            materialList.add(m2);
+            int rest_sider = carport_length - max_sider;
+            int max_fab = 3600;
+            int rest_fab = carport_width - max_fab;
 
-            Material m3 = materialFacade.SelectMaterialByCategory("understern", rest);
-            m3.setQuantity(2);
-            m3.setDescription("rest understernbrædder til siderne");
-            materialList.add(m3);
 
-            Material m4 = materialFacade.SelectMaterialByCategory("overstern", max_sider);
-            m4.setQuantity(2);
-            m4.setDescription("oversternbrædder til siderne");
-            materialList.add(m4);
+            if (rest_fab != rest_sider){
+                Material m2 = materialFacade.SelectMaterialByCategory("understern", max_sider);
+                m2.setQuantity(2);
+                m2.setDescription("understernbrædder til siderne");
+                materialList.add(m2);
 
-            Material m5 = materialFacade.SelectMaterialByCategory("overstern", rest);
-            m5.setQuantity(2);
-            m5.setDescription("rest oversternbrædder til siderne");
-            materialList.add(m5);
+                Material m3 = materialFacade.SelectMaterialByCategory("understern", rest_sider);
+                m3.setQuantity(2);
+                m3.setDescription("rest understernbrædder til siderne");
+                materialList.add(m3);
+
+                Material m4 = materialFacade.SelectMaterialByCategory("overstern", max_sider);
+                m4.setQuantity(2);
+                m4.setDescription("oversternbrædder til siderne");
+                materialList.add(m4);
+
+                Material m5 = materialFacade.SelectMaterialByCategory("overstern", rest_sider);
+                m5.setQuantity(2);
+                m5.setDescription("rest oversternbrædder til siderne");
+                materialList.add(m5);
+            }
+            else {
+                Material m2 = materialFacade.SelectMaterialByCategory("understern", max_sider);
+                m2.setQuantity(2);
+                m2.setDescription("understernbrædder til siderne");
+                materialList.add(m2);
+
+                Material m3 = materialFacade.SelectMaterialByCategory("understern", rest_sider);
+                m3.setQuantity(4);
+                m3.setDescription("rest understernbrædder til siderne og front og bagende");
+                materialList.add(m3);
+
+                Material m4 = materialFacade.SelectMaterialByCategory("overstern", max_sider);
+                m4.setQuantity(2);
+                m4.setDescription("oversternbrædder til siderne");
+                materialList.add(m4);
+
+                Material m5 = materialFacade.SelectMaterialByCategory("overstern", rest_sider);
+                m5.setQuantity(4);
+                m5.setDescription("rest oversternbrædder til siderne og front og bagende");
+                materialList.add(m5);
+            }
         }
 
         //over og understern i for og bagende
         if (carport_width <= 3600) {
-            Material m6 = materialFacade.SelectMaterialByCategory("understern", carport_width);
-            m6.setQuantity(2);
-            m6.setDescription("understernbrædder til for og bag ende");
-            materialList.add(m6);
+            if (carport_length != carport_width) {
+                Material m6 = materialFacade.SelectMaterialByCategory("understern", carport_width);
+                m6.setQuantity(2);
+                m6.setDescription("understernbrædder til for og bag ende");
+                materialList.add(m6);
 
-            Material m7 = materialFacade.SelectMaterialByCategory("overstern", carport_width);
-            m7.setQuantity(1);
-            m7.setDescription("oversternbrædder til forenden");
-            materialList.add(m7);
+                Material m7 = materialFacade.SelectMaterialByCategory("overstern", carport_width);
+                m7.setQuantity(1);
+                m7.setDescription("oversternbrædder til forenden");
+                materialList.add(m7);
+            }
         } else {
-            int max_forogbag = 3600;
-            int rest = carport_width - max_forogbag;
-            Material m8 = materialFacade.SelectMaterialByCategory("understern", max_forogbag);
-            m8.setQuantity(2);
-            m8.setDescription("understernbrædder til for og bag ende");
-            materialList.add(m8);
+            int max_sider = 5400;
+            int rest_sider = carport_length - max_sider;
+            int max_fab = 3600;
+            int rest_fab = carport_width - max_fab;
 
-            Material m9 = materialFacade.SelectMaterialByCategory("understern", rest);
-            m9.setQuantity(2);
-            m9.setDescription("rest understernbrædder til for og bag ende");
-            materialList.add(m9);
+            if (rest_fab != rest_sider) {
+                Material m8 = materialFacade.SelectMaterialByCategory("understern", max_fab);
+                m8.setQuantity(2);
+                m8.setDescription("understernbrædder til for og bag ende");
+                materialList.add(m8);
 
-            Material m10 = materialFacade.SelectMaterialByCategory("overstern", max_forogbag);
-            m10.setQuantity(1);
-            m10.setDescription("oversternbrædder til forende");
-            materialList.add(m10);
+                Material m9 = materialFacade.SelectMaterialByCategory("understern", rest_fab);
+                m9.setQuantity(2);
+                m9.setDescription("rest understernbrædder til for og bag ende");
+                materialList.add(m9);
 
-            Material m11 = materialFacade.SelectMaterialByCategory("overstern", rest);
-            m11.setQuantity(1);
-            m11.setDescription("rest oversternbrædder til forende");
-            materialList.add(m11);
+                Material m10 = materialFacade.SelectMaterialByCategory("overstern", max_fab);
+                m10.setQuantity(1);
+                m10.setDescription("oversternbrædder til forende");
+                materialList.add(m10);
+
+                Material m11 = materialFacade.SelectMaterialByCategory("overstern", rest_fab);
+                m11.setQuantity(1);
+                m11.setDescription("rest oversternbrædder til forende");
+                materialList.add(m11);
+            }
+            else {
+                Material m8 = materialFacade.SelectMaterialByCategory("understern", max_fab);
+                m8.setQuantity(2);
+                m8.setDescription("understernbrædder til for og bag ende");
+                materialList.add(m8);
+
+                Material m10 = materialFacade.SelectMaterialByCategory("overstern", max_fab);
+                m10.setQuantity(1);
+                m10.setDescription("oversternbrædder til forende");
+                materialList.add(m10);
+
+            }
+
         }
-
     }
 }
 

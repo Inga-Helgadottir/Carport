@@ -142,7 +142,7 @@
                             </tr>
                             <tr>
                                 <td>Dækningsbidrag:</td>
-                                <td id="daekningsbidrag"></td><!------------------------------------------->
+                                <td id="daekningsbidrag" ></td><!------------------------------------------->
                             </tr>
                             <tr>
                                 <td>Tilbudspris ex. moms:</td>
@@ -166,7 +166,8 @@
                         <%---send offer--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/sendoffer">
                         <input type="hidden" name="query_id" value="${requestScope.query.id}">
-                        <input type="hidden" id="offerprice_moms" value="" name="offerprice_moms">
+                        <input type="hidden" name="carport_id" value="${requestScope.query.carport.id}">
+                        <input type="hidden" id="offerprice" name="offerprice">
                         <button type="submit" class="btn btn-success my-2">Send Forespørgsel</button>
                     </form>
                 </div>
@@ -220,7 +221,7 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
-                document.getElementById("offerprice_moms").value = mm;
+              document.getElementById("offerprice").value = mm;
             }
 
 

@@ -35,18 +35,17 @@ public class SendRequest extends CommandProtectedPage {
             int carport_width = Integer.parseInt(request.getParameter("width"));
             int carport_length = Integer.parseInt(request.getParameter("length"));
             User user = (User) request.getSession().getAttribute("user");
-            int user_id = user.getId();
             String msg = request.getParameter("message");
 
             //skal kun gøres hvis brugeren ikke har en query i forvejen
-            if (!queryFacade.checkForQuery("requested","offered", user_id)) {
+            if (!queryFacade.checkForQuery("requested", user.getId())) {
                 //query + price + timestamp
                 Date date = new Date();
                 long time = date.getTime();
                 Timestamp created = new Timestamp(time);
                 List<Material> BOM = materialCalculator.calcBOM(carport_length, carport_width);
                 double price = materialCalculator.getPrice(BOM);
-                Query query = new Query("requested", price, user_id, msg, created);
+                Query query = new Query("requested", price, user.getId(), msg, created);
                 //carport
                 Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", price, "info");
                 queryFacade.customCarportQuery(carport, query);
