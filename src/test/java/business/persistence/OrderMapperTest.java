@@ -1,3 +1,5 @@
+package business.persistence;
+
 import business.entities.Order;
 import business.exceptions.UserException;
 import business.persistence.Database;
@@ -7,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.*;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,11 +19,10 @@ class OrderMapperTest {
     private final static String TESTDATABASE = DATABASE + "_test";
     private final static String USER = "sih";
     private final static String PASSWORD = "mysqlPasswordSIH995";
-    private final static String URL = "jdbc:mysql://localhost:3306/fog?" + TESTDATABASE + "serverTimezone=CET&useSSL=false";
+    private final static String URL = "jdbc:mysql://localhost:3306/" + TESTDATABASE + "?serverTimezone=CET&useSSL=false";
 
     private static Database database;
     private static OrderMapper orderMapper;
-//    Order o = new Order(24998, 1, 1, 1);
 
     @BeforeAll
     public static void setUpClass() {
@@ -32,8 +34,7 @@ class OrderMapperTest {
         }
     }
 
-//    @Test
-//    void createQuery() throws SQLException, UserException {
-//        orderMapper.createQuery(o);
-//    }
+    @Test
+    void createQuery() throws UserException{
+    }
 }

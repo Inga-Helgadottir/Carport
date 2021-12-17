@@ -13,8 +13,11 @@
     </jsp:attribute>
 
     <jsp:body>
+
+
         <section class="allTables d-flex flex-column">
             <div class="d-flex flex-row">
+                    <%---customer info--%>
                 <table class="table table-striped tableLeft half table1">
                     <thead>
                     <tr>
@@ -25,35 +28,31 @@
                     <tbody>
                     <tr>
                         <td>Kunde nr.:</td>
-                        <td>2</td><!------------------------------------------->
+                        <td>${requestScope.query.user.id}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Fulde navn:</td>
-                        <td>Kunde</td><!------------------------------------------->
+                        <td>${requestScope.query.user.name}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Adresse:</td>
-                        <td>Kundegade 1</td><!------------------------------------------->
-                    </tr>
-                    <tr>
-                        <td>Postnummer:</td>
-                        <td>3720</td><!------------------------------------------->
+                        <td>${requestScope.query.user.address}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>By:</td>
-                        <td>Rønne</td><!------------------------------------------->
+                        <td>${requestScope.query.user.city}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Telefon nr :</td>
-                        <td>10203040</td><!------------------------------------------->
+                        <td>${requestScope.query.user.telephone}</td><!------------------------------------------->
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>q@q.dk</td><!------------------------------------------->
+                        <td>${requestScope.query.user.email}</td><!------------------------------------------->
                     </tr>
                     </tbody>
                 </table>
-
+                    <%---query info--%>
                 <div class="d-flex flex-column half">
                     <table class="table table-striped">
                         <thead>
@@ -65,90 +64,59 @@
                         <tbody>
                         <tr>
                             <td>Ref. nr.:</td>
-                            <td>15</td><!------------------------------------------->
+                            <td>${requestScope.query.id}</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Oprettet:</td>
-                            <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
-                        </tr>
-                        <tr>
-                            <td>Ændret:</td>
-                            <td>2021-12-02 17:17:06.0</td><!------------------------------------------->
+                            <td>${requestScope.query.created}</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Status:</td>
-                            <td>request</td><!------------------------------------------->
+                            <td>${requestScope.query.status}</td><!------------------------------------------->
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">Carport</th>
-                            <th scope="col">
-                                Lås <input class="checkbox" type="checkbox" name="orderCheck" value=""><!--------------------------------->
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Bredde:</td>
-                            <td>
-                                <select name="width" id="width">
-                                    <option value="240">240 cm</option>
-                                    <option value="270">270 cm</option>
-                                    <option value="300">300 cm</option>
-                                    <option value="330">330 cm</option>
-                                    <option value="360">360 cm</option>
-                                    <option value="390">390 cm</option>
-                                    <option value="420">420 cm</option>
-                                    <option value="450">450 cm</option>
-                                    <option value="480">480 cm</option>
-                                    <option value="510">510 cm</option>
-                                    <option value="540">540 cm</option>
-                                    <option value="570">570 cm</option>
-                                    <option value="600">600 cm</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Længde:</td>
-                            <td>
-                                <select name="length" id="length">
-                                    <option value="240">240 cm</option>
-                                    <option value="270">270 cm</option>
-                                    <option value="300">300 cm</option>
-                                    <option value="330">330 cm</option>
-                                    <option value="360">360 cm</option>
-                                    <option value="390">390 cm</option>
-                                    <option value="420">420 cm</option>
-                                    <option value="450">450 cm</option>
-                                    <option value="480">480 cm</option>
-                                    <option value="510">510 cm</option>
-                                    <option value="540">540 cm</option>
-                                    <option value="570">570 cm</option>
-                                    <option value="600">600 cm</option>
-                                    <option value="630">630 cm</option>
-                                    <option value="660">660 cm</option>
-                                    <option value="690">690 cm</option>
-                                    <option value="720">720 cm</option>
-                                    <option value="750">750 cm</option>
-                                    <option value="780">780 cm</option>
-                                </select>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tag:</td>
-                            <td>Plasmo Ecolite blåtonet</td><!------------------------------------------->
-                        </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn btn-primary btnWidth">Opdater mål</button>
+                        <%---update dimensions--%>
+                    <form action="${pageContext.request.contextPath}/fc/updateDimensions" method="get">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Carport</th>
+                                <th scope="col">
+                                    <!--------------------------------->
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Bredde:</td>
+                                <td>
+                                    <input min="2400" max="6000" step="300" type="number" value="${requestScope.query.carport.width}" class="input">
+                                    <!------------------------------------------->
+                                    mm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Længde:</td>
+                                <td>
+                                    <input min="2400" max="7800" step="300" type="number" value="${requestScope.query.carport.length}" class="input">
+                                    <!------------------------------------------->
+                                    mm
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-primary btnWidth" name="carport_id"
+                                value="${requestScope.query.carport.id}">Opdater mål
+                        </button>
+                    </form>
                 </div>
             </div>
+
             <div class="d-flex flex-row">
                 <div class="half mb-5">
+                        <%---update price--%>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -159,39 +127,51 @@
                         <tbody>
                         <tr>
                             <td>Indkøbspris ex. moms:</td>
-                            <td id="inkobsprisExM">1000</td><!------------------------------------------->
+                            <td id="inkobsprisExM">${requestScope.query.price}</td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
-                                    <input id="daekningsgrad" type="number" value="30.0" class="input2"><!------------------------------------------->
-                                    %
+                                    <input type="number" value="30.0" class="input2" name="coverage" id="daekningsgrad">
+                                    <input type="hidden" value="${requestScope.query.id}" name="query_id">
+                                    <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                 </div>
-                                <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
+                                <button type="submit" class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
                             </td>
                         </tr>
                         <tr>
                             <td>Dækningsbidrag:</td>
-                            <td id="daekningsbidrag">wrong</td><!------------------------------------------->
+                            <td id="daekningsbidrag"></td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris ex. moms:</td>
-                            <td id="tilbudsprisExM">wrong</td><!------------------------------------------->
+                            <td id="tilbudsprisExM"></td><!------------------------------------------->
                         </tr>
                         <tr>
                             <td>Tilbudspris incl. moms:</td>
-                            <td id="tilbudsprisInclM">wrong</td><!------------------------------------------->
+                            <td id="tilbudsprisInclM"></td><!------------------------------------------->
                         </tr>
                         </tbody>
                     </table>
-                    <button id="showHide" class="btn btn-primary">Vis tegning over carport</button>
-                    <div id="showHideDiv">
-                        <p>Indsæt tegningen her</p>
-                    </div>
+                        <%---svg--%>
+                    <form method="get" action="${pageContext.request.contextPath}/fc/getSVG">
+                        <input type="hidden" name="length" value="${requestScope.query.carport.length}">
+                        <input type="hidden" name="width" value="${requestScope.query.carport.width}">
+                        <button type="submit" id="showHide" class="btn btn-primary">Vis tegning over carport</button>
+                        <div id="showHideDiv">
+                            <p>Indsæt tegningen her</p>
+                        </div>
+                    </form>
+                        <%---send offer--%>
+                    <form method="get" action="${pageContext.request.contextPath}/fc/sendoffer">
+                        <input type="hidden" name="query_id" value="${requestScope.query.id}">
+                        <input type="hidden" id="offerprice_moms" value="" name="offerprice_moms">
+                        <button type="submit" class="btn btn-success my-2">Send Forespørgsel</button>
+                    </form>
                 </div>
             </div>
-
+                <%---BOM--%>
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -206,35 +186,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1601</td><!------------------------------------------->
-                    <td>97x97 mm. trykimo. stolpe</td><!------------------------------------------->
-                    <td>Stolper nedgraves 90cm. i jord</td><!------------------------------------------->
-                    <td>3000 mm</td><!------------------------------------------->
-                    <td>6</td><!------------------------------------------->
-                    <td>Stk.</td><!------------------------------------------->
-                    <td>112.5</td><!------------------------------------------->
-                    <td>675.0</td><!------------------------------------------->
-                </tr>
+                <c:forEach items="${requestScope.query.BOM}" var="material">
+                    <tr>
+                        <td>${material.material_id}</td>
+                        <td>${material.width}x${material.height} mm. ${material.category}</td>
+                        <td>${material.description}</td>
+                        <td>${material.length}</td>
+                        <td>${material.quantity}</td>
+                        <td>Stk.</td>
+                        <td>${material.cost}</td>
+                        <td></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </section>
+
+
         <script>
-            /*
-            der mangler også showHide.css hos Timmy
-            ting på jsp siden som skal tilføjes id på
-                <td id="inkobsprisExM">2288.36</td>
-                <input id="daekningsgrad" type="number" value="30,0" class="input2">
-                <td id="daekningsbidrag">1830.69</td>
-                <td id="tilbudsprisExM">4119.05</td>
-                <td id="tilbudsprisInclM">5148.81</td>
-
-            på knappen skal man tilføje onclick="calc()"
-                 <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad</button>
-             */
-
             calc();
-
             function calc(){
                 let ipem = document.getElementById("inkobsprisExM").textContent;
                 let dg = document.getElementById("daekningsgrad").value;
@@ -249,18 +219,8 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
+                document.getElementById("offerprice_moms").value = mm;
             }
-
-            //-------------------------------------------show hide
-            let btn = document.getElementById("showHide");
-            let div = document.getElementById("showHideDiv");
-            btn.addEventListener("click", ()=>{
-                if(div.style.display == "block"){
-                    div.style.display = "none";
-                }else{
-                    div.style.display = "block";
-                }
-            });
         </script>
     </jsp:body>
 </t:genericpage>

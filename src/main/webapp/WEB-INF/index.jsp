@@ -15,6 +15,13 @@
     <jsp:body>
 
         <div>
+            <form id="form" action="${pageContext.request.contextPath}/fc/a" method="get">
+                <input type="text" id="testerr" name="testerr" value="">
+                <div id="testing">
+
+                </div>
+                <button type="submit">btn</button>
+            </form>
             <h2>Our Cool Site</h2>
 
             <div style="margin-top: 3em;margin-bottom: 3em;">
@@ -36,5 +43,9 @@
             </c:if>
 
         </div>
+        <script>
+            let mm = 22;
+            document.cookie = "username=" + mm;
+        </script>
     </jsp:body>
 </t:genericpage>
