@@ -33,7 +33,7 @@ public class UpdateDimensions extends CommandProtectedPage {
             int width = Integer.parseInt(request.getParameter("width"));
             carportFacade.updateCarportLength(length, carport_id);
             carportFacade.updateCarportWidth(width, carport_id);
-            List<Material> materials = materialCalculator.calcBOM(length, width);
+            List<Material> materials = materialCalculator.calcBOM(length, width,0,0);
             double price = materialCalculator.getPrice(materials);
             queryFacade.updateQueryPrice(price, query_id, carport_id);
 

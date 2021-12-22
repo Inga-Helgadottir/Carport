@@ -45,7 +45,7 @@ public class ProcessOfferCommand extends CommandProtectedPage {
 
             //lav BOM
             Carport carport = carportFacade.getCarport(carport_id);
-            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth());
+            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth(), carport.getShed_length(),carport.getShed_width());
 
 
             //fix listen: det er ret svært :( Man skal finde objekter i listen, som har fælles værdier til materiale_id attribut.

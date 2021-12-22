@@ -114,6 +114,66 @@ public class MaterialMapper {
         }
 
     }
+
+    public Material getOthers(String name) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE name = ? ";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int material_id = rs.getInt("id");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(material_id);
+                    return m;
+                }
+                else {
+                    throw new UserException("Could not find material " + name);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public Material getShedScrews(String description)throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE description = ? ";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, description);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int material_id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(material_id);
+                    return m;
+                }
+                else {
+                    throw new UserException("Could not find material " + description);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
 }
 /*
     public Material getMaterialByCategory2(int length, String category) throws UserException {

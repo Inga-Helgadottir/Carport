@@ -32,7 +32,7 @@ public class GetQueryInfo extends CommandProtectedPage {
             Query query = queryFacade.getQuery(query_id);
             Carport carport = carportFacade.getCarportByQuery(query);
             query.setCarport(carport);
-            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth());
+            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth(),carport.getShed_length(),carport.getShed_width());
             query.setBOM(BOM);
             //double price = materialCalculator.getPrice(BOM);
             //query.setSalesPrice(price);

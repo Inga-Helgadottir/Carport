@@ -43,7 +43,7 @@ public class SendRequest extends CommandProtectedPage {
                 Date date = new Date();
                 long time = date.getTime();
                 Timestamp created = new Timestamp(time);
-                List<Material> BOM = materialCalculator.calcBOM(carport_length, carport_width);
+                List<Material> BOM = materialCalculator.calcBOM(carport_length, carport_width,0,0);
                 double price = materialCalculator.getPrice(BOM);
                 Query query = new Query("requested", price, user.getId(), msg, created);
                 //carport
