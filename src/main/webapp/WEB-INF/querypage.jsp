@@ -160,9 +160,11 @@
                         </tbody>
                     </table>
                         <%---svg--%>
-                    <form method="get" action="${pageContext.request.contextPath}/fc/getSVG">
+                    <form method="get" action="${pageContext.request.contextPath}/fc/showsvg">
                         <input type="hidden" name="length" value="${requestScope.query.carport.length}">
                         <input type="hidden" name="width" value="${requestScope.query.carport.width}">
+                        <input type="hidden" name="shed_length" value="${requestScope.query.carport.shed_length}">
+                        <input type="hidden" name="shed_width" value="${requestScope.query.carport.shed_width}">
                         <button type="submit" id="showHide" class="btn btn-primary">Vis tegning over carport</button>
                         <div id="showHideDiv">
                             <p>Indsæt tegningen her</p>

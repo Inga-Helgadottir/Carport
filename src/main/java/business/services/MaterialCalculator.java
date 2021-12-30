@@ -16,7 +16,7 @@ public class MaterialCalculator {
         this.materialList = new ArrayList<>();
     }
 
-
+    // beregn BOM
     public List<Material> calcBOM(int carport_length, int carport_width, int shed_length, int shed_width) throws UserException {
         materialList.clear();
         calcPost(carport_length, carport_width, shed_length, shed_width);
@@ -25,10 +25,15 @@ public class MaterialCalculator {
         calcStern(carport_length, carport_width);
         if (shed_length != 0 && shed_width != 0) {
             calcPlanks(shed_length, shed_width);
-            //calcShedStuff(); //lægte og reglar til skur
+            //calcShedStuff();            //løsholter til skur galv, løsholter til skur sider, 1 lægte til z på skurdør
         }
         calcRoof(carport_length, carport_width);
+
+
         calcOthers(shed_length, shed_width);
+        if (shed_length != 0 && shed_width != 0) {
+            //calcOthersShed(shed_length, shed_width);             //stalddørsgreb, hængsel, vinkelbeslag + 2 forskellige skruer.
+        }
         return materialList;
     }
 
@@ -37,7 +42,7 @@ public class MaterialCalculator {
         double dist = 7.5;
         int amount_sider = (int) Math.ceil(shed_length / dist);
         int amount_topandbot = (int) Math.ceil(shed_length / dist);
-        Material planks = materialFacade.SelectMaterialByCategory("planks", 2100);
+        Material planks = materialFacade.SelectMaterialByCategory("brædt", 2100);
         int total = (int) (Math.ceil(amount_sider * 2) + Math.ceil(amount_topandbot * 2));
         planks.setQuantity(total);
     }
@@ -48,7 +53,7 @@ public class MaterialCalculator {
         Material firkantskiver = materialFacade.getOthers("firkantskiver");
         firkantskiver.setQuantity(12);
         materialList.add(firkantskiver);
-        Material braeddebolt = materialFacade.getOthers("braeddebolt");
+        Material braeddebolt = materialFacade.getOthers("bræddebolt");
         braeddebolt.setQuantity(18);
         materialList.add(braeddebolt);
         Material beslagskruer = materialFacade.getOthers("beslagskruer");
@@ -81,7 +86,7 @@ public class MaterialCalculator {
         }
     }
 
-    //price
+    //pris
     public double getPrice(List<Material> materialList) {
         int price = 0;
         for (Material m : materialList) {
@@ -90,7 +95,7 @@ public class MaterialCalculator {
         return price;
     }
 
-    // roof
+    // tag
     public void calcRoof(int length, int width) throws UserException {
         if (width <= 3600) {
             Material roof = materialFacade.SelectMaterialByCategory("tag", 3600);
@@ -117,7 +122,7 @@ public class MaterialCalculator {
         }
     }
 
-    //roof amount
+    //tag antal
     public int getRoofAmount(int length) {
         int amount = 0;
         if (length <= 3900) {
@@ -147,46 +152,45 @@ public class MaterialCalculator {
         }
     }
 
-
-
     //stolper
     public Material calcPost(int length, int width, int shed_length, int shed_width) throws UserException {
-        Material post = materialFacade.SelectMaterialByCategory("post", 3000);
+        Material post = materialFacade.SelectMaterialByCategory("stolpe", 3000);
         double test = width * 0.001;
         double test2 = length * 0.001;
         double squarefeet = test * test2;
-        int i = 0;
-        if (shed_length != 0 && shed_width != 0) {
-            i = 2;
+        int shedposts = 0;
+        shedposts = 2;
+        if (shed_width == width){
+            shedposts = 2;
         }
 
-        if (width >= 4300) {
+        if (shed_length != 0 && shed_width != 0) {
             if (squarefeet >= 44) {
-                post.setQuantity(10 + i);
+                post.setQuantity(10);
             } else if (squarefeet >= 38.5) {
-                post.setQuantity(8 + i);
+                post.setQuantity(8);
             } else if (squarefeet >= 33) {
-                post.setQuantity(7 + i);
+                post.setQuantity(6);
             } else if (squarefeet >= 22) {
-                post.setQuantity(5 + i);
+                post.setQuantity(4);
             } else if (squarefeet < 22) {
-                post.setQuantity(5 + i);
+                post.setQuantity(4);
             }
         } else {
             if (squarefeet >= 44) {
-                post.setQuantity(9 + i);
+                post.setQuantity(8);
             } else if (squarefeet >= 38.5) {
-                post.setQuantity(8 + i);
+                post.setQuantity(8);
             } else if (squarefeet >= 37.5) {
-                post.setQuantity(7 + i);
+                post.setQuantity(8);
             } else if (squarefeet >= 33) {
-                post.setQuantity(6 + i);
+                post.setQuantity(6);
             } else if (squarefeet >= 27.5) {
-                post.setQuantity(5 + i);
+                post.setQuantity(6);
             } else if (squarefeet >= 22) {
-                post.setQuantity(4 + i);
+                post.setQuantity(4);
             } else if (squarefeet < 22) {
-                post.setQuantity(4 + i);
+                post.setQuantity(4);
             }
         }
         materialList.add(post);
@@ -200,7 +204,7 @@ public class MaterialCalculator {
         int beamspacing;
         int beamheight;
         int beamwidth = 45;
-        String category = "rafter";
+        String category = "spær";
 
 
         if (width >= 5700) {
@@ -209,6 +213,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 5100) {
@@ -217,6 +222,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 4800) {
@@ -225,6 +231,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 4500) {
@@ -233,6 +240,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 4200) {
@@ -241,6 +249,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 3600) {
@@ -249,6 +258,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 3300) {
@@ -257,6 +267,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 3000) {
@@ -265,6 +276,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 2700) {
@@ -273,6 +285,7 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         } else if (width >= 2400) {
@@ -281,12 +294,14 @@ public class MaterialCalculator {
             Material raft = materialFacade.getRafters(beamheight, beamwidth, width, category);
             raftquantity = getRaftQuantity(length, beamspacing, beamwidth);
             raft.setQuantity(raftquantity);
+            raft.setBeamdist(beamspacing);
             materialList.add(raft);
             return raft;
         }
         return null;
     }
 
+    //spær antal
     private int getRaftQuantity(int length, int beamspacing, int beamwidth) {
         int t = (int) Math.ceil((double) (length - beamwidth) / beamspacing);
         int diff = length - (t * beamspacing);

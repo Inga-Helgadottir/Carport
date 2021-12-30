@@ -12,6 +12,7 @@ public class Material {
     private int material_id;
     private String description;
     private int quantity;
+    private int beamdist;
 
 
     public Material(String name, int width, int height, int length, String category, double cost, String description) {
@@ -22,6 +23,14 @@ public class Material {
         this.category = category;
         this.cost = cost;
         this.description = description;
+    }
+
+    public int getBeamdist() {
+        return beamdist;
+    }
+
+    public void setBeamdist(int beamdist) {
+        this.beamdist = beamdist;
     }
 
     public void setMaterial_id(int material_id) {

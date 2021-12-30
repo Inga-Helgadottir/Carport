@@ -44,6 +44,7 @@ public abstract class Command {
         commands.put("sendoffer", new SendOfferCommand("queriespage","employee"));
         commands.put("processoffer", new ProcessOfferCommand("offerspage", "customer"));
         commands.put("updateDimensions", new UpdateDimensions("index","employee"));
+        commands.put("showsvg",new showsvg("svgpage"));
 
     }
 

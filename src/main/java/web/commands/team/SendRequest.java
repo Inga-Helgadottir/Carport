@@ -34,6 +34,8 @@ public class SendRequest extends CommandProtectedPage {
         try {
             int carport_width = Integer.parseInt(request.getParameter("width"));
             int carport_length = Integer.parseInt(request.getParameter("length"));
+            int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+            int shedLength = Integer.parseInt(request.getParameter("shedLength"));
             User user = (User) request.getSession().getAttribute("user");
             String msg = request.getParameter("message");
 
@@ -47,7 +49,7 @@ public class SendRequest extends CommandProtectedPage {
                 double price = materialCalculator.getPrice(BOM);
                 Query query = new Query("requested", price, user.getId(), msg, created);
                 //carport
-                Carport carport = new Carport(carport_length, carport_width, 3000, 15, 0, 0, "custom", "custom", price, "info");
+                Carport carport = new Carport(carport_length, carport_width, 3000, 15, shedLength, shedWidth, "custom", "custom", price, "info");
                 queryFacade.customCarportQuery(carport, query);
 
                 // hvis der allerede er en query fra burgeren

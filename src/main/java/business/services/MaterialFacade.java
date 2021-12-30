@@ -31,8 +31,8 @@ public class MaterialFacade {
        return materialMapper.getOthers(name);
     }
 
-    public Material getShedScrews(String description)throws UserException {
-        return materialMapper.getShedScrews(description);
+    public Material getShedScrews(String category)throws UserException {
+        return materialMapper.getShedScrews(category);
     }
 }
 /*
