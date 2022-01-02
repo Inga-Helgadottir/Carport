@@ -1,8 +1,6 @@
 package web.commands.team;
 
-import business.entities.Carport;
 import business.entities.Material;
-import business.entities.Query;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
 import business.services.MaterialCalculator;
@@ -13,34 +11,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class GetQueryInfo extends CommandProtectedPage {
-    private final QueryFacade queryFacade;
+public class UpdateDimensions extends CommandProtectedPage {
     private final CarportFacade carportFacade;
     private final MaterialCalculator materialCalculator;
+    private final QueryFacade queryFacade;
 
-    public GetQueryInfo(String pageToShow, String role) {
+
+    public UpdateDimensions(String pageToShow, String role) {
         super(pageToShow, role);
-        queryFacade = new QueryFacade(database);
         carportFacade = new CarportFacade(database);
         materialCalculator = new MaterialCalculator(database);
+        queryFacade = new QueryFacade(database);
     }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
+            int carport_id = Integer.parseInt(request.getParameter("carport_id"));
             int query_id = Integer.parseInt(request.getParameter("query_id"));
-            Query query = queryFacade.getQuery(query_id);
-            Carport carport = carportFacade.getCarportByQuery(query);
-            query.setCarport(carport);
-            List<Material> BOM = materialCalculator.calcBOM(carport.getLength(), carport.getWidth(),carport.getShed_length(),carport.getShed_width());
-            query.setBOM(BOM);
-            //double price = materialCalculator.getPrice(BOM);
-            //query.setSalesPrice(price);
-            request.setAttribute("query", query);
+            int length = Integer.parseInt(request.getParameter("length"));
+            int width = Integer.parseInt(request.getParameter("width"));
+            carportFacade.updateCarportLength(length, carport_id);
+            carportFacade.updateCarportWidth(width, carport_id);
+            List<Material> materials = materialCalculator.calcBOM(length, width,0,0);
+            double price = materialCalculator.getPrice(materials);
+            queryFacade.updateQueryPrice(price, query_id, carport_id);
+
             return pageToShow;
 
         } catch (UserException e) {
-            request.setAttribute("error", e.getMessage());
+            request.setAttribute("error ", e.getMessage());
             return pageToShow;
         }
     }

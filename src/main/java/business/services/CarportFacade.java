@@ -32,4 +32,16 @@ public class CarportFacade {
     public Carport getCarportByQuery(Query query) throws UserException {
         return carportMapper.getCarportByQuery(query);
     }
+
+    public Carport getCarport(int carport_id) throws UserException {
+        return carportMapper.getCarport(carport_id);
+    }
+
+
+    public void updateCarportLength(int length, int carport_id) throws UserException{
+        carportMapper.updateCarportLength(length,carport_id);
+    }
+    public void updateCarportWidth(int width, int carport_id) throws UserException{
+        carportMapper.updateCarportWidth(width,carport_id);
+    }
 }

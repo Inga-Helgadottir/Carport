@@ -81,24 +81,24 @@ public class MaterialMapper {
         }
     }
 
-    public Material getRafters(int beamheight, int beamwidth, int beamlength, String category) throws
+    public Material getRafters(int beamheight, int beamwidth, int beamlength, String name) throws
             UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `material` WHERE width=? AND height=? AND length=? AND category=?";
+            String sql = "SELECT * FROM `material` WHERE width=? AND height=? AND length=? AND `name`=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, beamwidth);
                 ps.setInt(2, beamheight);
                 ps.setInt(3, beamlength);
-                ps.setString(4, category);
+                ps.setString(4, name);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     int id = rs.getInt("id");
-                    String name = rs.getString("name");
                     int width = rs.getInt("width");
                     int height = rs.getInt("height");
                     int length = rs.getInt("length");
                     double cost = rs.getDouble("cost");
+                    String category = rs.getString("category");
                     String description = rs.getString("description");
                     Material m = new Material(name,width,height,length,category,cost,description);
                     m.setMaterial_id(id);
@@ -113,6 +113,66 @@ public class MaterialMapper {
             throw new UserException("Connection to database could not be established");
         }
 
+    }
+
+    public Material getOthers(String name) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE name = ? ";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, name);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int material_id = rs.getInt("id");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    String category = rs.getString("category");
+                    double cost = rs.getDouble("cost");
+                    String description = rs.getString("description");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(material_id);
+                    return m;
+                }
+                else {
+                    throw new UserException("Could not find material " + name);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public Material getShedScrews(String category)throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM `material` WHERE `category` = ? ";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, category);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int material_id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int length = rs.getInt("length");
+                    String description = rs.getString("description");
+                    double cost = rs.getDouble("cost");
+                    Material m = new Material(name,width,height,length,category,cost,description);
+                    m.setMaterial_id(material_id);
+                    return m;
+                }
+                else {
+                    throw new UserException("Could not find material " + category);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
     }
 }
 /*

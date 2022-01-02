@@ -19,6 +19,9 @@ public class SendOfferCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
             int query_id = Integer.parseInt(request.getParameter("query_id"));
+            int carport_id = Integer.parseInt(request.getParameter("carport_id"));
+            double salesprice = Double.parseDouble(request.getParameter("offerprice"));
+            queryFacade.updateQueryPrice(salesprice,query_id, carport_id);
             queryFacade.updateQueryStatus("offered", query_id);
             return pageToShow;
 

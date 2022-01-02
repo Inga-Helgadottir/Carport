@@ -38,12 +38,20 @@
                         <td>${requestScope.offer.carport.shed_width}</td>
                         <td>${requestScope.offer.status}</td>
                         <td>
+<<<<<<< HEAD
                             <button type="submit" name="query_id" value="${requestScope.offer.id}" class="btn btn-success">Se
+=======
+                            <button type="submit" name="query_id" value="${requestScope.offer.id}"
+                                    class="btn btn-success">Se
+>>>>>>> timmy
                                 Forespørgsel
                             </button>
                         </td>
                     </c:if>
+<<<<<<< HEAD
 
+=======
+>>>>>>> timmy
                 </tr>
                 </tbody>
             </table>

@@ -16,8 +16,13 @@ public class QueryFacade {
     }
 
 
+<<<<<<< HEAD
     public Boolean checkForQuery(String status, String status1, int user_id) throws UserException {
         return queryMapper.checkForQuery(status, status1, user_id);
+=======
+    public Boolean checkForQuery(String status, int user_id) throws UserException {
+        return queryMapper.checkForQuery(status,user_id);
+>>>>>>> timmy
     }
 
     public Query getQuery(String status, int user_id) throws UserException {
@@ -43,5 +48,9 @@ public class QueryFacade {
 
     public void updateQueryStatus(String status, int query_id) throws UserException {
         queryMapper.updateQueryStatus(status, query_id);
+    }
+
+    public void updateQueryPrice(double salesprice, int query_id, int carport_id)throws UserException {
+        queryMapper.updateQueryPrice(salesprice,query_id,carport_id);
     }
 }

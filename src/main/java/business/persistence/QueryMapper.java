@@ -94,18 +94,21 @@ public class QueryMapper {
         }
     }
 
-    public boolean checkForQuery(String status,String status1, int user_id) throws UserException {
+    public boolean checkForQuery(String status, int user_id) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM `query` WHERE `status`=? OR `status`=? AND user_id=?";
+            String sql = "SELECT * FROM `query` WHERE `status`=? AND user_id=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
-                ps.setString(2, status1);
-                ps.setInt(3, user_id);
+                ps.setInt(2, user_id);
                 ResultSet rs = ps.executeQuery();
                 return rs.next();
             } catch (SQLException ex) {
+<<<<<<< HEAD
                 throw new UserException(ex.getMessage()+"cfq"+status+status1);
+=======
+                throw new UserException(ex.getMessage()+"         "+status);
+>>>>>>> timmy
             }
         } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
@@ -160,8 +163,12 @@ public class QueryMapper {
                     query.setId(id);
                     return query;
                 } else {
+<<<<<<< HEAD
                     return null;
 
+=======
+                   return null;
+>>>>>>> timmy
                 }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
@@ -332,6 +339,35 @@ public class QueryMapper {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, status);
                 ps.setInt(2, query_id);
+                ps.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateQueryPrice(double salesprice, int query_id, int carport_id) {
+        try (Connection connection = database.connect()) {
+            String sql = "update `query` set `price` = ? where id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setDouble(1,salesprice);
+                ps.setInt(2, query_id);
+                ps.executeUpdate();
+                updateCarportPrice(carport_id,salesprice);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateCarportPrice(int carport_id, double salesprice) {
+        try (Connection connection = database.connect()) {
+            String sql = "update `carport` set `price` = ? where id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setDouble(1,salesprice);
+                ps.setInt(2, carport_id);
                 ps.executeUpdate();
             }
         } catch (SQLException e) {

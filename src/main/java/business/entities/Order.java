@@ -14,6 +14,7 @@ public class Order {
 //-------------udenfor constructor--------------
 private List<Carport> carportList;
     private int id;
+    private List<Material> BOM;
 
     public Order(String status, Timestamp created, double price, String message, int query_id, int user_id) {
         this.status = status;
@@ -23,6 +24,15 @@ private List<Carport> carportList;
         this.query_id = query_id;
         this.user_id = user_id;
         this.carportList =  new ArrayList<>();
+        this.BOM = new ArrayList<>();
+    }
+
+    public List<Material> getBOM() {
+        return BOM;
+    }
+
+    public void setBOM(List<Material> BOM) {
+        this.BOM = BOM;
     }
 
     public void setCarportList(List<Carport> carportList) {

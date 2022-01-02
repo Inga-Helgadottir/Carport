@@ -30,7 +30,7 @@ public class GetOfferInfo extends CommandProtectedPage {
             Query query = queryFacade.getQuery(query_id);
             Carport carport = carportFacade.getCarportByQuery(query);
             query.setCarport(carport);
-            query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth()));
+            query.setBOM(materialCalculator.calcBOM(carport.getLength(), carport.getWidth(),carport.getShed_length(),carport.getShed_width()));
             request.setAttribute("offer", query);
             return pageToShow;
         } catch (UserException e) {
