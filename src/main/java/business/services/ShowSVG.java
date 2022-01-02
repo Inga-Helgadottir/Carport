@@ -39,8 +39,22 @@ public class ShowSVG {
         striper();
         stopler();
         rem();
+        pile();
 
         return svg.toString();
+    }
+
+    public void pile() {
+        int tmp = 35;
+        int tmp2 = (int) ((width_buffer + width) * 0.5);
+        svg.addDefs();
+        svg.addArrowLine(length_buffer - tmp, width_buffer + width, length_buffer - tmp, width_buffer);//y
+        svg.addArrowLine(length_buffer, width_buffer + width + tmp, length_buffer + length, width_buffer + width + tmp); //x
+        svg.addText();
+        svg.addText(length_buffer - tmp,tmp2, -90, width ); // horisontal linjes tekst
+        // svg.addText((arrowLineFullLength * 0.5) + 50 , arrowLineFullHeight + 40, 0, arrowLineFullLength + " cm");
+        //svg.addDashLine(100, 50, 600, fullHeight - 50);
+        //svg.addDashLine(100, fullHeight - 50, 600, 50);
     }
 
     public void firkant() {

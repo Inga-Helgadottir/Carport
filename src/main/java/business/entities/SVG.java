@@ -35,9 +35,9 @@ public class SVG {
             "<path d=\"M 0 0 L 10 5 L 0 10 z\" />\n" +
             "</marker> </defs>";
     private final String lineDashTemplate = "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" style=\"stroke:#000000; stroke-width: 5;\"stroke-dasharray=\"10,10\" d=\"M5 40 l215 0\" />";
-    private final String textTemplate = "<text style=\"text-anchor: middle\" transform=\"translate(%f,%f) rotate(%f)\">%s</text>";
+    private final String textTemplate = "<text style=\"text-anchor: middle\" transform=\"translate(%d,%d) rotate(%d)\">%s</text>";
     // private final String slantRectTemplate = //TODO template for tag med hældning (ved ikke om vi kommer til at lave det)
-    private final String arrowLineTemplate = "<line x1=\"%f\"  y1=\"%f\" x2=\"%f\" y2=\"%f\" \n" +
+    private final String arrowLineTemplate = "<line x1=\"%d\"  y1=\"%d\" x2=\"%d\" y2=\"%d\" \n" +
             "\tstyle=\"stroke: #000000;\n" +
             "\tmarker-start: url(#arrow);\n" +
             "\tmarker-end: url(#arrow);\"/>";
@@ -64,7 +64,7 @@ public class SVG {
         svg.append(String.format(rectDashTemplate, x, y, width, height));
     }
 
-    public void addArrowLine(double x1, double y1, double x2, double y2) { //mangler arrow integration
+    public void addArrowLine(int x1, int y1, int x2, int y2) { //mangler arrow integration
         svg.append(String.format(arrowLineTemplate, x1, y1, x2, y2));
     }
 
@@ -79,5 +79,9 @@ public class SVG {
     @Override
     public String toString() {
         return svg.toString() + "</svg>";
+    }
+
+    public void addText(int i, int tmp2, int i1, int width) {
+        svg.append(String.format(textTemplate, i,tmp2, i1,width));
     }
 }
