@@ -2,14 +2,6 @@ package business.entities;
 
 public class User
 {
-
-    public User(String email, String password, String role)
-    {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-
-    }
     private String name;
     private int telephone;
     private int address_id;
@@ -19,8 +11,50 @@ public class User
     private String role;
     private int zipcode;
     private String city;
+    private String message;
     private String address;
+    private int zipcodeId;
+    private int cityId;
 
+    public User(String email, String password, String role)
+    {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
+
+    public int getZipcodeId() {
+        return zipcodeId;
+    }
+
+    public void setZipcodeId(int zipcodeId) {
+        this.zipcodeId = zipcodeId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public int getZipcode() {
         return zipcode;
@@ -78,9 +112,6 @@ public class User
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
     public String getName() {
         return name;
@@ -105,9 +136,4 @@ public class User
     public void setAddress_id(int address_id) {
         this.address_id = address_id;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
 }

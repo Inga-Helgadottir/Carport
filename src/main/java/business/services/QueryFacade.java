@@ -1,9 +1,6 @@
 package business.services;
 
-import business.entities.Carport;
-import business.entities.Material;
-import business.entities.Query;
-import business.entities.QueryCollection;
+import business.entities.*;
 import business.exceptions.UserException;
 import business.persistence.Database;
 import business.persistence.QueryMapper;
@@ -28,7 +25,10 @@ public class QueryFacade {
     public Query getQuery(int query_id)throws UserException{
      return queryMapper.getQuery(query_id);
     }
+    public User getUser(int user_id) throws  UserException{
+        return queryMapper.getUser(user_id);
 
+    }
 
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         return queryMapper.makeQuery(query, carports);

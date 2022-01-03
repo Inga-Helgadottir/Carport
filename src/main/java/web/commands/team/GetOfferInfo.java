@@ -2,6 +2,7 @@ package web.commands.team;
 
 import business.entities.Carport;
 import business.entities.Query;
+import business.entities.User;
 import business.exceptions.UserException;
 import business.services.CarportFacade;
 import business.services.MaterialCalculator;

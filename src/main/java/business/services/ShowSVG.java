@@ -47,14 +47,17 @@ public class ShowSVG {
     public void pile() {
         int tmp = 35;
         int tmp2 = (int) ((width_buffer + width) * 0.5);
+        int tmp3 = (int) ((length + length_buffer) * 0.5);
         svg.addDefs();
         svg.addArrowLine(length_buffer - tmp, width_buffer + width, length_buffer - tmp, width_buffer);//y
         svg.addArrowLine(length_buffer, width_buffer + width + tmp, length_buffer + length, width_buffer + width + tmp); //x
         svg.addText();
-        svg.addText(length_buffer - tmp,tmp2, -90, width ); // horisontal linjes tekst
-        // svg.addText((arrowLineFullLength * 0.5) + 50 , arrowLineFullHeight + 40, 0, arrowLineFullLength + " cm");
-        //svg.addDashLine(100, 50, 600, fullHeight - 50);
-        //svg.addDashLine(100, fullHeight - 50, 600, 50);
+        svg.addText(length_buffer - tmp, tmp2, -90, width); // y
+        svg.addText(tmp3, width_buffer + width + tmp, 0, length); //x
+
+        int buffer = 65;
+        svg.addDashLine(length_buffer + buffer, width_buffer +u_width , length_buffer +length - buffer, width_buffer+width-u_width);
+        svg.addDashLine(length_buffer +buffer, width_buffer+width - u_width, length_buffer + length -buffer, width_buffer + u_width);
     }
 
     public void firkant() {
@@ -147,12 +150,12 @@ public class ShowSVG {
             svg.addStolpe(length_buffer + length - udhæng_back - stolpe_tykkelse, width_buffer + udhæng_bredde + shed_width - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
             svg.addStolpe(length_buffer + length - udhæng_back - shed_length, width_buffer + udhæng_bredde, stolpe_tykkelse, stolpe_tykkelse);
             svg.addStolpe(length_buffer + length - udhæng_back - shed_length, width_buffer + udhæng_bredde + shed_width - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
-            if (stolpe_antal <= 6) {
+            if (stolpe_antal <= 8) {
                 svg.addStolpe(length_buffer + length - udhæng_back - stolpe_tykkelse, width_buffer + width - udhæng_bredde - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
-            } else if (stolpe_antal <= 8) {
+            } else if (stolpe_antal <= 9) {
                 svg.addStolpe(length_buffer + length - udhæng_back - stolpe_tykkelse, width_buffer + width - udhæng_bredde - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
                 svg.addStolpe(length_buffer + length - udhæng_back - shed_length, width_buffer + width - udhæng_bredde - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
-            } else if (stolpe_antal <= 10) {
+            } else if (stolpe_antal <= 11) {
                 svg.addStolpe(length_buffer + length - udhæng_back - stolpe_tykkelse, width_buffer + width - udhæng_bredde - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
                 svg.addStolpe(length_buffer + length - udhæng_back - shed_length, width_buffer + width - udhæng_bredde - stolpe_tykkelse, stolpe_tykkelse, stolpe_tykkelse);
                 int tmp1 = (length - udhæng_front - udhæng_back - shed_length - stolpe_tykkelse) / 2;

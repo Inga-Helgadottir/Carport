@@ -39,8 +39,26 @@ public class RegisterCommand extends CommandUnprotectedPage
 
             tmp.setZipcode(zipcode);
             tmp.setCity(city);
+            tmp.setAddress(address);
 
-            //tmp.setAddress_id(address_id);
+            int zipcodeId = userFacade.createUserCheckZipcode(tmp);
+            int cityId = userFacade.createUserCheckCity(tmp);
+
+            if(zipcodeId == 0){
+                zipcodeId = userFacade.createUserZipcode(tmp);
+            }
+
+            tmp.setZipcodeId(zipcodeId);
+
+            if(cityId == 0){
+                cityId = userFacade.createUserCity(tmp);
+            }
+
+            tmp.setCityId(cityId);
+
+            int addressId = userFacade.createUserAddress(tmp);
+            tmp.setAddress_id(addressId);
+
             User user = userFacade.createUser(tmp);
             HttpSession session = request.getSession();
 

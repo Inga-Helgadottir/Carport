@@ -15,9 +15,11 @@ public class MaterialFacade {
         materialMapper = new MaterialMapper(database);
     }
 
-
-    public List<Material> getMaterialsByCategory(String name) throws UserException {
-        return materialMapper.getMaterialsByCategory(name);
+    public Material getMaterial(String name) throws UserException {
+        return materialMapper.getMaterial(name);
+    }
+    public Material getMaterialByCategory(String name) throws UserException {
+        return materialMapper.getMaterialByCategory(name);
     }
 
     public Material SelectMaterialByCategory(String name, int length) throws UserException {

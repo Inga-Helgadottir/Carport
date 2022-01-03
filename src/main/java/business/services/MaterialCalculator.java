@@ -25,15 +25,9 @@ public class MaterialCalculator {
         calcStern(carport_length, carport_width);
         if (shed_length != 0 && shed_width != 0) {
             calcPlanks(shed_length, shed_width);
-            //calcShedStuff();            //løsholter til skur galv, løsholter til skur sider, 1 lægte til z på skurdør
         }
         calcRoof(carport_length, carport_width);
-
-
         calcOthers(shed_length, shed_width);
-        if (shed_length != 0 && shed_width != 0) {
-            //calcOthersShed(shed_length, shed_width);             //stalddørsgreb, hængsel, vinkelbeslag + 2 forskellige skruer.
-        }
         return materialList;
     }
 
@@ -45,6 +39,19 @@ public class MaterialCalculator {
         Material planks = materialFacade.SelectMaterialByCategory("brædt", 2100);
         int total = (int) (Math.ceil(amount_sider * 2) + Math.ceil(amount_topandbot * 2));
         planks.setQuantity(total);
+        materialList.add(planks);
+
+        Material lægte = materialFacade.SelectMaterialByCategory("lægte", 4200);
+        lægte.setQuantity(12);
+        materialList.add(lægte);
+
+        Material reglar = materialFacade.SelectMaterialByCategory("reglar", 2700);
+        reglar.setQuantity(12);
+        materialList.add(reglar);
+
+        Material reglar1 = materialFacade.SelectMaterialByCategory("reglar", 2400);
+        reglar1.setQuantity(4);
+        materialList.add(reglar1);
     }
 
     //skruer
@@ -82,7 +89,16 @@ public class MaterialCalculator {
             skruer_skur1.setQuantity(2);
             materialList.add(skruer_skur);
             materialList.add(skruer_skur1);
-            // standdørsgreb, t hængsel og vinkel beslag
+
+            Material dørgreb = materialFacade.getMaterial("stalddørsgreb");
+            dørgreb.setQuantity(1);
+            materialList.add(dørgreb);
+            Material t_hængsel = materialFacade.getMaterial("t hængsel");
+            t_hængsel.setQuantity(2);
+            materialList.add(t_hængsel);
+            Material vinkelbeslag_35 = materialFacade.getMaterial("vinkelbeslag");
+            vinkelbeslag_35.setQuantity(32);
+            materialList.add(vinkelbeslag_35);
         }
     }
 
@@ -96,7 +112,7 @@ public class MaterialCalculator {
     }
 
     // tag
-    public void calcRoof(int length, int width) throws UserException {
+    public Material calcRoof(int length, int width) throws UserException {
         if (width <= 3600) {
             Material roof = materialFacade.SelectMaterialByCategory("tag", 3600);
             roof.setQuantity(getRoofAmount(length));
@@ -104,6 +120,7 @@ public class MaterialCalculator {
             Material roof1 = materialFacade.SelectMaterialByCategory("tag", 1200);
             roof1.setQuantity(getRoofAmount(length));
             materialList.add(roof1);
+            return roof;
         } else if (width <= 4800) {
             Material roof = materialFacade.SelectMaterialByCategory("tag", 4800);
             roof.setQuantity(getRoofAmount(length));
@@ -111,6 +128,7 @@ public class MaterialCalculator {
             Material roof1 = materialFacade.SelectMaterialByCategory("tag", 2400);
             roof1.setQuantity(getRoofAmount(length));
             materialList.add(roof1);
+            return roof;
 
         } else if (width <= 6000) {
             Material roof = materialFacade.SelectMaterialByCategory("tag", 6000);
@@ -119,7 +137,9 @@ public class MaterialCalculator {
             Material roof1 = materialFacade.SelectMaterialByCategory("tag", 3600);
             roof1.setQuantity(getRoofAmount(length));
             materialList.add(roof1);
+            return roof;
         }
+        return null;
     }
 
     //tag antal
@@ -140,16 +160,12 @@ public class MaterialCalculator {
     }
 
     //rem
-    public void calcRem(int length, int width) throws UserException {
-        if (width <= 4300) {
-            Material rem = materialFacade.SelectMaterialByCategory("rem", length);
-            rem.setQuantity(2);
-            materialList.add(rem);
-        } else if (width <= 6000) {
-            Material rem = materialFacade.SelectMaterialByCategory("rem", length);
-            rem.setQuantity(3);
-            materialList.add(rem);
-        }
+    public Material calcRem(int length, int width) throws UserException {
+
+        Material rem = materialFacade.SelectMaterialByCategory("rem", length);
+        rem.setQuantity(2);
+        materialList.add(rem);
+        return rem;
     }
 
     //stolper
@@ -158,23 +174,18 @@ public class MaterialCalculator {
         double test = width * 0.001;
         double test2 = length * 0.001;
         double squarefeet = test * test2;
-        int shedposts = 0;
-        shedposts = 2;
-        if (shed_width == width){
-            shedposts = 2;
-        }
 
         if (shed_length != 0 && shed_width != 0) {
             if (squarefeet >= 44) {
-                post.setQuantity(10);
+                post.setQuantity(11);
             } else if (squarefeet >= 38.5) {
-                post.setQuantity(8);
+                post.setQuantity(9);
             } else if (squarefeet >= 33) {
-                post.setQuantity(6);
+                post.setQuantity(8);
             } else if (squarefeet >= 22) {
-                post.setQuantity(4);
+                post.setQuantity(5);
             } else if (squarefeet < 22) {
-                post.setQuantity(4);
+                post.setQuantity(5);
             }
         } else {
             if (squarefeet >= 44) {

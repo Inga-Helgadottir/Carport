@@ -21,4 +21,15 @@ public class OrderFacade {
     public Order makeOrder(Order order, List<Material>BOM, int carport_id) throws UserException {
         return orderMapper.makeOrder(order,BOM,carport_id);
     }
+    public List<Order> getUserOrders(String status, int user_id) throws UserException {
+        return orderMapper.getUserOrders(status,user_id);
+    }
+
+    public Order getOrder(int order_id)throws UserException {
+        return orderMapper.getOrder(order_id);
+    }
+
+    public int getQueryId(int order_id) throws UserException {
+        return orderMapper.getQueryId(order_id);
+    }
 }

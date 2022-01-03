@@ -1,8 +1,6 @@
 package business.persistence;
-
 import business.entities.*;
 import business.exceptions.UserException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,7 @@ public class QueryMapper {
     public QueryMapper(Database database) {
         this.database = database;
     }
+
 
 
     public void fillLinkTable(int carport_id, int query_id, int quantity) throws UserException {
@@ -169,7 +168,6 @@ public class QueryMapper {
         }
     }
 
-
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO `query` (`status`, price, message, user_id, type, created) VALUES (?,?,?,?,?,?)";
@@ -218,7 +216,6 @@ public class QueryMapper {
         }
     }
 
-
     public List<Query> getAllQueries(String status) throws UserException {
         List<Query> queries = new ArrayList<>();
         try (Connection connection = database.connect()) {
@@ -247,7 +244,7 @@ public class QueryMapper {
         }
     }
 
-    private User getUser(int user_id) throws UserException {
+    public User getUser(int user_id) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM `user` WHERE `id`=?";
 

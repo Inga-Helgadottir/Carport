@@ -107,6 +107,25 @@
                                     mm
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td>skur Bredde:</td>
+                                <td>
+                                    <input name="shed_width" type="number"
+                                           value="${requestScope.query.carport.shed_width}" class="input">
+                                    <!------------------------------------------->
+                                    mm
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>skur Længde:</td>
+                                <td>
+                                    <input name="shed_length"  type="number"
+                                           value="${requestScope.query.carport.shed_length}" class="input">
+                                    <!------------------------------------------->
+                                    mm
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                         <input name="query_id" type="hidden" value="${requestScope.query.id}">
@@ -166,9 +185,6 @@
                         <input type="hidden" name="shed_length" value="${requestScope.query.carport.shed_length}">
                         <input type="hidden" name="shed_width" value="${requestScope.query.carport.shed_width}">
                         <button type="submit" id="showHide" class="btn btn-primary">Vis tegning over carport</button>
-                        <div id="showHideDiv">
-                            <p>Indsæt tegningen her</p>
-                        </div>
                     </form>
                         <%---send offer--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/sendoffer">
