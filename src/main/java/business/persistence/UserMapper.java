@@ -6,7 +6,7 @@ import business.entities.User;
 import java.sql.*;
 
 public class UserMapper {
-    private Database database;
+    private final Database database;
 
     public UserMapper(Database database) {
         this.database = database;
@@ -14,7 +14,7 @@ public class UserMapper {
 
     public User createUser(User user) throws UserException {
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO `user` (`name`,`email`, `password`, `role`, `telefon`, `address_id`) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO `user` (`name`,`email`, `password`, `role`, `telephone`, `address_id`) VALUES (?,?,?,?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, user.getName());
@@ -65,6 +65,115 @@ public class UserMapper {
             }
         } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
+        }
+    }
+
+
+
+
+    public int createUserCheckZipcode(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT id FROM `zipcode` WHERE postalcode = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, user.getZipcode());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    ResultSet ids = ps.getGeneratedKeys();
+                    ids.next();
+                    return id;
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public int createUserZipcode(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO `zipcode` (`name`,`postalcode`) VALUES (?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, user.getAddress());
+                ps.setInt(2, user.getZipcode());
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                user.setZipcodeId(id);
+                return id;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public int createUserCity(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO `city` (`name`,`zipcode_id`) VALUES (?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, user.getCity());
+                ps.setInt(2, user.getZipcodeId());
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                user.setCityId(id);
+                return id;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
+    public int createUserCheckCity(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT id FROM `city` WHERE zipcode_id = ?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, user.getZipcodeId());
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    ResultSet ids = ps.getGeneratedKeys();
+                    ids.next();
+                    return id;
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public int createUserAddress(User user) throws UserException {
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO `address` (`address`,`city_id`) VALUES (?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, user.getAddress());
+                ps.setInt(2, user.getCityId());
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                user.setId(id);
+                return id;
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
         }
     }
 

@@ -139,7 +139,7 @@ public class CarportMapper {
         }
     }
 
-    public Carport getCarport(int carport_id) throws UserException{
+    public Carport getCarport(int carport_id) throws UserException {
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM `carport` WHERE `id`=?";
 
@@ -147,17 +147,17 @@ public class CarportMapper {
                 ps.setInt(1, carport_id);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                   int length = rs.getInt("length");
-                   int width = rs.getInt("width");
-                   int height = rs.getInt("height");
-                   int roof_angle = rs.getInt("roof_angle");
-                   int shed_length = rs.getInt("shed_length");
-                   int shed_width = rs.getInt("shed_width");
+                    int length = rs.getInt("length");
+                    int width = rs.getInt("width");
+                    int height = rs.getInt("height");
+                    int roof_angle = rs.getInt("roof_angle");
+                    int shed_length = rs.getInt("shed_length");
+                    int shed_width = rs.getInt("shed_width");
                     String name = rs.getString("name");
                     String type = rs.getString("type");
                     double price = rs.getDouble("price");
                     String info = rs.getString("info");
-                    Carport carport = new Carport(length,width,height,roof_angle,shed_length,shed_width,name,type,price,info);
+                    Carport carport = new Carport(length, width, height, roof_angle, shed_length, shed_width, name, type, price, info);
                     carport.setId(carport_id);
                     return carport;
                 } else {
@@ -176,7 +176,7 @@ public class CarportMapper {
             String sql = "update `carport` set `length`=? where id=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1,length);
+                ps.setInt(1, length);
                 ps.setInt(2, carport_id);
                 ps.executeUpdate();
             }
@@ -184,12 +184,13 @@ public class CarportMapper {
             e.printStackTrace();
         }
     }
+
     public void updateCarportWidth(int width, int carport_id) {
         try (Connection connection = database.connect()) {
             String sql = "update `carport` set `width`=? where id=?";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1,width);
+                ps.setInt(1, width);
                 ps.setInt(2, carport_id);
                 ps.executeUpdate();
             }

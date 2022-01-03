@@ -38,10 +38,11 @@
                 <img src="<%=request.getContextPath()%>/image/logo.png" alt="fog logo" class="navImg">
             </a>
             <%--        husk at tilføje href til alle links----------------------------------------------%>
-            <a class="aTag" href="#">Byggematerialer</a>
+            <a class="aTag" href="${pageContext.request.contextPath}/fc/orders">Mine Ordre</a>
             <a class="aTag" href="${pageContext.request.contextPath}/fc/standartcarportpage">Carporte</a>
             <a class="aTag" href="${pageContext.request.contextPath}/fc/offers">Tilbud</a>
             <a class="aTag" href="${pageContext.request.contextPath}/fc/quickbuildpage">Quick Byg</a>
+
         </div>
         <div class="navBarDiv2 col-lg-3 col-md-4 col-sm-5">
             <c:set var="thisPage" value="${pageContext.request.servletPath}"/>

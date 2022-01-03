@@ -37,7 +37,6 @@
                         <td>${item.status}</td>
                         <td>
                             <button type="submit" name="query_id" value="${item.id}" class="btn btn-success">Se Forespørgsel</button>
-                            <input type="hidden" name="user_id" value="${item.user.id}"/>
                         </td>
                     </tr>
                 </c:forEach>

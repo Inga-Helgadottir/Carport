@@ -15,6 +15,9 @@ public class Order {
 private List<Carport> carportList;
     private int id;
     private List<Material> BOM;
+    private Carport carport;
+    private Query query;
+    private User user;
 
     public Order(String status, Timestamp created, double price, String message, int query_id, int user_id) {
         this.status = status;
@@ -25,6 +28,31 @@ private List<Carport> carportList;
         this.user_id = user_id;
         this.carportList =  new ArrayList<>();
         this.BOM = new ArrayList<>();
+
+    }
+
+    public Carport getCarport() {
+        return carport;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setCarport(Carport carport) {
+        this.carport = carport;
+    }
+
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery(Query query) {
+        this.query = query;
     }
 
     public List<Material> getBOM() {

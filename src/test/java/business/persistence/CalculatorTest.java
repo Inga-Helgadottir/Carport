@@ -50,4 +50,21 @@ public class CalculatorTest {
         rafter.setQuantity(15);
         assertEquals(rafter.getQuantity(),materialCalculator.calcRafters(6000, 7800).getQuantity());
     }
+
+    @Test
+    void calcRem() throws UserException{
+        Material rem = materialFacade.SelectMaterialByCategory("rem",7800);
+        rem.setQuantity(2);
+        assertEquals(rem.getQuantity(), materialCalculator.calcRem(7800,6000).getQuantity());
+    }
+
+    @Test
+    void calcRoof() throws UserException{
+        Material roof = materialFacade.SelectMaterialByCategory("tag",6000);
+        roof.setQuantity(6);
+        assertEquals(roof.getQuantity(),materialCalculator.calcRoof(7800,6000).getQuantity());
+    }
+
+
+
 }

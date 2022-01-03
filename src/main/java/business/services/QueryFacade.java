@@ -1,5 +1,5 @@
 package business.services;
-
+import business.entities.*;
 import business.entities.Carport;
 import business.entities.Query;
 import business.exceptions.UserException;
@@ -16,13 +16,8 @@ public class QueryFacade {
     }
 
 
-<<<<<<< HEAD
-    public Boolean checkForQuery(String status, String status1, int user_id) throws UserException {
-        return queryMapper.checkForQuery(status, status1, user_id);
-=======
     public Boolean checkForQuery(String status, int user_id) throws UserException {
         return queryMapper.checkForQuery(status,user_id);
->>>>>>> timmy
     }
 
     public Query getQuery(String status, int user_id) throws UserException {
@@ -32,7 +27,10 @@ public class QueryFacade {
     public Query getQuery(int query_id) throws UserException {
         return queryMapper.getQuery(query_id);
     }
+    public User getUser(int user_id) throws  UserException{
+        return queryMapper.getUser(user_id);
 
+    }
 
     public Query makeQuery(Query query, List<Carport> carports) throws UserException {
         return queryMapper.makeQuery(query, carports);
