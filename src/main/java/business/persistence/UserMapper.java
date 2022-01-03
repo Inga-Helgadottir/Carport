@@ -6,7 +6,7 @@ import business.entities.User;
 import java.sql.*;
 
 public class UserMapper {
-    private Database database;
+    private final Database database;
 
     public UserMapper(Database database) {
         this.database = database;

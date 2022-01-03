@@ -6,7 +6,7 @@ import business.persistence.UserMapper;
 import business.exceptions.UserException;
 
 public class UserFacade {
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     public UserFacade(Database database) {
         userMapper = new UserMapper(database);
@@ -19,7 +19,6 @@ public class UserFacade {
     public User createUser(User user) throws UserException {
         return userMapper.createUser(user);
     }
-
 
 
     public int createUserCheckZipcode(User user) throws UserException {
