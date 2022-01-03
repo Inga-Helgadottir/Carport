@@ -29,17 +29,28 @@ public class GetOffers extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         try {
-            int user_id = (int) request.getSession().getAttribute("user_id");
+            User user = (User) request.getSession().getAttribute("user");
+            int user_id = user.getId();
             Query offer = queryFacade.getQuery("offered", user_id);
+<<<<<<< HEAD
+            if (offer!= null){
+=======
             if (offer != null) {
+>>>>>>> timmy
                 Carport carport = carportFacade.getCarportByQuery(offer);
                 offer.setCarport(carport);
                 request.setAttribute("offer", offer);
             }
             else {
+<<<<<<< HEAD
+                request.setAttribute("error", "Ingen tilbud");
+=======
                 request.setAttribute("error","Afventer stadig tilbud");
+>>>>>>> timmy
             }
             return pageToShow;
+
+
         } catch (UserException e) {
             request.setAttribute("error", e.getMessage());
             return pageToShow;

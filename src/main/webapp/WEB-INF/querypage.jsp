@@ -83,16 +83,24 @@
                             <thead>
                             <tr>
                                 <th scope="col">Carport</th>
+<<<<<<< HEAD
+                                <th scope="col"></th>
+=======
                                 <th scope="col">
                                     <!--------------------------------->
                                 </th>
+>>>>>>> timmy
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>Bredde:</td>
                                 <td>
+<<<<<<< HEAD
+                                    <input min="2400" max="6000" step="300" type="number"
+=======
                                     <input name="width" min="2400" max="6000" step="300" type="number"
+>>>>>>> timmy
                                            value="${requestScope.query.carport.width}" class="input">
                                     <!------------------------------------------->
                                     mm
@@ -101,7 +109,11 @@
                             <tr>
                                 <td>Længde:</td>
                                 <td>
+<<<<<<< HEAD
+                                    <input min="2400" max="7800" step="300" type="number"
+=======
                                     <input name="length" min="2400" max="7800" step="300" type="number"
+>>>>>>> timmy
                                            value="${requestScope.query.carport.length}" class="input">
                                     <!------------------------------------------->
                                     mm
@@ -139,6 +151,10 @@
             <div class="d-flex flex-row">
                 <div class="half mb-5">
                         <%---update price--%>
+<<<<<<< HEAD
+
+=======
+>>>>>>> timmy
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -156,11 +172,20 @@
                             <td>Dækningsgrad:</td>
                             <td class="d-flex justify-content-between">
                                 <div>
+<<<<<<< HEAD
+                                    <input type="number" value="30.0" class="input2" name=""
+                                           id="daekningsgrad">
+                                    <input type="hidden" value="${requestScope.query.id}" name="query_id">
+                                    <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
+                                </div>
+                                <button class="btn btn-primary" onclick="calc()">Opdater dækningsgrad
+=======
                                     <input type="number" value="30.0" class="input2" name="coverage" id="daekningsgrad">
                                     <input type="hidden" value="${requestScope.query.id}" name="query_id">
                                     <input type="hidden" value="${requestScope.query.carport.id}" name="carport_id">
                                 </div>
                                 <button type="submit" class="btn btn-primary" onclick="calc()">Opdater dækningsgrad
+>>>>>>> timmy
                                 </button>
                             </td>
                         </tr>
@@ -178,6 +203,10 @@
                         </tr>
                         </tbody>
                     </table>
+<<<<<<< HEAD
+
+=======
+>>>>>>> timmy
                         <%---svg--%>
                     <form method="get" action="${pageContext.request.contextPath}/fc/showsvg">
                         <input type="hidden" name="length" value="${requestScope.query.carport.length}">
@@ -192,6 +221,7 @@
                         <input type="hidden" name="carport_id" value="${requestScope.query.carport.id}">
                         <input type="hidden" id="offerprice" name="offerprice">
                         <button type="submit" class="btn btn-success my-2">Send Forespørgsel</button>
+                        <input type="hidden" id="offerprice_moms" value="" name="offerprice_moms">
                     </form>
                 </div>
             </div>
@@ -243,7 +273,11 @@
                 db.innerText = dgtp;
                 tpem.innerText = um;
                 tpim.innerText = mm;
+<<<<<<< HEAD
+                document.getElementById("offerprice_moms").value = mm;
+=======
                 document.getElementById("offerprice").value = mm;
+>>>>>>> timmy
             }
 
 

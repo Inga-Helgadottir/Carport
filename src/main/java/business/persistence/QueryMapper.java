@@ -103,7 +103,11 @@ public class QueryMapper {
                 ResultSet rs = ps.executeQuery();
                 return rs.next();
             } catch (SQLException ex) {
+<<<<<<< HEAD
+                throw new UserException(ex.getMessage()+"cfq"+status+status1);
+=======
                 throw new UserException(ex.getMessage()+"         "+status);
+>>>>>>> timmy
             }
         } catch (SQLException ex) {
             throw new UserException("Connection to database could not be established");
@@ -158,7 +162,12 @@ public class QueryMapper {
                     query.setId(id);
                     return query;
                 } else {
+<<<<<<< HEAD
+                    return null;
+
+=======
                    return null;
+>>>>>>> timmy
                 }
             } catch (SQLException ex) {
                 throw new UserException(ex.getMessage());
@@ -320,7 +329,7 @@ public class QueryMapper {
         }
     }
 
-    public void updateQueryStatus(String status, int query_id) throws UserException {
+    public void updateQueryStatus(String status, int query_id) {
         try (Connection connection = database.connect()) {
             String sql = "update `query` set `status` = ? where id = ?";
 
